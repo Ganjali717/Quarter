@@ -23,5 +23,10 @@ namespace Quarter.Models
         public string AboutUsDesc { get; set; }
         [StringLength(maximumLength:200)]
         public string AboutUsTitle { get; set; }
+        [StringLength(maximumLength:100)]
+        public string AboutUsImg { get; set; }
+        [StringLength(maximumLength: 100)]
+        public string ServiceImg { get; set; }
+
     }
 }

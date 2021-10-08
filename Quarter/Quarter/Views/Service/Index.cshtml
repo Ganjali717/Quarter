@@ -27,7 +27,7 @@
             <div class="row">
                 <div class="col-lg-5 align-self-center">
                     <div class="about-us-img-wrap ltn__img-shape-left  about-img-left">
-                        <img src="~/assets/img/service/21.jpg" alt="Image">
+                        <img src="~/assets/img/service/@Model.Settings.FirstOrDefault().ServiceImg" alt="Image">
                     </div>
                 </div>  
                 <div class="col-lg-7 align-self-center">
@@ -35,12 +35,10 @@
                         <div class="section-title-area ltn__section-title-2--- mb-20">
                             <h6 class="section-subtitle section-subtitle-2 ltn__secondary-color">About Us</h6>
                             <h1 class="section-title">
-                                The Leading Real Estate
-                                Rental Marketplace<span>.</span>
+                               @Model.Settings.FirstOrDefault().AboutUsTitle<span>.</span>
                             </h1>
                             <p>
-                                Over 39,000 people work for us in more than 70 countries all over the
-                                This breadth of global coverage, combined with specialist services
+                                @Model.Settings.FirstOrDefault().AboutUsDesc
                             </p>
                         </div>
                         <div class="about-us-info-wrap-inner about-us-info-devide---">
@@ -68,84 +66,22 @@
                 </div>
             </div>
             <div class="row  justify-content-center">
-                <div class="col-lg-4 col-sm-6 col-12">
-                    <div class="ltn__feature-item ltn__feature-item-6 text-center bg-white  box-shadow-1">
-                        <div class="ltn__feature-icon">
-                            <span><i class="flaticon-house"></i></span>
-                            <!-- <img src="~/assets/img/icons/icon-img/21.png" alt="#"> -->
-                        </div>
-                        <div class="ltn__feature-info">
-                            <h3><a href="service-details.html">Property Management</a></h3>
-                            <p>over 1 million+ homes for sale available on the website, we can match you with a house you will want to call home.</p>
-                            <!-- <a class="ltn__service-btn" href="service-details.html">Find A Home <i class="flaticon-right-arrow"></i></a> -->
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-4 col-sm-6 col-12">
-                    <div class="ltn__feature-item ltn__feature-item-6 text-center bg-white  box-shadow-1">
-                        <div class="ltn__feature-icon">
-                            <span><i class="flaticon-mortgage"></i></span>
-                            <!-- <img src="~/assets/img/icons/icon-img/21.png" alt="#"> -->
-                        </div>
-                        <div class="ltn__feature-info">
-                            <h3><a href="service-details.html">Mortgage Service</a></h3>
-                            <p>over 1 million+ homes for sale available on the website, we can match you with a house you will want to call home.</p>
-                            <!-- <a class="ltn__service-btn" href="service-details.html">Find A Home <i class="flaticon-right-arrow"></i></a> -->
+                @foreach (var item in Model.Services)
+                {
+                    <div class="col-lg-4 col-sm-6 col-12">
+                        <div class="ltn__feature-item ltn__feature-item-6 text-center bg-white  box-shadow-1">
+                            <div class="ltn__feature-icon">
+                                <span>@Html.Raw(item.Logo)</span>
+                                <!-- <img src="~/assets/img/icons/icon-img/21.png" alt="#"> -->
+                            </div>
+                            <div class="ltn__feature-info">
+                                <h3><a asp-action="detail" asp-controller="service" asp-route-id="@item.Id">@item.Title</a></h3>
+                                <p>@item.Desc</p>
+                                <!-- <a class="ltn__service-btn" href="service-details.html">Find A Home <i class="flaticon-right-arrow"></i></a> -->
+                            </div>
                         </div>
                     </div>
-                </div>
-                <div class="col-lg-4 col-sm-6 col-12">
-                    <div class="ltn__feature-item ltn__feature-item-6 text-center bg-white  box-shadow-1">
-                        <div class="ltn__feature-icon">
-                            <span><i class="flaticon-operator"></i></span>
-                            <!-- <img src="~/assets/img/icons/icon-img/21.png" alt="#"> -->
-                        </div>
-                        <div class="ltn__feature-info">
-                            <h3><a href="service-details.html">Consulting Service</a></h3>
-                            <p>over 1 million+ homes for sale available on the website, we can match you with a house you will want to call home.</p>
-                            <!-- <a class="ltn__service-btn" href="service-details.html">Find A Home <i class="flaticon-right-arrow"></i></a> -->
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-4 col-sm-6 col-12">
-                    <div class="ltn__feature-item ltn__feature-item-6 text-center bg-white  box-shadow-1">
-                        <div class="ltn__feature-icon">
-                            <span><i class="flaticon-house-1"></i></span>
-                            <!-- <img src="~/assets/img/icons/icon-img/21.png" alt="#"> -->
-                        </div>
-                        <div class="ltn__feature-info">
-                            <h3><a href="service-details.html">Home Buying</a></h3>
-                            <p>over 1 million+ homes for sale available on the website, we can match you with a house you will want to call home.</p>
-                            <!-- <a class="ltn__service-btn" href="service-details.html">Find A Home <i class="flaticon-right-arrow"></i></a> -->
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-4 col-sm-6 col-12">
-                    <div class="ltn__feature-item ltn__feature-item-6 text-center bg-white  box-shadow-1">
-                        <div class="ltn__feature-icon">
-                            <span><i class="flaticon-house-3"></i></span>
-                            <!-- <img src="~/assets/img/icons/icon-img/21.png" alt="#"> -->
-                        </div>
-                        <div class="ltn__feature-info">
-                            <h3><a href="service-details.html">Home Selling</a></h3>
-                            <p>over 1 million+ homes for sale available on the website, we can match you with a house you will want to call home.</p>
-                            <!-- <a class="ltn__service-btn" href="service-details.html">Find A Home <i class="flaticon-right-arrow"></i></a> -->
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-4 col-sm-6 col-12">
-                    <div class="ltn__feature-item ltn__feature-item-6 text-center bg-white  box-shadow-1">
-                        <div class="ltn__feature-icon">
-                            <span><i class="flaticon-official-documents"></i></span>
-                            <!-- <img src="~/assets/img/icons/icon-img/21.png" alt="#"> -->
-                        </div>
-                        <div class="ltn__feature-info">
-                            <h3><a href="service-details.html">Escrow Services</a></h3>
-                            <p>over 1 million+ homes for sale available on the website, we can match you with a house you will want to call home.</p>
-                            <!-- <a class="ltn__service-btn" href="service-details.html">Find A Home <i class="flaticon-right-arrow"></i></a> -->
-                        </div>
-                    </div>
-                </div>
+                }
             </div>
         </div>
     </div>

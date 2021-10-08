@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Quarter.Models;
+using Quarter.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -17,7 +18,14 @@ namespace Quarter.Controllers
         }
         public IActionResult Index()
         {
-            return View();
+            AboutViewModel aboutVM = new AboutViewModel
+            {
+                Settings = _context.Settings.ToList(),
+                Abouts = _context.Abouts.ToList(), 
+                Teams = _context.Teams.Take(3).ToList(),
+                Services = _context.Services.Take(3).ToList()
+            };
+            return View(aboutVM);
         }
     }
 }

@@ -11,5 +11,6 @@ namespace Quarter.ViewModels
         public List<Team> Teams { get; set; }
         public List<Setting> Settings { get; set; }
         public List<About> Abouts { get; set; }
+        public List<Service> Services { get; set; }
     }
 }

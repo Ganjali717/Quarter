@@ -10,8 +10,8 @@ using Quarter.Models;
 namespace Quarter.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20211008081048_CreateAboutAndServiceTable")]
-    partial class CreateAboutAndServiceTable
+    [Migration("20211008085202_DeleteImageFromService")]
+    partial class DeleteImageFromService
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -224,16 +224,7 @@ namespace Quarter.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<string>("Desc")
-                        .HasColumnType("nvarchar(300)")
-                        .HasMaxLength(300);
-
                     b.Property<string>("Icon")
-                        .HasColumnType("nvarchar(100)")
-                        .HasMaxLength(100);
-
-                    b.Property<string>("Image")
-                        .IsRequired()
                         .HasColumnType("nvarchar(100)")
                         .HasMaxLength(100);
 
@@ -258,11 +249,6 @@ namespace Quarter.Migrations
                         .HasColumnType("nvarchar(200)")
                         .HasMaxLength(200);
 
-                    b.Property<string>("Image")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(100)")
-                        .HasMaxLength(100);
-
                     b.Property<string>("Logo")
                         .HasColumnType("nvarchar(50)")
                         .HasMaxLength(50);
@@ -275,14 +261,33 @@ namespace Quarter.Migrations
                         .HasColumnType("nvarchar(100)")
                         .HasMaxLength(100);
 
-                    b.Property<int?>("serviceId")
-                        .HasColumnType("int");
+                    b.HasKey("Id");
+
+                    b.HasIndex("ServiceDetailId");
+
+                    b.ToTable("Services");
+                });
+
+            modelBuilder.Entity("Quarter.Models.ServiceDetail", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("BigDesc1")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("BigDesc2")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Image")
+                        .HasColumnType("nvarchar(100)")
+                        .HasMaxLength(100);
 
                     b.HasKey("Id");
 
-                    b.HasIndex("serviceId");
-
-                    b.ToTable("Services");
+                    b.ToTable("ServiceDetail");
                 });
 
             modelBuilder.Entity("Quarter.Models.Setting", b =>
@@ -295,6 +300,10 @@ namespace Quarter.Migrations
                     b.Property<string>("AboutUsDesc")
                         .HasColumnType("nvarchar(300)")
                         .HasMaxLength(300);
+
+                    b.Property<string>("AboutUsImg")
+                        .HasColumnType("nvarchar(100)")
+                        .HasMaxLength(100);
 
                     b.Property<string>("AboutUsTitle")
                         .HasColumnType("nvarchar(200)")
@@ -313,6 +322,10 @@ namespace Quarter.Migrations
                         .HasMaxLength(100);
 
                     b.Property<string>("HeaderLogo")
+                        .HasColumnType("nvarchar(100)")
+                        .HasMaxLength(100);
+
+                    b.Property<string>("ServiceImg")
                         .HasColumnType("nvarchar(100)")
                         .HasMaxLength(100);
 
@@ -490,9 +503,11 @@ namespace Quarter.Migrations
 
             modelBuilder.Entity("Quarter.Models.Service", b =>
                 {
-                    b.HasOne("Quarter.Models.Service", "service")
+                    b.HasOne("Quarter.Models.ServiceDetail", "serviceDetail")
                         .WithMany()
-                        .HasForeignKey("serviceId");
+                        .HasForeignKey("ServiceDetailId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("Quarter.Models.Team", b =>

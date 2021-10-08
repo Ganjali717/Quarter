@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Quarter.Models;
 using Quarter.ViewModels;
 using System;
@@ -20,7 +21,7 @@ namespace Quarter.Controllers
         {
             ServiceViewModel serviceVM = new ServiceViewModel
             {
-                Services = _context.Services.ToList(), 
+                Services = _context.Services.Include(x => x.serviceDetail)  .ToList(), 
                 Settings = _context.Settings.ToList()
             };
             return View(serviceVM);
@@ -28,7 +29,7 @@ namespace Quarter.Controllers
 
         public IActionResult Detail(int id)
         {
-            var detail = _context.Services.FirstOrDefault(x => x.Id == id);
+            var detail = _context.Services.Include(x=>x.serviceDetail).FirstOrDefault(x => x.Id == id);
 
             return View(detail);
         }

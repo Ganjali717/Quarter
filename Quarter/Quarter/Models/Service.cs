@@ -17,10 +17,8 @@ namespace Quarter.Models
         [Required]
         [StringLength(maximumLength: 200)]
         public string Desc { get; set; }
-        [Required]
-        [StringLength(maximumLength: 100)]
-        public string Image { get; set; }
         public int ServiceDetailId { get; set; }
-        public Service service { get; set; }
+
+        public ServiceDetail serviceDetail { get; set; }
     }
 }
