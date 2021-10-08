@@ -23,6 +23,7 @@ namespace Quarter.Controllers
             {
                 Houses = _context.House.Include(x => x.HouseImages).Include(x => x.City).Include(z => z.HouseStatus).Include(y => y.HouseType).ToList(),
                 HouseTypes = _context.HouseTypes.Include(x => x.Houses).ToList(), 
+                HouseStatuses = _context.HouseStatuses.Include(x=>x.Houses).ToList(),
                 Amenitis = _context.Amenitis.Include(x=> x.HouseAmenitis).ToList()
             };
             return View(houseVM);

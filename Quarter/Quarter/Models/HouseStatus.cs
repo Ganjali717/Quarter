@@ -9,5 +9,6 @@ namespace Quarter.Models
     {
         public int Id { get; set; }
         public string StatusName { get; set; }
+        public List<House> Houses { get; set; }
     }
 }

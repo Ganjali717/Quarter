@@ -559,7 +559,7 @@
                                     <li>
                                         <label class="checkbox-item">
                                             @item.Name
-                                            <input type="checkbox" checked="checked">
+                                            <input type="checkbox">
                                             <span class="checkmark"></span>
                                         </label>
                                         <span class="categorey-no">(@item.Houses.Count())</span>
@@ -574,7 +574,7 @@
                                     <li>
                                         <label class="checkbox-item">
                                             @item.Name
-                                            <input type="checkbox" checked="checked">
+                                            <input type="checkbox">
                                             <span class="checkmark"></span>
                                         </label>
                                         <span class="categorey-no">(@item.HouseAmenitis.Count())</span>
@@ -624,21 +624,23 @@
                             <hr>
                             <h4 class="ltn__widget-title">Bed/bath</h4>
                             <ul>
-                                <li>
-                                    <label class="checkbox-item">
-                                        Single
-                                        <input type="checkbox" checked="checked">
-                                        <span class="checkmark"></span>
-                                    </label>
-                                    <span class="categorey-no">3,924</span>
-                                </li>
+                                 <li>
+                                     <label class="checkbox-item">
+                                            Single
+                                            <input type="checkbox" checked="checked">
+                                            <span class="checkmark"></span>
+                                        </label>
+                                        <span class="categorey-no">@(Model.Houses.FirstOrDefault().Baths == 1?Model.Houses.Count():0)</span>
+                                  </li>
+                               
+
                                 <li>
                                     <label class="checkbox-item">
                                         Double
                                         <input type="checkbox">
                                         <span class="checkmark"></span>
                                     </label>
-                                    <span class="categorey-no">3,610</span>
+                                    <span class="categorey-no">@(Model.Houses.FirstOrDefault().Baths == 2?Model.Houses.Count():0)</span>
                                 </li>
                                 <li>
                                     <label class="checkbox-item">
@@ -646,7 +648,7 @@
                                         <input type="checkbox">
                                         <span class="checkmark"></span>
                                     </label>
-                                    <span class="categorey-no">2,912</span>
+                                    <span class="categorey-no">@(Model.Houses.FirstOrDefault().Baths > 3?Model.Houses.Count():0)</span>
                                 </li>
                                 <li>
                                     <label class="checkbox-item">
@@ -654,36 +656,24 @@
                                         <input type="checkbox">
                                         <span class="checkmark"></span>
                                     </label>
-                                    <span class="categorey-no">2,687</span>
+                                    <span class="categorey-no">@(Model.Houses.FirstOrDefault().Baths > 5?Model.Houses.Count():0)</span>
                                 </li>
                             </ul>
                             <hr>
                             <h4 class="ltn__widget-title">Catagory</h4>
                             <ul>
-                                <li>
-                                    <label class="checkbox-item">
-                                        Buying
-                                        <input type="checkbox" checked="checked">
-                                        <span class="checkmark"></span>
-                                    </label>
-                                    <span class="categorey-no">3,924</span>
-                                </li>
-                                <li>
-                                    <label class="checkbox-item">
-                                        Renting
-                                        <input type="checkbox">
-                                        <span class="checkmark"></span>
-                                    </label>
-                                    <span class="categorey-no">3,610</span>
-                                </li>
-                                <li>
-                                    <label class="checkbox-item">
-                                        Selling
-                                        <input type="checkbox">
-                                        <span class="checkmark"></span>
-                                    </label>
-                                    <span class="categorey-no">2,912</span>
-                                </li>
+                                @foreach (var item in Model.HouseStatuses)
+                                {
+                                    <li>
+                                        <label class="checkbox-item">
+                                            @item.StatusName
+                                            <input type="checkbox" >
+                                            <span class="checkmark"></span>
+                                        </label>
+                                        <span class="categorey-no">@(item.Houses.Count())</span>
+                                    </li>
+                                }
+
                             </ul>
                         </div>
                         <!-- Category Widget -->

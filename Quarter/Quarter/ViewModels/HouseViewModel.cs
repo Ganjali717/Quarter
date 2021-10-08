@@ -13,5 +13,7 @@ namespace Quarter.ViewModels
         public List<Team> Teams { get; set; }
         public List<HouseStatus> HouseStatuses { get; set; }
         public List<HouseType> HouseTypes { get; set; }
+
+             
     }
 }
