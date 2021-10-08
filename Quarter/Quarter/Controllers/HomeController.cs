@@ -22,7 +22,8 @@ namespace Quarter.Controllers
         {
             HomeViewModel homeVM = new HomeViewModel
             {
-                Sliders = _context.Sliders.OrderBy(x => x.Order).ToList()
+                Sliders = _context.Sliders.OrderBy(x => x.Order).ToList(),
+                Services = _context.Services.Skip(3).Take(3).ToList()
             };
             return View(homeVM);
         }

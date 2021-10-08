@@ -19,5 +19,12 @@ namespace Quarter.Models
         public DbSet<Team> Teams { get; set; }
         public DbSet<Service> Services { get; set; }
         public DbSet<About> Abouts { get; set; }
+        public DbSet<House> House { get; set; }
+        public DbSet<Ameniti> Amenitis { get; set; }
+        public DbSet<City> Cities { get; set; }
+        public DbSet<HouseImage> HouseImages { get; set; }
+        public DbSet<HouseAmeniti> HouseAmenitis { get; set; }
+        public DbSet<HouseStatus> HouseStatuses { get; set; }
+        public DbSet<HouseType> HouseTypes { get; set; }
     }
 }

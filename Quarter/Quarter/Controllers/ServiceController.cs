@@ -21,7 +21,7 @@ namespace Quarter.Controllers
         {
             ServiceViewModel serviceVM = new ServiceViewModel
             {
-                Services = _context.Services.Include(x => x.serviceDetail)  .ToList(), 
+                Services = _context.Services.Include(x => x.serviceDetail).ToList(), 
                 Settings = _context.Settings.ToList()
             };
             return View(serviceVM);

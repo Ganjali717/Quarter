@@ -315,3 +315,4 @@ C:\Users\LENOVO\OneDrive\Desktop\Layihe\Quarter\Quarter\Quarter\obj\Debug\netcor
 C:\Users\LENOVO\OneDrive\Desktop\Layihe\Quarter\Quarter\Quarter\obj\Debug\netcoreapp3.1\Razor\Views\About\Index.cshtml.g.cs
 C:\Users\LENOVO\OneDrive\Desktop\Layihe\Quarter\Quarter\Quarter\obj\Debug\netcoreapp3.1\Razor\Views\Service\Detail.cshtml.g.cs
 C:\Users\LENOVO\OneDrive\Desktop\Layihe\Quarter\Quarter\Quarter\obj\Debug\netcoreapp3.1\Razor\Views\Service\Index.cshtml.g.cs
+C:\Users\LENOVO\OneDrive\Desktop\Layihe\Quarter\Quarter\Quarter\obj\Debug\netcoreapp3.1\Razor\Views\Shop\Index.cshtml.g.cs
