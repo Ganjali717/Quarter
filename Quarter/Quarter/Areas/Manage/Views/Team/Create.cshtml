@@ -1,0 +1,46 @@
+﻿@model Team
+@{
+    ViewData["Title"] = "Create";
+}
+
+
+<div class="container-fluid">
+    <h1>Create</h1>
+    <form method="post" enctype="multipart/form-data">
+        <div class="form-group">
+            <label asp-for="Fullname">FullName</label>
+            <input asp-for="Fullname" class="form-control" placeholder="FullName">
+            <span class="text-danger" asp-validation-for="Fullname"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="teamDetail.Email">Email</label>
+            <input asp-for="teamDetail.Email" class="form-control" placeholder="Email">
+            <span class="text-danger" asp-validation-for="teamDetail.Email"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="teamDetail.PhoneNumber">PhoneNumber</label>
+            <input asp-for="teamDetail.PhoneNumber" class="form-control" placeholder="PhoneNumber">
+            <span class="text-danger" asp-validation-for="teamDetail.PhoneNumber"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="teamDetail.Experience">Experience</label>
+            <input asp-for="teamDetail.Experience" class="form-control" placeholder="Experience">
+            <span class="text-danger" asp-validation-for="teamDetail.Experience"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="teamDetail.Desc">Description</label>
+            <input asp-for="teamDetail.Desc" class="form-control" placeholder="Description">
+            <span class="text-danger" asp-validation-for="teamDetail.Desc"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="FileImage">ImageFile</label>
+            <input asp-for="FileImage" class="form-control" placeholder="ImageFile">
+            <span class="text-danger" asp-validation-for="FileImage"></span>
+        </div>
+
+        <div class="form-group">
+            <button type="submit" class="btn btn-primary">Create</button>
+        </div>
+
+    </form>
+</div>

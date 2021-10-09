@@ -7,7 +7,7 @@
 
 <div class="container-fluid">
     <div class="d-flex justify-content-between align-items-center">
-        <h1>Authors</h1>
+        <h1>Maklerler</h1>
         <a asp-action="create" class="btn btn-primary">Create</a>
     </div>
     <table class="table">
@@ -27,8 +27,8 @@
                 <tr>
                     <th scope="row">@order</th>
                     <td>@makler.Fullname</td>
-                    <td><img src="~/uploads/author/@makler.Image" style="max-width:100px" alt="Alternate Text" /></td>
-                    <td>@makler.teamDetail.Experience</td>
+                    <td><img src="~/uploads/team/@makler.Image" style="max-width:100px" alt="Alternate Text" /></td>
+                    <td>@makler.teamDetail.Experience year</td>
                     <td>
                         <a asp-action="edit" asp-route-id="@makler.Id" class="btn btn-warning">Edit</a>
                         <a asp-action="deletefetch" asp-route-id="@makler.Id" class="btn btn-danger btn-item-delete">Delete</a>
