@@ -1,0 +1,32 @@
+﻿@model Setting
+@{
+    ViewData["Title"] = "Index";
+    int order = 0;
+}
+
+
+<div class="container-fluid">
+    <h1>About</h1>
+    <form method="post" enctype="multipart/form-data">
+        <div class="form-group">
+            <label asp-for="AboutUsTitle">FullName</label>
+            <input asp-for="AboutUsTitle" class="form-control" placeholder="FullName">
+            <span class="text-danger" asp-validation-for="AboutUsTitle"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="AboutUsDesc">ImageFile</label>
+            <input asp-for="AboutUsDesc" class="form-control" placeholder="ImageFile">
+            <span class="text-danger" asp-validation-for="AboutUsDesc"></span>
+        </div>
+
+        <div class="img-box">
+            <input type="hidden" name="Image" value="@Model.AboutUsImg" />
+            <img style="max-width:300px" src="~/uploads/team/@Model.AboutUsImg" />
+        </div>
+
+        <div class="form-group">
+            <button type="submit" class="btn btn-primary">Edit</button>
+        </div>
+
+    </form>
+</div>

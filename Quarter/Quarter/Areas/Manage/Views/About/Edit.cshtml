@@ -1,0 +1,24 @@
+﻿@model About 
+
+
+<div class="container-fluid">
+    <h1>Edit</h1>
+    <form method="post" enctype="multipart/form-data">
+        <div class="form-group">
+            <label asp-for="Icon">FullName</label>
+            <input asp-for="Icon" class="form-control" placeholder="FullName">
+            <span class="text-danger" asp-validation-for="Icon"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="Title">Email</label>
+            <input asp-for="Title" class="form-control" placeholder="Email">
+            <span class="text-danger" asp-validation-for="Title"></span>
+        </div>
+
+
+        <div class="form-group">
+            <button type="submit" class="btn btn-primary">Edit</button>
+        </div>
+
+    </form>
+</div>

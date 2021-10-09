@@ -1,0 +1,62 @@
+﻿@model AboutViewModel
+@{
+    ViewData["Title"] = "Index";
+    int order = 0;
+}
+
+
+<div class="container-fluid">
+    <div class="d-flex justify-content-between align-items-center">
+        <h1>About</h1>
+        <a asp-action="create" class="btn btn-primary">Create</a>
+    </div>
+    <table class="table">
+        <thead>
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">Title</th>
+                <th scope="col">Logo</th>
+                <th scope="col">Action</th>
+            </tr>
+           
+        </thead>
+        <tbody>
+            @foreach (var about in Model.Abouts)
+            {
+                order++;
+                <tr>
+                    <th scope="row">@order</th>
+                    <td>@about.Title</td>
+                    <td>@about.Icon</td>
+                    <td>
+                        <a asp-action="edit" asp-route-id="@about.Id" class="btn btn-warning">Edit</a>
+                        <a asp-action="deletefetch" asp-route-id="@about.Id" class="btn btn-danger btn-item-delete">Delete</a>
+                    </td>
+                </tr>
+            }
+        
+        </tbody>
+    </table>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">AboutUsTitle</th>
+                <th scope="col">AboutUsDesc</th>
+                <th scope="col">Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <th scope="row">@order</th>
+                <td>@Model.Settings.FirstOrDefault().AboutUsTitle</td>
+                <td>@Model.Settings.FirstOrDefault().AboutUsDesc</td>
+                <td>
+                    <a asp-action="editimage" asp-route-id="@Model.Settings.FirstOrDefault().Id" class="btn btn-warning">Edit</a>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
