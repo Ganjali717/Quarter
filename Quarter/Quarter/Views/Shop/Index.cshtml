@@ -12,7 +12,7 @@
                         <h1 class="page-title">Shop</h1>
                         <div class="ltn__breadcrumb-list">
                             <ul>
-                                <li><a asp-action=""><span class="ltn__secondary-color"><i class="fas fa-home"></i></span> Home</a></li>
+                                <li><a asp-action="index" asp-controller="home"><span class="ltn__secondary-color"><i class="fas fa-home"></i></span> Home</a></li>
                                 <li>Shop</li>
                             </ul>
                         </div>
@@ -92,7 +92,7 @@
                                                     <a href="product-details.html"><img src="~/assets/img/product-3/@item.HouseImages.FirstOrDefault().Image" alt="#"></a>
                                                     <div class="real-estate-agent">
                                                         <div class="agent-img">
-                                                            <a href="team-details.html"><img src="~/assets/img/team/@item.Team.Image" alt="#"></a>
+                                                            <a href="team-details.html"><img src="~/uploads/team/@item.Team.Image" alt="#"></a>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -102,7 +102,7 @@
                                                             <li class="sale-badg">@item.HouseStatus.StatusName</li>
                                                         </ul>
                                                     </div>
-                                                    <h2 class="product-title"><a href="product-details.html">New Apartment Nice View</a></h2>
+                                                    <h2 class="product-title"><a asp-action="detail" asp-controller="shop" asp-route-id="@item.Id">@item.HouseType.Name</a></h2>
                                                     <div class="product-img-location">
                                                         <ul>
                                                             <li>

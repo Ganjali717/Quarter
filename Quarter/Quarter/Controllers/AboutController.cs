@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Quarter.Models;
 using Quarter.ViewModels;
 using System;
@@ -22,7 +23,7 @@ namespace Quarter.Controllers
             {
                 Settings = _context.Settings.ToList(),
                 Abouts = _context.Abouts.ToList(), 
-                Teams = _context.Teams.Take(3).ToList(),
+                Teams = _context.Teams.Include(x => x.teamDetail).Skip(3).Take(3).ToList(),
                 Services = _context.Services.Take(3).ToList()
             };
             return View(aboutVM);

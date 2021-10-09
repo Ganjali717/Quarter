@@ -32,10 +32,14 @@ namespace Quarter.Controllers
 
         public IActionResult Detail(int id)
         {
+            DetailViewModel detailVM = new DetailViewModel
+            {
+                Houses = _context.House.Include(x => x.HouseImages).Include(x => x.HouseStatus).Include(x => x.City).Include(x => x.HouseAmenitis).Include(x => x.Team).ThenInclude(x=> x.teamDetail).FirstOrDefault(x => x.Id == id),
+                Amenitis = _context.Amenitis.ToList(),
+                HouseTypes = _context.HouseTypes.Include(x=>x.Houses).ToList()
+            };
             
-            var housdetail = _context.House.Include(x => x.HouseImages).Include(x => x.City).Include(z => z.HouseStatus).Include(y => y.HouseType).Include(x => x.HouseAmenitis).ThenInclude(x => x.Ameniti).Include(x => x.Team).ThenInclude(x => x.teamDetail).FirstOrDefault(x => x.Id == id);
-            if (housdetail == null) return NotFound();
-            return View(housdetail);
+            return View(detailVM);
         }
     }
 }

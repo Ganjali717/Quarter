@@ -1,4 +1,4 @@
-﻿@model House
+﻿@model DetailViewModel
 
 @{
     ViewData["Title"] = "Detail";
@@ -13,7 +13,7 @@
                     <h1 class="page-title">Product Details</h1>
                     <div class="ltn__breadcrumb-list">
                         <ul>
-                            <li><a href="index.html"><span class="ltn__secondary-color"><i class="fas fa-home"></i></span> Home</a></li>
+                            <li><a asp-action="index" asp-controller="home"><span class="ltn__secondary-color"><i class="fas fa-home"></i></span> Home</a></li>
                             <li>Product Details</li>
                         </ul>
                     </div>
@@ -79,13 +79,13 @@
                     <div class="ltn__blog-meta">
                         <ul>
                             <li class="ltn__blog-category">
-                                <a href="#">@(Model.IsFeatured == true?"Featured":"")</a>
+                                <a href="#">@(Model.Houses.IsFeatured == true?"Featured":"")</a>
                             </li>
                             <li class="ltn__blog-category">
-                                <a class="bg-orange" href="#">@(Model.HouseStatus.StatusName == "Satilir"?"Satilir":"Kiraye")</a>
+                                <a class="bg-orange" href="#">@(Model.Houses.HouseStatus.StatusName == "Satilir"?"Satilir":"Kiraye")</a>
                             </li>
                             <li class="ltn__blog-date">
-                                <i class="far fa-calendar-alt"></i>@Model.Date
+                                <i class="far fa-calendar-alt"></i>@Model.Houses.Date
                             </li>
                             <li>
                                 <a href="#"><i class="far fa-comments"></i>35 Comments</a>
@@ -93,26 +93,26 @@
                         </ul>
                     </div>
                     <h1>Diamond Manor Apartment</h1>
-                    <label><span class="ltn__secondary-color"><i class="flaticon-pin"></i></span> @Model.Location, @Model.City.Name</label>
+                    <label><span class="ltn__secondary-color"><i class="flaticon-pin"></i></span> @Model.Houses.Location, @Model.Houses.City.Name</label>
                     <h4 class="title-2">Description</h4>
                     <p>
-                       @Model.Desc
+                       @Model.Houses.Desc
                     </p>
                     <p>To the left is the modern kitchen with central island, leading through to the unique breakfast family room which feature glass walls and doors out onto the garden and access to the separate utility room.</p>
 
                     <h4 class="title-2">Property Detail</h4>
                     <div class="property-detail-info-list section-bg-1 clearfix mb-60">
                         <ul>
-                            <li><label>Home Area: </label> <span>@Model.Area sqft</span></li>
-                            <li><label>Rooms:</label> <span>@Model.Rooms</span></li>
-                            <li><label>Baths:</label> <span>@Model.Baths</span></li>
-                            <li><label>Year built:</label> <span>@Model.YearBuilt</span></li>
+                            <li><label>Home Area: </label> <span>@Model.Houses.Area sqft</span></li>
+                            <li><label>Rooms:</label> <span>@Model.Houses.Rooms</span></li>
+                            <li><label>Baths:</label> <span>@Model.Houses.Baths</span></li>
+                            <li><label>Year built:</label> <span>@Model.Houses.YearBuilt</span></li>
                         </ul>
                         <ul>
-                            <li><label>Lot dimensions:</label> <span>@Model.Area sqft</span></li>
-                            <li><label>Beds:</label> <span>@Model.Beds</span></li>
-                            <li><label>Price:</label> <span>@Model.SalePrice</span></li>
-                            <li><label>Property Status:</label> <span>@Model.HouseStatus.StatusName</span></li>
+                            <li><label>Lot dimensions:</label> <span>@Model.Houses.Area sqft</span></li>
+                            <li><label>Beds:</label> <span>@Model.Houses.Beds</span></li>
+                            <li><label>Price:</label> <span>@Model.Houses.SalePrice</span></li>
+                            <li><label>Property Status:</label> <span>@Model.Houses.HouseStatus.StatusName</span></li>
                         </ul>
                     </div>
 
@@ -142,11 +142,11 @@
                             <div class="col-lg-10 col-md-12">
                                 <div class="ltn__menu-widget">
                                     <ul>
-                                        @for (int i = 0; i < Model.HouseAmenitis.Count; i++)
+                                        @for (int i = 0; i < Model.Houses.HouseAmenitis.Count; i++)
                                         {
                                             <li>
                                                 <label class="checkbox-item">
-                                                    @Model.HouseAmenitis[i].Ameniti.Name
+                                                    @Model.Houses.HouseAmenitis[i].Ameniti.Name
                                                     <input type="checkbox" checked="checked">
                                                     <span class="checkmark"></span>
                                                 </label>
@@ -626,8 +626,8 @@
                     <!-- Author Widget -->
                     <div class="widget ltn__author-widget">
                         <div class="ltn__author-widget-inner text-center">
-                            <img src="~/assets/img/team/@Model.Team.Image" alt="Image">
-                            <h5>@Model.Team.Fullname</h5>
+                            <img src="~/assets/img/team/@Model.Houses.Team.Image" alt="Image">
+                            <h5>@Model.Houses.Team.Fullname</h5>
                             <small>Makler</small>
                             <div class="product-ratting">
                                 <ul>
@@ -639,12 +639,12 @@
                                     <li class="review-total"> <a href="#"> ( 1 Reviews )</a></li>
                                 </ul>
                             </div>
-                            <p>@Model.Team.teamDetail.Desc</p>
+                            <p>@Model.Houses.Team.teamDetail.Desc</p>
                             <div class="ltn__social-media">
                                 <ul>
-                                    <li><a href="#">@Html.Raw(Model.Team.teamDetail.Facebook)</a></li>
-                                    <li><a href="#">@Html.Raw(Model.Team.teamDetail.Twitter)</a></li>
-                                    <li><a href="#">@Html.Raw(Model.Team.teamDetail.Linkedin)</a></li>
+                                    <li><a href="#">@Html.Raw(Model.Houses.Team.teamDetail.Facebook)</a></li>
+                                    <li><a href="#">@Html.Raw(Model.Houses.Team.teamDetail.Twitter)</a></li>
+                                    <li><a href="#">@Html.Raw(Model.Houses.Team.teamDetail.Linkedin)</a></li>
                                 </ul>
                             </div>
                         </div>
@@ -746,9 +746,9 @@
                     <div class="widget ltn__menu-widget ltn__menu-widget-2--- ltn__menu-widget-2-color-2---">
                         <h4 class="ltn__widget-title ltn__widget-title-border-2">Top Categories</h4>
                         <ul>
-                            @foreach (var item in Model.HouseType.Houses)
+                            @foreach (var item in Model.HouseTypes)
                             {
-                                <li><a href="#">@item.HouseType.Name<span>@item.HouseType.Houses.Count()</span></a></li>
+                                <li><a href="#">@item.Name<span>@item.Houses.Count()</span></a></li>
                             }
                         </ul>
                     </div>
@@ -897,9 +897,9 @@
                     <div class="widget ltn__tagcloud-widget">
                         <h4 class="ltn__widget-title ltn__widget-title-border-2">Popular Tags</h4>
                         <ul>
-                            @foreach (var item in Model.HouseAmenitis)
+                            @foreach (var item in Model.Amenitis)
                             {
-                                <li><a href="#">@item.Ameniti.Name</a></li>
+                                <li><a href="#">@item.Name</a></li>
                             }
                         </ul>
                     </div>
