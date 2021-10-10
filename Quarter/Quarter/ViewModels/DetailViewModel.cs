@@ -10,6 +10,8 @@ namespace Quarter.ViewModels
     {
         public House Houses { get; set; }
 
+        public List<HouseImage> HouseImages { get; set; }
+
         public List<Ameniti> Amenitis { get; set; }
         public List<HouseType> HouseTypes { get; set; }
     }

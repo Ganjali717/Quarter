@@ -21,32 +21,31 @@
                 <th scope="col">Area</th>
                 <th scope="col">Rooms</th>
                 <th scope="col">Floor</th>
-                <th scope="col">Current Floor</th>
                 <th scope="col">Sale Price</th>
                 <th scope="col">Image</th>
+                <th scope="col">Action</th>
             </tr>
         </thead>
         <tbody>
             @foreach (var house in Model)
             {
                 order++;
-            <tr>
-                <th scope="row">@order</th>
-                <td>@house.Team.Fullname</td>
-                <td>@house.HouseType.Name</td>
-                <td>@house.HouseStatus.StatusName</td>
-                <td>@house.City.Name</td>
-                <td>@house.Area</td>
-                <td>@house.Rooms</td>
-                <td>@house.Floor</td>
-                <td>@house.CurrentFloor</td>
-                <td>@house.SalePrice</td>
-                <td><img src="~/uploads/team/@house.ImageFiles" style="max-width:100px" alt="Alternate Text" /></td>
-                <td>
-                    <a asp-action="edit" asp-route-id="@house.Id" class="btn btn-warning">Edit</a>
-                    <a asp-action="deletefetch" asp-route-id="@house.Id" class="btn btn-danger btn-item-delete">Delete</a>
-                </td>
-            </tr>
+                <tr>
+                    <th scope="row">@order</th>
+                    <td>@house.Team.Fullname</td>
+                    <td>@house.HouseType.Name</td>
+                    <td>@house.HouseStatus.StatusName</td>
+                    <td>@house.City.Name</td>
+                    <td>@house.Area</td>
+                    <td>@house.Rooms</td>
+                    <td>@house.Floor</td>
+                    <td>@house.SalePrice AZN</td>
+                    <td><img src="~/uploads/house/@house.HouseImages.FirstOrDefault(x => x.PosterStatus == true)?.Image" style="max-width:100px" alt="Alternate Text" /></td>
+                    <td>
+                        <a asp-action="edit"  asp-route-id="@house.Id" class="btn btn-warning">Edit</a>
+                        <a asp-action="deletehousefetch" asp-route-id="@house.Id" class="btn btn-danger btn-item-delete">Delete</a>
+                    </td>
+                </tr>
             }
 
         </tbody>

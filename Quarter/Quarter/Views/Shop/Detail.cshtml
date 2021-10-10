@@ -29,41 +29,16 @@
 <div class="ltn__img-slider-area mb-90">
     <div class="container-fluid">
         <div class="row ltn__image-slider-5-active slick-arrow-1 slick-arrow-1-inner ltn__no-gutter-all">
-            <div class="col-lg-12">
-                <div class="ltn__img-slide-item-4">
-                    <a href="~/assets/img/img-slide/31.jpg" data-rel="lightcase:myCollection">
-                        <img src="~/assets/img/img-slide/31.jpg" alt="Image">
-                    </a>
+            @foreach (var item in Model.HouseImages)
+            {
+                <div class="col-lg-12">
+                    <div class="ltn__img-slide-item-4">
+                        <a href="~/uploads/house/@item.Image" data-rel="lightcase:myCollection">
+                            <img src="~/uploads/house/@item.Image" alt="Image">
+                        </a>
+                    </div>
                 </div>
-            </div>
-            <div class="col-lg-12">
-                <div class="ltn__img-slide-item-4">
-                    <a href="~/assets/img/img-slide/32.jpg" data-rel="lightcase:myCollection">
-                        <img src="~/assets/img/img-slide/32.jpg" alt="Image">
-                    </a>
-                </div>
-            </div>
-            <div class="col-lg-12">
-                <div class="ltn__img-slide-item-4">
-                    <a href="~/assets/img/img-slide/33.jpg" data-rel="lightcase:myCollection">
-                        <img src="~/assets/img/img-slide/33.jpg" alt="Image">
-                    </a>
-                </div>
-            </div>
-            <div class="col-lg-12">
-                <div class="ltn__img-slide-item-4">
-                    <a href="~/assets/img/img-slide/34.jpg" data-rel="lightcase:myCollection">
-                        <img src="~/assets/img/img-slide/34.jpg" alt="Image">
-                    </a>
-                </div>
-            </div>
-            <div class="col-lg-12">
-                <div class="ltn__img-slide-item-4">
-                    <a href="~/assets/img/img-slide/35.jpg" data-rel="lightcase:myCollection">
-                        <img src="~/assets/img/img-slide/35.jpg" alt="Image">
-                    </a>
-                </div>
-            </div>
+            }
         </div>
     </div>
 </div>
@@ -120,19 +95,16 @@
                     <h4 class="title-2">From Our Gallery</h4>
                     <div class="ltn__property-details-gallery mb-30">
                         <div class="row">
+
+                            @foreach (var item in Model.HouseImages.Skip(2).Take(2))
+                            {
+                               
                             <div class="col-md-6">
                                 <a href="img/others/14.jpg" data-rel="lightcase:myCollection">
-                                    <img class="mb-30" src="~/assets/img/others/14.jpg" alt="Image">
-                                </a>
-                                <a href="img/others/15.jpg" data-rel="lightcase:myCollection">
-                                    <img class="mb-30" src="~/assets/img/others/15.jpg" alt="Image">
+                                    <img class="mb-30" src="~/uploads/house/@item.Image" alt="Image">
                                 </a>
                             </div>
-                            <div class="col-md-6">
-                                <a href="img/others/16.jpg" data-rel="lightcase:myCollection">
-                                    <img class="mb-30" src="~/assets/img/others/16.jpg" alt="Image">
-                                </a>
-                            </div>
+                            }
                         </div>
                     </div>
 
@@ -626,7 +598,7 @@
                     <!-- Author Widget -->
                     <div class="widget ltn__author-widget">
                         <div class="ltn__author-widget-inner text-center">
-                            <img src="~/assets/img/team/@Model.Houses.Team.Image" alt="Image">
+                            <img src="~/uploads/team/@Model.Houses.Team.Image" alt="Image">
                             <h5>@Model.Houses.Team.Fullname</h5>
                             <small>Makler</small>
                             <div class="product-ratting">

@@ -88,7 +88,7 @@ namespace Quarter.Areas.Manage.Controllers
                 }
 
                 string newFileName = Guid.NewGuid().ToString() + house.PosterFile.FileName;
-                string path = Path.Combine(_env.WebRootPath, "uploads/book", newFileName);
+                string path = Path.Combine(_env.WebRootPath, "uploads/house", newFileName);
 
                 using (FileStream stream = new FileStream(path, FileMode.Create))
                 {
@@ -153,6 +153,7 @@ namespace Quarter.Areas.Manage.Controllers
         {
             if (!_context.Cities.Any(x => x.Id == house.CityId)) ModelState.AddModelError("CityId", "Cities not found!");
             if (!_context.Teams.Any(x => x.Id == house.TeamId)) ModelState.AddModelError("TeamId", "Team not found!");
+            if (!_context.Amenitis.Any(x => x.Id == ((uint)house.AmenitiIds.FirstOrDefault()))) ModelState.AddModelError("AmenitiId", "Ameniti not found!");
             if (!_context.HouseTypes.Any(x => x.Id == house.HouseTypeId)) ModelState.AddModelError("HouseTypeId", "HouseType not found!");
             if (!_context.HouseStatuses.Any(x => x.Id == house.HouseStatusId)) ModelState.AddModelError("HouseStatusId", "HouseStatus not found!");
 
@@ -262,6 +263,24 @@ namespace Quarter.Areas.Manage.Controllers
             _context.SaveChanges();
 
             return RedirectToAction("index");
+        }
+
+        public IActionResult DeleteHouseFetch(int id)
+        {
+            House house = _context.House.Include(b => b.HouseImages).Include(t => t.HouseAmenitis).Include(x => x.HouseStatus).Include(x => x.HouseType).Include(x => x.Team).Include(x => x.City).FirstOrDefault(x => x.Id == id);
+            if (house == null) return Json(new { status = 404 });
+
+            try
+            {
+                _context.House.Remove(house);
+                _context.SaveChanges();
+            }
+            catch (Exception)
+            {
+                return Json(new { status = 500 });
+            }
+
+            return Json(new { status = 200 });
         }
     }
 }
