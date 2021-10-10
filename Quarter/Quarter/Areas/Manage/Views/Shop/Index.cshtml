@@ -1,0 +1,60 @@
+﻿@model List<House>
+@{
+    ViewData["Title"] = "Index";
+    int order = 0;
+}
+
+
+<div class="container-fluid">
+    <div class="d-flex justify-content-between align-items-center">
+        <h1>Evler</h1>
+        <a asp-action="create" class="btn btn-primary">Create</a>
+    </div>
+    <table class="table">
+        <thead>
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">Team</th>
+                <th scope="col">HouseType</th>
+                <th scope="col">HouseStatus</th>
+                <th scope="col">City</th>
+                <th scope="col">Area</th>
+                <th scope="col">Rooms</th>
+                <th scope="col">Bathroom</th>
+                <th scope="col">Bedroom</th>
+                <th scope="col">Floor</th>
+                <th scope="col">Current Floor</th>
+                <th scope="col">Sale Price</th>
+                <th scope="col">Image</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var house in Model)
+            {
+                order++;
+            <tr>
+                <th scope="row">@order</th>
+                <td>@house.Team.Fullname</td>
+                <td>@house.HouseType.Name</td>
+                <td>@house.HouseStatus.StatusName</td>
+                <td>@house.City.Name</td>
+                <td>@house.Area</td>
+                <td>@house.Rooms</td>
+                <td>@house.Baths</td>
+                <td>@house.Beds</td>
+                <td>@house.Floor</td>
+                <td>@house.CurrentFloor</td>
+                <td>@house.SalePrice</td>
+                <td><img src="~/uploads/team/@house.ImageFiles" style="max-width:100px" alt="Alternate Text" /></td>
+                <td>
+                    <a asp-action="edit" asp-route-id="@house.Id" class="btn btn-warning">Edit</a>
+                    <br />
+                    <br />
+                    <a asp-action="deletefetch" asp-route-id="@house.Id" class="btn btn-danger btn-item-delete">Delete</a>
+                </td>
+            </tr>
+            }
+
+        </tbody>
+    </table>
+</div>
