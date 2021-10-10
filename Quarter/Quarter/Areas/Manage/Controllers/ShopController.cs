@@ -134,21 +134,134 @@ namespace Quarter.Areas.Manage.Controllers
             return RedirectToAction("index");
         }
 
-       /* public IActionResult Edit(int id)
+
+        public IActionResult Edit(int id)
         {
-            var house = _context.House.Include(x => x.HouseAmenitis).Include(x => x.HouseImages).Include(x => x.HouseStatus).Include(x => x.HouseType).Include(x => x.Team).Include(x => x.City).FirstOrDefault(x => x.Id == id);
+            House house = _context.House.Include(b => b.HouseImages).Include(t => t.HouseAmenitis).Include(x => x.HouseStatus).Include(x => x.HouseType).Include(x => x.Team).Include(x => x.City).FirstOrDefault(x => x.Id == id);
+            ViewBag.Ameniti = _context.Amenitis.ToList();
+            ViewBag.City = _context.Cities.ToList();
+            ViewBag.Team = _context.Teams.ToList();
+            ViewBag.HouseTypes = _context.HouseTypes.ToList();
+            ViewBag.HouseStatuses = _context.HouseStatuses.ToList();
+            house.AmenitiIds = house.HouseAmenitis.Select(x => x.AmenitiId).ToList();
             if (house == null) return NotFound();
             return View(house);
         }
 
         [HttpPost]
-        [ValidateAntiForgeryToken]
         public IActionResult Edit(House house)
         {
-          
-            House existHouse = _context.House.Include(x => x.HouseAmenitis).Include(x => x.HouseImages).Include(x => x.HouseStatus).Include(x => x.HouseType).Include(x => x.Team).Include(x => x.City).FirstOrDefault(x => x.Id == house.Id); 
+            if (!_context.Cities.Any(x => x.Id == house.CityId)) ModelState.AddModelError("CityId", "Cities not found!");
+            if (!_context.Teams.Any(x => x.Id == house.TeamId)) ModelState.AddModelError("TeamId", "Team not found!");
+            if (!_context.HouseTypes.Any(x => x.Id == house.HouseTypeId)) ModelState.AddModelError("HouseTypeId", "HouseType not found!");
+            if (!_context.HouseStatuses.Any(x => x.Id == house.HouseStatusId)) ModelState.AddModelError("HouseStatusId", "HouseStatus not found!");
 
-             
-        }*/
+            House existHouse = _context.House.Include(b => b.HouseImages).Include(t => t.HouseAmenitis).Include(x => x.HouseStatus).Include(x => x.HouseType).Include(x => x.Team).Include(x => x.City).FirstOrDefault(x => x.Id == house.Id);
+
+            if (existHouse == null) return View();
+
+            if (house.PosterFile != null)
+            {
+                if (house.PosterFile.ContentType != "image/png" && house.PosterFile.ContentType != "image/jpeg")
+                {
+                    ModelState.AddModelError("PosterFile", "File type can be only jpeg,jpg or png!");
+                    return View();
+                }
+
+                if (house.PosterFile.Length > 2097152)
+                {
+                    ModelState.AddModelError("PosterFile", "File size can not be more than 2MB!");
+                    return View();
+                }
+
+                HouseImage poster = existHouse.HouseImages.FirstOrDefault(x => x.PosterStatus == true);
+                string newFileName = FileManager.Save(_env.WebRootPath, "uploads/house", house.PosterFile);
+
+                if (poster == null)
+                {
+                    poster = new HouseImage
+                    {
+                        PosterStatus = true,
+                        Image = newFileName,
+                        HouseId = house.Id
+                    };
+
+                    _context.HouseImages.Add(poster);
+                }
+                else
+                {
+                    FileManager.Delete(_env.WebRootPath, "uploads/house", existHouse.HouseImages.FirstOrDefault(x => x.PosterStatus == true).Image);
+                    poster.Image = newFileName;
+                }
+            }
+
+            /*_context.BookTags.RemoveRange(existBook.BookTags.Where(x => !book.TagIds.Contains(x.TagId)));*/
+
+            //BookTag edit update
+
+            existHouse.HouseAmenitis.RemoveAll((x => !house.AmenitiIds.Contains(x.AmenitiId)));
+
+            if (house.AmenitiIds != null)
+            {
+                foreach (var amenitiId in house.AmenitiIds.Where(x => !existHouse.HouseAmenitis.Any(bt => bt.AmenitiId == x)))
+                {
+                    HouseAmeniti bookTag = new HouseAmeniti
+                    {
+                        AmenitiId = amenitiId,
+                        HouseId = house.Id
+                    };
+                }
+            }
+
+            existHouse.HouseImages.RemoveAll(x => x.PosterStatus == null && !house.HouseImageIds.Contains(x.Id));
+
+            if (house.ImageFiles != null)
+            {
+                foreach (var file in house.ImageFiles)
+                {
+                    if (file.ContentType != "image/png" && file.ContentType != "image/jpeg")
+                    {
+                        continue;
+                    }
+
+                    if (file.Length > 2097152)
+                    {
+                        continue;
+                    }
+
+                    HouseImage image = new HouseImage
+                    {
+                        PosterStatus = null,
+                        Image = FileManager.Save(_env.WebRootPath, "uploads/house", file)
+                    };
+
+                    existHouse.HouseImages.Add(image);
+                }
+            }
+
+            existHouse.Area = house.Area;
+            existHouse.Baths = house.Baths;
+            existHouse.Beds = house.Beds;
+            existHouse.City = house.City;
+            existHouse.CurrentFloor = house.CurrentFloor;
+            existHouse.Floor = house.Floor;
+            existHouse.Desc = house.Desc;
+            existHouse.Date = house.Date;
+            existHouse.HouseType = house.HouseType;
+            existHouse.HouseStatus = house.HouseStatus;
+            existHouse.HouseAmenitis = house.HouseAmenitis;
+            existHouse.IsFeatured = house.IsFeatured;
+            existHouse.IsRelated = house.IsRelated;
+            existHouse.Location = house.Location;
+            existHouse.YearBuilt = house.YearBuilt;
+            existHouse.Team = house.Team;
+            existHouse.Rate = house.Rate;
+            existHouse.Rooms = house.Rooms;
+            existHouse.SalePrice = house.SalePrice;
+
+            _context.SaveChanges();
+
+            return RedirectToAction("index");
+        }
     }
 }

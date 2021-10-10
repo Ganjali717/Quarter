@@ -20,8 +20,6 @@
                 <th scope="col">City</th>
                 <th scope="col">Area</th>
                 <th scope="col">Rooms</th>
-                <th scope="col">Bathroom</th>
-                <th scope="col">Bedroom</th>
                 <th scope="col">Floor</th>
                 <th scope="col">Current Floor</th>
                 <th scope="col">Sale Price</th>
@@ -40,16 +38,12 @@
                 <td>@house.City.Name</td>
                 <td>@house.Area</td>
                 <td>@house.Rooms</td>
-                <td>@house.Baths</td>
-                <td>@house.Beds</td>
                 <td>@house.Floor</td>
                 <td>@house.CurrentFloor</td>
                 <td>@house.SalePrice</td>
                 <td><img src="~/uploads/team/@house.ImageFiles" style="max-width:100px" alt="Alternate Text" /></td>
                 <td>
                     <a asp-action="edit" asp-route-id="@house.Id" class="btn btn-warning">Edit</a>
-                    <br />
-                    <br />
                     <a asp-action="deletefetch" asp-route-id="@house.Id" class="btn btn-danger btn-item-delete">Delete</a>
                 </td>
             </tr>
