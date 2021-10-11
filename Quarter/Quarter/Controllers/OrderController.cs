@@ -27,7 +27,7 @@ namespace Quarter.Controllers
         [Authorize(Roles = "Member")]
         public IActionResult Index()
         {
-            List<Order> orders = _context.Orders.Include(x => x.OrderItems).Where(x => x.AppUser.UserName == User.Identity.Name).ToList();
+            List<Order> orders = _context.Orders.Include(x => x.OrderItems).ThenInclude(x => x.House).ThenInclude(x => x.HouseImages).Where(x => x.AppUser.UserName == User.Identity.Name).ToList();
             return View(orders);
         }
 
@@ -113,7 +113,7 @@ namespace Quarter.Controllers
 
             if (member == null)
             {
-                var houseStr = HttpContext.Request.Cookies["Books"];
+                var houseStr = HttpContext.Request.Cookies["Houses"];
                 if (houseStr != null)
                 {
                     wishlistItemVMs = JsonConvert.DeserializeObject<List<WishlistItemViewModel>>(houseStr);
@@ -149,7 +149,7 @@ namespace Quarter.Controllers
 
             if (member == null)
             {
-                Response.Cookies.Delete("Books");
+                Response.Cookies.Delete("Houses");
             }
             else
             {
@@ -166,8 +166,7 @@ namespace Quarter.Controllers
             {
                 HouseId = house.Id,
                 HouseLocation = house.Location,
-                SalePrice = house.SalePrice,
-               
+                SalePrice = house.SalePrice
             };
 
             order.OrderItems.Add(orderItem);

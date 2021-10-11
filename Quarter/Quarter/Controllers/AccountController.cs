@@ -143,7 +143,7 @@ namespace Quarter.Controllers
             return RedirectToAction("index", "home");
         }
 
-        public async  Task<IActionResult> ShowAccount(string id)
+        public IActionResult ShowAccount(string id)
         {
 
             AppUser appUsers = _context.AppUsers.FirstOrDefault(x => x.Id == id);
@@ -153,15 +153,15 @@ namespace Quarter.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> ShowAccount(AppUser appUser)
+        public IActionResult ShowAccount(AppUser appUser)
         {
             AppUser existUser = _context.AppUsers.FirstOrDefault(x => x.Id == appUser.Id);
 
             if (!ModelState.IsValid) return View();
 
-            existUser.FullName = appUser.FullName;
-            existUser.Email = appUser.Email;
-            existUser.UserName = appUser.UserName;
+            existUser.FullName = appUser.FullName ?? existUser.FullName;
+            existUser.Email = appUser.Email ?? existUser.Email;
+            existUser.UserName = appUser.UserName ?? existUser.UserName;
 
             _context.SaveChanges();
 

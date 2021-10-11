@@ -47,24 +47,19 @@
                                             <td class="cart-product-info">
                                                 <h4><a href="product-details.html">@item.OrderItems.FirstOrDefault().HouseLocation</a></h4>
                                             </td>
-                                            <td class="cart-product-price">@item.OrderItems.FirstOrDefault().SalePrice</td>
-                                            <td class="cart-product-quantity">
-                                                <div class="cart-plus-minus">
-                                                    <input type="text" value="02" name="qtybutton" class="cart-plus-minus-box">
-                                                </div>
-                                            </td>
+                                            <td class="cart-product-price">@item.OrderItems.FirstOrDefault().SalePrice AZN</td>
                                             <td>
                                                 @if (item.Status == OrderStatus.Accepted)
                                                 {
-                                                    <h5><span class="badge badge-success">Accepted</span></h5>
+                                                    <h5><span  style="background-color:forestgreen; border-radius:10px; padding:15px;">Accepted</span></h5>
                                                 }
                                                 else if (item.Status == OrderStatus.Rejected)
                                                 {
-                                                    <h5><span class="badge badge-danger">Rejected</span></h5>
+                                                    <h5><span style="background-color:red; border-radius:10px; padding:15px;">Rejected</span></h5>
                                                 }
                                                 else
                                                 {
-                                                    <h5><span class="badge badge-info">Pending</span></h5>
+                                                    <h5><span style="background-color:deepskyblue; border-radius:10px; padding:15px;">Pending</span></h5>
                                                 }
                                             </td>
                                         </tr>

@@ -1,5 +1,10 @@
 ﻿@model HouseViewModel
-
+@{ 
+    ViewData["Title"] = "Index";
+    int order = (ViewBag.SelectedPage - 1) * 4;
+    int selectedPage = ViewBag.SelectedPage;
+    decimal totalPage = ViewBag.TotalPage;
+}
 
 
 
@@ -535,13 +540,33 @@
                     <div class="ltn__pagination-area text-center">
                         <div class="ltn__pagination">
                             <ul>
-                                <li><a href="#"><i class="fas fa-angle-double-left"></i></a></li>
-                                <li><a href="#">1</a></li>
-                                <li class="active"><a href="#">2</a></li>
-                                <li><a href="#">3</a></li>
-                                <li><a href="#">...</a></li>
-                                <li><a href="#">10</a></li>
-                                <li><a href="#"><i class="fas fa-angle-double-right"></i></a></li>
+                                @if (selectedPage > 1)
+                                {
+                                    <li>
+                                        <a asp-action="index" asp-route-page="@(selectedPage-1)" class="single-btn prev-btn ">
+                                            <i class="fas fa-angle-double-left"></i>
+                                        </a>
+                                    </li>
+                                }
+
+                                @{
+                                    int startPage = (selectedPage == 1 || totalPage <= 3) ? 1 : selectedPage < totalPage ? selectedPage - 1 : selectedPage - 2;
+                                    int endPage = totalPage > 2 ? startPage + 2 : (int)totalPage;
+                                }
+
+                                @for (int i = startPage; i <= endPage; i++)
+                                {
+                                    <li class="@(i==selectedPage?"active":"")"><a asp-action="index" asp-route-page="@i" asp-route-genreId="@ViewBag.GenreId" asp-route-authorId="@ViewBag.AuthorId" asp-route-tagId="@ViewBag.TagId" class="single-btn">@i</a></li>
+                                }
+
+                                @if (selectedPage < totalPage)
+                                {
+                                    <li>
+                                        <a asp-action="index" asp-route-page="@(selectedPage+1)" class="single-btn next-btn">
+                                            <i class="zmdi zmdi-chevron-right"></i>
+                                        </a>
+                                    </li>
+                                }
                             </ul>
                         </div>
                     </div>
@@ -552,15 +577,35 @@
                         <label class="mb-30"><small>About 9,620 results (0.62 seconds) </small></label>
                         <!-- Advance Information widget -->
                         <div class="widget ltn__menu-widget">
+                            <h4 class="ltn__widget-title">Category</h4>
+                            <ul>
+                                @foreach (var item in Model.HouseStatuses)
+                                {
+                                    <li>
+                                        <label class="checkbox-item">
+                                            <a asp-action="index" asp-controller="shop" asp-route-houseStatusId="@item.Id" data-id="@item.Id">
+                                                @item.StatusName
+                                                <input type="checkbox">
+                                                <span class="checkmark"></span>
+                                            </a>
+                                        </label>
+                                        <span class="categorey-no">@(item.Houses.Count())</span>
+                                    </li>
+                                }
+
+                            </ul>
+                            <hr />
                             <h4 class="ltn__widget-title">Property Type</h4>
                             <ul>
                                 @foreach (var item in Model.HouseTypes)
                                 {
                                     <li>
                                         <label class="checkbox-item">
-                                            @item.Name
-                                            <input type="checkbox">
-                                            <span class="checkmark"></span>
+                                            <a asp-action="index" asp-controller="shop" asp-route-houseTypeId="@item.Id" data-id="@item.Id">
+                                                @item.Name
+                                                <input type="checkbox">
+                                                <span class="checkmark"></span>
+                                            </a>
                                         </label>
                                         <span class="categorey-no">(@item.Houses.Count())</span>
                                     </li>
@@ -573,9 +618,11 @@
                                 {
                                     <li>
                                         <label class="checkbox-item">
-                                            @item.Name
-                                            <input type="checkbox">
-                                            <span class="checkmark"></span>
+                                            <a asp-action="index" asp-controller="shop" asp-route-amenitiesId="@item.Id" data-id="@item.Id">
+                                                @item.Name
+                                                <input type="checkbox">
+                                                <span class="checkmark"></span>
+                                            </a>
                                         </label>
                                         <span class="categorey-no">(@item.HouseAmenitis.Count())</span>
                                     </li>
@@ -622,21 +669,7 @@
                                 </div>
                             </div>
                             <hr>
-                            <h4 class="ltn__widget-title">Catagory</h4>
-                            <ul>
-                                @foreach (var item in Model.HouseStatuses)
-                                {
-                                    <li>
-                                        <label class="checkbox-item">
-                                            @item.StatusName
-                                            <input type="checkbox" >
-                                            <span class="checkmark"></span>
-                                        </label>
-                                        <span class="categorey-no">@(item.Houses.Count())</span>
-                                    </li>
-                                }
 
-                            </ul>
                         </div>
                         
                         <!-- Banner Widget -->

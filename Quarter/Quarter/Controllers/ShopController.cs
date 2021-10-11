@@ -21,16 +21,31 @@ namespace Quarter.Controllers
             _context = context;
             _userManager = userManager;
         }
-        public IActionResult Index()
+        public IActionResult Index(int page = 1, int? houseTypeId = null, int? amenitiesId = null, int? houseStatusId = null)
         {
+            var query = _context.House.AsQueryable();
+            ViewBag.HouseTypeId = houseTypeId;
+            ViewBag.AmenitiesId = amenitiesId;
+            ViewBag.HouseStatusesId = houseStatusId;
+
+            if (houseTypeId != null)
+                query = query.Where(x => x.HouseTypeId == houseTypeId);
+            if(amenitiesId != null)
+                query = query.Where(x => x.HouseAmenitis.Any(a => a.AmenitiId == amenitiesId));
+            if (houseStatusId != null)
+                query = query.Where(x => x.HouseStatusId == amenitiesId);
+
             HouseViewModel houseVM = new HouseViewModel
             {
-                Houses = _context.House.Include(x => x.HouseImages).Include(x => x.City).Include(z => z.HouseStatus).Include(y => y.HouseType).ToList(),
+                Houses = query.Include(x => x.HouseImages).Include(x => x.City).Include(z => z.HouseStatus).Include(y => y.HouseType).ToList(),
                 HouseTypes = _context.HouseTypes.Include(x => x.Houses).ToList(), 
                 HouseStatuses = _context.HouseStatuses.Include(x=>x.Houses).ToList(),
                 Amenitis = _context.Amenitis.Include(x=> x.HouseAmenitis).ToList(),
                 Teams = _context.Teams.ToList()   
             };
+
+            ViewBag.SelectedPage = page;
+            ViewBag.TotalPage = Math.Ceiling(query.Count() / 4m);
             return View(houseVM);
         }
 
