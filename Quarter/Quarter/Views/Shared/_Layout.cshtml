@@ -4,10 +4,7 @@
 @{
     Setting setting = service.GetSetting();
     List<WishlistItemViewModel> wishlistItem = service.GetWishItems();
-   
-
     AppUser member = User.Identity.IsAuthenticated ? userManager.Users.FirstOrDefault(x => x.UserName == User.Identity.Name && !x.IsAdmin) : null;
-
 }
 
 
@@ -132,6 +129,11 @@
                                             </li>
                                             <li class="menu-icon">
                                                 <a asp-action="index" asp-controller="shop">Shop</a>
+                                                <ul>
+                                                    <li>
+                                                        <a asp-action="index" asp-controller="order">Orders</a>
+                                                    </li>
+                                                </ul>
                                             </li>
                                             <li class="menu-icon">
                                                 <a asp-action="index" asp-controller="service">Service</a>

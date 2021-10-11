@@ -146,7 +146,7 @@ namespace Quarter.Controllers
         public async  Task<IActionResult> ShowAccount(string id)
         {
 
-            AppUser appUsers = await _userManager.FindByIdAsync(id);
+            AppUser appUsers = _context.AppUsers.FirstOrDefault(x => x.Id == id);
            
             return View(appUsers);
         }
@@ -155,7 +155,7 @@ namespace Quarter.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> ShowAccount(AppUser appUser)
         {
-            AppUser existUser = await _userManager.FindByIdAsync(appUser.Id);
+            AppUser existUser = _context.AppUsers.FirstOrDefault(x => x.Id == appUser.Id);
 
             if (!ModelState.IsValid) return View();
 

@@ -42,13 +42,20 @@ using Quarter.Services;
 #nullable disable
 #nullable restore
 #line 5 "C:\Users\LENOVO\OneDrive\Desktop\Layihe\Quarter\Quarter\Quarter\Views\_ViewImports.cshtml"
+using Quarter.Models.Enums;
+
+#line default
+#line hidden
+#nullable disable
+#nullable restore
+#line 6 "C:\Users\LENOVO\OneDrive\Desktop\Layihe\Quarter\Quarter\Quarter\Views\_ViewImports.cshtml"
 using Microsoft.AspNetCore.Identity;
 
 #line default
 #line hidden
 #nullable disable
     [global::Microsoft.AspNetCore.Razor.Hosting.RazorSourceChecksumAttribute(@"SHA1", @"49e1075c85ee09084847871ab20821f2c17b8740", @"/Views/Service/Index.cshtml")]
-    [global::Microsoft.AspNetCore.Razor.Hosting.RazorSourceChecksumAttribute(@"SHA1", @"7138fb0a5120cedd3e9172073211ddba0691acf7", @"/Views/_ViewImports.cshtml")]
+    [global::Microsoft.AspNetCore.Razor.Hosting.RazorSourceChecksumAttribute(@"SHA1", @"ef04afd7d27ccb72b886b3e6744d037cea69259a", @"/Views/_ViewImports.cshtml")]
     public class Views_Service_Index : global::Microsoft.AspNetCore.Mvc.Razor.RazorPage<ServiceViewModel>
     {
         private static readonly global::Microsoft.AspNetCore.Razor.TagHelpers.TagHelperAttribute __tagHelperAttribute_0 = new global::Microsoft.AspNetCore.Razor.TagHelpers.TagHelperAttribute("asp-action", "index", global::Microsoft.AspNetCore.Razor.TagHelpers.HtmlAttributeValueStyle.DoubleQuotes);
@@ -95,7 +102,7 @@ using Microsoft.AspNetCore.Identity;
                         <div class=""ltn__breadcrumb-list"">
                             <ul>
                                 <li>");
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "49e1075c85ee09084847871ab20821f2c17b87406623", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "49e1075c85ee09084847871ab20821f2c17b87406822", async() => {
                 WriteLiteral("<span class=\"ltn__secondary-color\"><i class=\"fas fa-home\"></i></span> Home");
             }
             );
@@ -130,7 +137,7 @@ using Microsoft.AspNetCore.Identity;
                 <div class=""col-lg-5 align-self-center"">
                     <div class=""about-us-img-wrap ltn__img-shape-left  about-img-left"">
                         ");
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("img", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagOnly, "49e1075c85ee09084847871ab20821f2c17b87408637", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("img", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagOnly, "49e1075c85ee09084847871ab20821f2c17b87408836", async() => {
             }
             );
             __Microsoft_AspNetCore_Mvc_Razor_TagHelpers_UrlResolutionTagHelper = CreateTagHelper<global::Microsoft.AspNetCore.Mvc.Razor.TagHelpers.UrlResolutionTagHelper>();
@@ -178,7 +185,7 @@ AddHtmlAttributeValue("", 1255, Model.Settings.FirstOrDefault().ServiceImg, 1255
 #line hidden
 #nullable disable
             WriteLiteral("\r\n                            </p>\r\n                        </div>\r\n                        <div class=\"btn-wrapper animated\">\r\n                            ");
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "49e1075c85ee09084847871ab20821f2c17b874011572", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "49e1075c85ee09084847871ab20821f2c17b874011771", async() => {
                 WriteLiteral("About Us");
             }
             );
@@ -238,7 +245,7 @@ AddHtmlAttributeValue("", 1255, Model.Settings.FirstOrDefault().ServiceImg, 1255
 #line hidden
 #nullable disable
             WriteLiteral("</span>\r\n                                <!-- <img src=\"~/assets/img/icons/icon-img/21.png\" alt=\"#\"> -->\r\n                            </div>\r\n                            <div class=\"ltn__feature-info\">\r\n                                <h3>");
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "49e1075c85ee09084847871ab20821f2c17b874014889", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "49e1075c85ee09084847871ab20821f2c17b874015088", async() => {
 #nullable restore
 #line 75 "C:\Users\LENOVO\OneDrive\Desktop\Layihe\Quarter\Quarter\Quarter\Views\Service\Index.cshtml"
                                                                                                        Write(item.Title);

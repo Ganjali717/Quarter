@@ -27,7 +27,8 @@ namespace Quarter.Models
         public DbSet<HouseStatus> HouseStatuses { get; set; }
         public DbSet<HouseType> HouseTypes { get; set; }
         public DbSet<AppUser> AppUsers { get; set; }
-
         public DbSet<WishlistItem> WishlistItems { get; set; }
+        public DbSet<Order> Orders { get; set; }
+        public DbSet<OrderItem> OrderItems { get; set; }
     }
 }
