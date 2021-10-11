@@ -1,23 +1,23 @@
 ﻿$(document).ready(function () {
-/*
-    $(document).on("click", ".show-product-modal", function (e) {
+
+    $(document).on("click", ".show-modal-house", function (e) {
         e.preventDefault();
 
         var id = $(this).attr("data-id");
 
-        fetch('https://localhost:44322/home/getbook/' + id)
+        fetch('https://localhost:44369/shop/gethouse/' + id)
             .then(response => response.text())
             .then(data => {
 
 
-                $("#product-modal-detail").html(data)
+                $(".modal-content").html(data)
             });
         // get data from controller
 
         //set data 
 
         $("#quickModal").modal("show")
-    })*/
+    })
 
     $(document).on("click", ".add-wish-btn", function (e) {
         e.preventDefault();

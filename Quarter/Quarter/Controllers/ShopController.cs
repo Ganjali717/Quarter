@@ -190,5 +190,12 @@ namespace Quarter.Controllers
             }
             return PartialView("_WishlistPartial", houses);
         }
+
+        public IActionResult GetHouse(int id)
+        {
+            House house = _context.House.Include(x => x.HouseImages).Include(x => x.City).Include(z => z.HouseStatus).Include(y => y.HouseType).FirstOrDefault(x => x.Id == id);
+
+            return PartialView("_HouseModalPartial", house);
+        }
     }
 }
