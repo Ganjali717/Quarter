@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Quarter.Models;
 using Quarter.ViewModels;
 using System;
@@ -14,12 +15,14 @@ namespace Quarter.Controllers
         private readonly UserManager<AppUser> _userManager;
         private readonly RoleManager<IdentityRole> _roleManager;
         private readonly SignInManager<AppUser> _signInManager;
+        private readonly AppDbContext _context;
 
-        public AccountController(UserManager<AppUser> userManager, RoleManager<IdentityRole> roleManager, SignInManager<AppUser> signInManager)
+        public AccountController(UserManager<AppUser> userManager, RoleManager<IdentityRole> roleManager, SignInManager<AppUser> signInManager, AppDbContext context)
         {
             _userManager = userManager;
             _roleManager = roleManager;
             _signInManager = signInManager;
+            _context = context;
         }
         public async Task<IActionResult> Index()
         {
@@ -139,5 +142,32 @@ namespace Quarter.Controllers
 
             return RedirectToAction("index", "home");
         }
+
+        public async  Task<IActionResult> ShowAccount(string id)
+        {
+
+            AppUser appUsers = await _userManager.FindByIdAsync(id);
+           
+            return View(appUsers);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> ShowAccount(AppUser appUser)
+        {
+            AppUser existUser = await _userManager.FindByIdAsync(appUser.Id);
+
+            if (!ModelState.IsValid) return View();
+
+            existUser.FullName = appUser.FullName;
+            existUser.Email = appUser.Email;
+            existUser.UserName = appUser.UserName;
+
+            _context.SaveChanges();
+
+            return RedirectToAction("index", "home");
+        }
+
+
     }
 }

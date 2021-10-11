@@ -334,3 +334,4 @@ C:\Users\LENOVO\OneDrive\Desktop\Layihe\Quarter\Quarter\Quarter\obj\Debug\netcor
 C:\Users\LENOVO\OneDrive\Desktop\Layihe\Quarter\Quarter\Quarter\obj\Debug\netcoreapp3.1\Razor\Views\Account\Login.cshtml.g.cs
 C:\Users\LENOVO\OneDrive\Desktop\Layihe\Quarter\Quarter\Quarter\obj\Debug\netcoreapp3.1\Razor\Views\Shared\_WishlistPartial.cshtml.g.cs
 C:\Users\LENOVO\OneDrive\Desktop\Layihe\Quarter\Quarter\Quarter\obj\Debug\netcoreapp3.1\Razor\Areas\Manage\Views\Account\Login.cshtml.g.cs
+C:\Users\LENOVO\OneDrive\Desktop\Layihe\Quarter\Quarter\Quarter\obj\Debug\netcoreapp3.1\Razor\Views\Account\ShowAccount.cshtml.g.cs

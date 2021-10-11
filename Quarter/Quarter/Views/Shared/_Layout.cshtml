@@ -106,7 +106,7 @@
                         <div class="col">
                             <div class="site-logo-wrap">
                                 <div class="site-logo">
-                                    <a href="index.html"><img src="~/assets/img/@setting.HeaderLogo" alt="Logo"></a>
+                                    <a asp-action="index" asp-controller="home"><img src="~/assets/img/@setting.HeaderLogo" alt="Logo"></a>
                                 </div>
                                 <div class="get-support clearfix d-none">
                                     <div class="get-support-icon">
@@ -172,21 +172,20 @@
                                         <a href="#"><i class="icon-user"></i></a>
                                         <ul>
 
-                                           
-                                                @if (User.Identity.IsAuthenticated)
-                                                {
-                                                    <li>  <a href="login-register.html" class="font-weight-bold">@User.Identity.Name</a></li>
-                                                    <li>  <a class="font-weight-bold" asp-action="logout" asp-controller="account">Logout</a></li>
-                                                  
-                                                }
-                                                else
-                                                {
-                                                     <li> <a asp-action="login" asp-controller="account">Sign in</a></li>
-                                                    <li> <a asp-action="register" asp-controller="account">Register</a></li>
-                                                }
 
-                                            <li><a href="account.html">My Account</a></li>
-                                            <li><a href="wishlist.html">Wishlist</a></li>
+                                            @if (User.Identity.IsAuthenticated)
+                                            {
+                                                <li>  <a href="login-register.html" class="font-weight-bold">@User.Identity.Name</a></li>
+                                                <li>  <a class="font-weight-bold" asp-action="logout" asp-controller="account">Logout</a></li>
+                                                 <li><a asp-action="showaccount" asp-controller="account" asp-route-id="@member.Id" >My Account</a></li>
+                                            }
+                                            else
+                                            {
+                                                <li> <a asp-action="login" asp-controller="account">Sign in</a></li>
+                                                <li> <a asp-action="register" asp-controller="account">Register</a></li>
+                                            }
+
+
                                         </ul>
                                     </li>
                                 </ul>
