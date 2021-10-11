@@ -34,16 +34,19 @@
                 <label asp-for="HouseStatusId">House Status</label>
                 <select asp-for="HouseStatusId" class="form-control" id="HouseStatusId" asp-items="@(new SelectList(ViewBag.HouseStatuses,"Id","StatusName"))">
                 </select>
+                <span class="text-danger" asp-validation-for="HouseStatusId"></span>
             </div>
             <div class="form-group col-md-6">
                 <label asp-for="HouseTypeId">House Type</label>
                 <select asp-for="HouseTypeId" class="form-control" id="HouseTypeId" asp-items="@(new SelectList(ViewBag.HouseTypes,"Id","Name"))">
                 </select>
+                <span class="text-danger" asp-validation-for="HouseTypeId"></span>
             </div>
             <div class="form-group col-md-4">
                 <label asp-for="AmenitiIds">Amenitis </label>
                 <select asp-for="AmenitiIds" class="form-control" id="AmenitiIds" asp-items="@(new SelectList(ViewBag.Ameniti,"Id","Name"))">
                 </select>
+                <span class="text-danger" asp-validation-for="AmenitiIds"></span>
             </div>
 
         </div>
@@ -58,11 +61,13 @@
                 <label asp-for="CityId">City</label>
                 <select asp-for="CityId" class="form-control" id="CityId" asp-items="@(new SelectList(ViewBag.City,"Id","Name"))">
                 </select>
+                <span class="text-danger" asp-validation-for="CityId"></span>
             </div>
             <div class="form-group col-md-4">
                 <label asp-for="TeamId">Team</label>
                 <select asp-for="TeamId" class="form-control" id="TeamId" asp-items="@(new SelectList(ViewBag.Team,"Id","Fullname"))">
                 </select>
+                <span class="text-danger" asp-validation-for="TeamId"></span>
             </div>
         </div>
         <div class="form-row">

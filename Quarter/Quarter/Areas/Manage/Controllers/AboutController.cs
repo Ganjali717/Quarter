@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Quarter.Models;
 using Quarter.ViewModels;
@@ -9,6 +10,7 @@ using System.Threading.Tasks;
 
 namespace Quarter.Areas.Manage.Controllers
 {
+    [Authorize(Roles = "Admin,SuperAdmin")]
     [Area("manage")]
     public class AboutController : Controller
     {

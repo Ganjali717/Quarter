@@ -68,31 +68,21 @@
                             <div class="car-dealer-form-inner">
                                 <form action="#" class="ltn__car-dealer-form-box row">
                                     <div class="ltn__car-dealer-form-item ltn__custom-icon---- ltn__icon-car---- col-lg-3 col-md-6">
-                                        <select class="nice-select">
-                                            <option>Choose Area</option>
-                                            <option>chicago</option>
-                                            <option>London</option>
-                                            <option>Los Angeles</option>
-                                            <option>New York</option>
-                                            <option>New Jersey</option>
+                                        <select class="nice-select" asp-items="@(new SelectList(ViewBag.Cities,"Id","Name"))">
+                                            <option>Weheri sech</option>
+                                            
                                         </select>
                                     </div>
                                     <div class="ltn__car-dealer-form-item ltn__custom-icon---- ltn__icon-meter---- col-lg-3 col-md-6">
-                                        <select class="nice-select">
-                                            <option>Property Status</option>
-                                            <option>Open house</option>
-                                            <option>Rent</option>
-                                            <option>Sale</option>
-                                            <option>Sold</option>
+                                        <select class="nice-select" asp-items="@(new SelectList(ViewBag.HouseStatus,"Id","StatusName"))">
+                                            <option>House Status</option>
+                                           
                                         </select>
                                     </div>
                                     <div class="ltn__car-dealer-form-item ltn__custom-icon---- ltn__icon-calendar---- col-lg-3 col-md-6">
-                                        <select class="nice-select">
-                                            <option>Property Type</option>
-                                            <option>Apartment</option>
-                                            <option>Co-op</option>
-                                            <option>Condo</option>
-                                            <option>Single Family Home</option>
+                                        <select class="nice-select" asp-items="@(new SelectList(ViewBag.HouseType,"Id","Name"))">
+                                            <option>House Type</option>
+                                         
                                         </select>
                                     </div>
                                     <div class="ltn__car-dealer-form-item ltn__custom-icon ltn__icon-calendar col-lg-3 col-md-6">
@@ -365,7 +355,7 @@
                     <div class="col-lg-12">
                         <div class="ltn__product-item ltn__product-item-4 text-center---">
                             <div class="product-img">
-                                <a href="product-details.html"><img src="~/assets/img/product-3/@item.HouseImages.FirstOrDefault().Image" alt="#"></a>
+                                <a href="product-details.html"><img src="~/uploads/house/@item.HouseImages.FirstOrDefault(x => x.PosterStatus ==true)?.Image" alt="#"></a>
                                 <div class="product-badge">
                                     <ul>
                                         <li class="sale-badge bg-green">@item.HouseStatus.StatusName</li>
@@ -456,186 +446,6 @@
 </div>
 <!-- PRODUCT SLIDER AREA END -->
 
-<!-- APARTMENTS PLAN AREA START -->
-<div class="ltn__apartments-plan-area pt-115--- pb-70">
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-12">
-                <div class="section-title-area ltn__section-title-2--- text-center">
-                    <h6 class="section-subtitle section-subtitle-2 ltn__secondary-color">Apartment Sketch</h6>
-                    <h1 class="section-title">Apartments Plan</h1>
-                </div>
-                <div class="ltn__tab-menu ltn__tab-menu-3 ltn__tab-menu-top-right-- text-uppercase--- text-center">
-                    <div class="nav">
-                        <a data-bs-toggle="tab" href="#liton_tab_3_1">The Studio</a>
-                        <a class="active show" data-bs-toggle="tab" href="#liton_tab_3_2">Deluxe Portion</a>
-                        <a data-bs-toggle="tab" href="#liton_tab_3_3" class="">Penthouse</a>
-                        <a data-bs-toggle="tab" href="#liton_tab_3_4" class="">Top Garden</a>
-                        <a data-bs-toggle="tab" href="#liton_tab_3_5" class="">Double Height</a>
-                    </div>
-                </div>
-                <div class="tab-content">
-                    <div class="tab-pane fade" id="liton_tab_3_1">
-                        <div class="ltn__apartments-tab-content-inner">
-                            <div class="row">
-                                <div class="col-lg-6">
-                                    <div class="apartments-plan-info ltn__secondary-bg text-color-white">
-                                        <h2>The Studio</h2>
-                                        <p>
-                                            Enimad minim veniam quis nostrud exercitation ullamco laboris.
-                                            Lorem ipsum dolor sit amet cons aetetur adipisicing elit sedo
-                                            eiusmod tempor.Incididunt labore et dolore magna aliqua.
-                                            sed ayd minim veniam.
-                                        </p>
-                                        <div class="apartments-info-list apartments-info-list-color mt-40">
-                                            <ul>
-                                                <li><label>Total Area</label> <span>2800 Sq. Ft</span></li>
-                                                <li><label>Bedroom</label> <span>150 Sq. Ft</span></li>
-                                                <li><label>Bathroom</label> <span>45 Sq. Ft</span></li>
-                                                <li><label>Belcony/Pets</label> <span>Allowed</span></li>
-                                                <li><label>Lounge</label> <span>650 Sq. Ft</span></li>
-                                            </ul>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-lg-6">
-                                    <div class="apartments-plan-img">
-                                        <img src="~/assets/img/others/10.png" alt="#">
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="tab-pane fade active show" id="liton_tab_3_2">
-                        <div class="ltn__product-tab-content-inner">
-                            <div class="row">
-                                <div class="col-lg-6">
-                                    <div class="apartments-plan-info ltn__secondary-bg text-color-white">
-                                        <h2>Deluxe Portion</h2>
-                                        <p>
-                                            Enimad minim veniam quis nostrud exercitation ullamco laboris.
-                                            Lorem ipsum dolor sit amet cons aetetur adipisicing elit sedo
-                                            eiusmod tempor.Incididunt labore et dolore magna aliqua.
-                                            sed ayd minim veniam.
-                                        </p>
-                                        <div class="apartments-info-list apartments-info-list-color mt-40">
-                                            <ul>
-                                                <li><label>Total Area</label> <span>2800 Sq. Ft</span></li>
-                                                <li><label>Bedroom</label> <span>150 Sq. Ft</span></li>
-                                                <li><label>Bathroom</label> <span>45 Sq. Ft</span></li>
-                                                <li><label>Belcony/Pets</label> <span>Allowed</span></li>
-                                                <li><label>Lounge</label> <span>650 Sq. Ft</span></li>
-                                            </ul>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-lg-6">
-                                    <div class="apartments-plan-img">
-                                        <img src="~/assets/img/others/10.png" alt="#">
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="tab-pane fade" id="liton_tab_3_3">
-                        <div class="ltn__product-tab-content-inner">
-                            <div class="row">
-                                <div class="col-lg-6">
-                                    <div class="apartments-plan-info ltn__secondary-bg text-color-white">
-                                        <h2>Penthouse</h2>
-                                        <p>
-                                            Enimad minim veniam quis nostrud exercitation ullamco laboris.
-                                            Lorem ipsum dolor sit amet cons aetetur adipisicing elit sedo
-                                            eiusmod tempor.Incididunt labore et dolore magna aliqua.
-                                            sed ayd minim veniam.
-                                        </p>
-                                        <div class="apartments-info-list apartments-info-list-color mt-40">
-                                            <ul>
-                                                <li><label>Total Area</label> <span>2800 Sq. Ft</span></li>
-                                                <li><label>Bedroom</label> <span>150 Sq. Ft</span></li>
-                                                <li><label>Bathroom</label> <span>45 Sq. Ft</span></li>
-                                                <li><label>Belcony/Pets</label> <span>Allowed</span></li>
-                                                <li><label>Lounge</label> <span>650 Sq. Ft</span></li>
-                                            </ul>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-lg-6">
-                                    <div class="apartments-plan-img">
-                                        <img src="~/assets/img/others/10.png" alt="#">
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="tab-pane fade" id="liton_tab_3_4">
-                        <div class="ltn__product-tab-content-inner">
-                            <div class="row">
-                                <div class="col-lg-6">
-                                    <div class="apartments-plan-info ltn__secondary-bg text-color-white">
-                                        <h2>Top Garden</h2>
-                                        <p>
-                                            Enimad minim veniam quis nostrud exercitation ullamco laboris.
-                                            Lorem ipsum dolor sit amet cons aetetur adipisicing elit sedo
-                                            eiusmod tempor.Incididunt labore et dolore magna aliqua.
-                                            sed ayd minim veniam.
-                                        </p>
-                                        <div class="apartments-info-list apartments-info-list-color mt-40">
-                                            <ul>
-                                                <li><label>Total Area</label> <span>2800 Sq. Ft</span></li>
-                                                <li><label>Bedroom</label> <span>150 Sq. Ft</span></li>
-                                                <li><label>Bathroom</label> <span>45 Sq. Ft</span></li>
-                                                <li><label>Belcony/Pets</label> <span>Allowed</span></li>
-                                                <li><label>Lounge</label> <span>650 Sq. Ft</span></li>
-                                            </ul>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-lg-6">
-                                    <div class="apartments-plan-img">
-                                        <img src="~/assets/img/others/10.png" alt="#">
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="tab-pane fade" id="liton_tab_3_5">
-                        <div class="ltn__product-tab-content-inner">
-                            <div class="row">
-                                <div class="col-lg-6">
-                                    <div class="apartments-plan-info ltn__secondary-bg text-color-white">
-                                        <h2>Double Height</h2>
-                                        <p>
-                                            Enimad minim veniam quis nostrud exercitation ullamco laboris.
-                                            Lorem ipsum dolor sit amet cons aetetur adipisicing elit sedo
-                                            eiusmod tempor.Incididunt labore et dolore magna aliqua.
-                                            sed ayd minim veniam.
-                                        </p>
-                                        <div class="apartments-info-list apartments-info-list-color mt-40">
-                                            <ul>
-                                                <li><label>Total Area</label> <span>2800 Sq. Ft</span></li>
-                                                <li><label>Bedroom</label> <span>150 Sq. Ft</span></li>
-                                                <li><label>Bathroom</label> <span>45 Sq. Ft</span></li>
-                                                <li><label>Belcony/Pets</label> <span>Allowed</span></li>
-                                                <li><label>Lounge</label> <span>650 Sq. Ft</span></li>
-                                            </ul>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-lg-6">
-                                    <div class="apartments-plan-img">
-                                        <img src="~/assets/img/others/10.png" alt="#">
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-<!-- APARTMENTS PLAN AREA END -->
 
 <!-- VIDEO AREA START -->
 <div class="ltn__video-popup-area ltn__video-popup-margin---">

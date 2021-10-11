@@ -21,6 +21,9 @@ namespace Quarter.Controllers
         }
         public IActionResult Index()
         {
+            ViewBag.Cities = _context.Cities.ToList();
+            ViewBag.HouseStatus = _context.HouseStatuses.ToList();
+            ViewBag.HouseType = _context.HouseTypes.ToList();
             HomeViewModel homeVM = new HomeViewModel
             {
                 Sliders = _context.Sliders.OrderBy(x => x.Order).ToList(),

@@ -1,0 +1,40 @@
+﻿@{
+    Layout = null;
+    double totalPrice = 0;
+    foreach (var item in Model)
+    {
+        totalPrice += item.Price;
+    }
+}
+@model List<WishlistItemViewModel>
+
+    <div class="ltn__utilize-menu-head">
+        <span class="ltn__utilize-menu-title">Wishlist</span>
+        <button class="ltn__utilize-close">×</button>
+    </div>
+    <div class="mini-cart-product-area ltn__scrollbar">
+
+        @foreach (var item in Model)
+        {
+            <div class="mini-cart-item clearfix">
+                <div class="mini-cart-img">
+                    <a href="#"><img src="~/uploads/house/@item.Image" alt="Image"></a>
+                    <a class="mini-cart-item-delete" asp-action="deletehouse" asp-controller="shop" asp-route-id="@item.HouseId" data-id="@item.HouseId"><i class="icon-cancel"></i></a>
+                </div>
+                <div class="mini-cart-info">
+                    <h6><a href="#">@item.Name</a></h6>
+                    <span class="mini-cart-quantity">@item.Price AZN</span>
+                </div>
+            </div>
+        }
+    </div>
+    <div class="mini-cart-footer">
+        <div class="mini-cart-sub-total">
+            <h5>Subtotal: <span>@totalPrice AZN</span></h5>
+        </div>
+        <div class="btn-wrapper">
+            <a href="cart.html" class="theme-btn-1 btn btn-effect-1">View Cart</a>
+            <a href="cart.html" class="theme-btn-2 btn btn-effect-2">Checkout</a>
+        </div>
+        <p>Free Shipping on All Orders Over $100!</p>
+    </div>

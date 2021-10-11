@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Hosting;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Quarter.Helpers;
@@ -11,6 +12,7 @@ using System.Threading.Tasks;
 
 namespace Quarter.Areas.Manage.Controllers
 {
+    [Authorize(Roles = "Admin,SuperAdmin")]
     [Area("manage")]
     public class ShopController : Controller
     {
@@ -151,15 +153,32 @@ namespace Quarter.Areas.Manage.Controllers
         [HttpPost]
         public IActionResult Edit(House house)
         {
+            House existHouse = _context.House.Include(b => b.HouseImages).Include(t => t.HouseAmenitis).Include(x => x.HouseStatus).Include(x => x.HouseType).Include(x => x.Team).Include(x => x.City).FirstOrDefault(x => x.Id == house.Id);
+
+            ViewBag.Ameniti = _context.Amenitis.ToList();
+            ViewBag.City = _context.Cities.ToList();
+            ViewBag.Team = _context.Teams.ToList();
+            ViewBag.HouseTypes = _context.HouseTypes.ToList();
+            ViewBag.HouseStatuses = _context.HouseStatuses.ToList();    
+
+            if (existHouse == null) return View();
+            house.HouseImages = existHouse.HouseImages;
+
             if (!_context.Cities.Any(x => x.Id == house.CityId)) ModelState.AddModelError("CityId", "Cities not found!");
             if (!_context.Teams.Any(x => x.Id == house.TeamId)) ModelState.AddModelError("TeamId", "Team not found!");
-            if (!_context.Amenitis.Any(x => x.Id == ((uint)house.AmenitiIds.FirstOrDefault()))) ModelState.AddModelError("AmenitiId", "Ameniti not found!");
             if (!_context.HouseTypes.Any(x => x.Id == house.HouseTypeId)) ModelState.AddModelError("HouseTypeId", "HouseType not found!");
             if (!_context.HouseStatuses.Any(x => x.Id == house.HouseStatusId)) ModelState.AddModelError("HouseStatusId", "HouseStatus not found!");
 
-            House existHouse = _context.House.Include(b => b.HouseImages).Include(t => t.HouseAmenitis).Include(x => x.HouseStatus).Include(x => x.HouseType).Include(x => x.Team).Include(x => x.City).FirstOrDefault(x => x.Id == house.Id);
+            foreach (var item in house.AmenitiIds)
+            {
+                if (!_context.Amenitis.Any(x => x.Id == item)) ModelState.AddModelError("AmenitiIds", "Ameniti not found!");
+            }
+           
 
-            if (existHouse == null) return View();
+
+            if (!ModelState.IsValid) return View(house);
+
+           
 
             if (house.PosterFile != null)
             {
@@ -196,9 +215,6 @@ namespace Quarter.Areas.Manage.Controllers
                 }
             }
 
-            /*_context.BookTags.RemoveRange(existBook.BookTags.Where(x => !book.TagIds.Contains(x.TagId)));*/
-
-            //BookTag edit update
 
             existHouse.HouseAmenitis.RemoveAll((x => !house.AmenitiIds.Contains(x.AmenitiId)));
 
@@ -240,27 +256,33 @@ namespace Quarter.Areas.Manage.Controllers
                 }
             }
 
+
+
             existHouse.Area = house.Area;
             existHouse.Baths = house.Baths;
             existHouse.Beds = house.Beds;
-            existHouse.City = house.City;
+            existHouse.CityId = house.CityId;
             existHouse.CurrentFloor = house.CurrentFloor;
             existHouse.Floor = house.Floor;
             existHouse.Desc = house.Desc;
             existHouse.Date = house.Date;
-            existHouse.HouseType = house.HouseType;
-            existHouse.HouseStatus = house.HouseStatus;
-            existHouse.HouseAmenitis = house.HouseAmenitis;
+            existHouse.HouseTypeId = house.HouseTypeId;
+            existHouse.HouseStatusId = house.HouseStatusId;
             existHouse.IsFeatured = house.IsFeatured;
             existHouse.IsRelated = house.IsRelated;
             existHouse.Location = house.Location;
             existHouse.YearBuilt = house.YearBuilt;
-            existHouse.Team = house.Team;
+            existHouse.TeamId = house.TeamId;
             existHouse.Rate = house.Rate;
             existHouse.Rooms = house.Rooms;
             existHouse.SalePrice = house.SalePrice;
-
             _context.SaveChanges();
+
+
+            
+
+
+
 
             return RedirectToAction("index");
         }
