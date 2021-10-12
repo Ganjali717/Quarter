@@ -123,7 +123,8 @@ namespace Quarter.Controllers
                 Houses = _context.House.Include(x => x.HouseImages).Include(x => x.HouseStatus).Include(x => x.City).Include(x => x.HouseAmenitis).Include(x => x.Team).ThenInclude(x=> x.teamDetail).FirstOrDefault(x => x.Id == id),
                 Amenitis = _context.Amenitis.ToList(),
                 HouseTypes = _context.HouseTypes.Include(x=>x.Houses).ToList(),
-                HouseImages = _context.HouseImages.ToList()
+                HouseImages = _context.HouseImages.ToList(), 
+                Evler = _context.House.Include(x => x.HouseImages).Include(x => x.HouseStatus).Include(x => x.City).Include(x => x.HouseAmenitis).Include(x => x.Team).ThenInclude(x => x.teamDetail).ToList()
             };
             
             return View(detailVM);

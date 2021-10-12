@@ -10,8 +10,8 @@ using Quarter.Models;
 namespace Quarter.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20211011133902_CreateOrderAndOrderItemTable")]
-    partial class CreateOrderAndOrderItemTable
+    [Migration("20211012072028_AddHouseImageInOrder")]
+    partial class AddHouseImageInOrder
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -441,10 +441,6 @@ namespace Quarter.Migrations
                     b.Property<string>("AppUserId")
                         .HasColumnType("nvarchar(450)");
 
-                    b.Property<string>("City")
-                        .HasColumnType("nvarchar(50)")
-                        .HasMaxLength(50);
-
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("datetime2");
 
@@ -458,58 +454,29 @@ namespace Quarter.Migrations
                         .HasColumnType("nvarchar(50)")
                         .HasMaxLength(50);
 
-                    b.Property<string>("Note")
-                        .HasColumnType("nvarchar(500)")
-                        .HasMaxLength(500);
-
-                    b.Property<string>("Phone")
-                        .HasColumnType("nvarchar(25)")
-                        .HasMaxLength(25);
-
-                    b.Property<int>("Status")
-                        .HasColumnType("int");
-
-                    b.Property<double>("TotalAmount")
-                        .HasColumnType("float");
-
-                    b.Property<string>("ZipCode")
-                        .HasColumnType("nvarchar(20)")
-                        .HasMaxLength(20);
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("AppUserId");
-
-                    b.ToTable("Orders");
-                });
-
-            modelBuilder.Entity("Quarter.Models.OrderItem", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
                     b.Property<int?>("HouseId")
                         .HasColumnType("int");
+
+                    b.Property<string>("HouseImage")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("HouseLocation")
                         .HasColumnType("nvarchar(100)")
                         .HasMaxLength(100);
 
-                    b.Property<int>("OrderId")
-                        .HasColumnType("int");
-
                     b.Property<double>("SalePrice")
                         .HasColumnType("float");
 
+                    b.Property<int>("Status")
+                        .HasColumnType("int");
+
                     b.HasKey("Id");
+
+                    b.HasIndex("AppUserId");
 
                     b.HasIndex("HouseId");
 
-                    b.HasIndex("OrderId");
-
-                    b.ToTable("OrderItems");
+                    b.ToTable("Orders");
                 });
 
             modelBuilder.Entity("Quarter.Models.Service", b =>
@@ -870,19 +837,10 @@ namespace Quarter.Migrations
                     b.HasOne("Quarter.Models.AppUser", "AppUser")
                         .WithMany()
                         .HasForeignKey("AppUserId");
-                });
 
-            modelBuilder.Entity("Quarter.Models.OrderItem", b =>
-                {
                     b.HasOne("Quarter.Models.House", "House")
                         .WithMany()
                         .HasForeignKey("HouseId");
-
-                    b.HasOne("Quarter.Models.Order", "Order")
-                        .WithMany("OrderItems")
-                        .HasForeignKey("OrderId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
                 });
 
             modelBuilder.Entity("Quarter.Models.Service", b =>

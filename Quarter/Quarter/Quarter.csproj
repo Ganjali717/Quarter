@@ -11,6 +11,12 @@
     <Compile Remove="Migrations\20211008114810_CreateHouse.Designer.cs" />
     <Compile Remove="Migrations\20211008125717_CreateListInHouseType.cs" />
     <Compile Remove="Migrations\20211008125717_CreateListInHouseType.Designer.cs" />
+    <Compile Remove="Migrations\20211012064459_CreateOrderTable.cs" />
+    <Compile Remove="Migrations\20211012064459_CreateOrderTable.Designer.cs" />
+    <Compile Remove="Migrations\20211012064647_CreateOrderTable.cs" />
+    <Compile Remove="Migrations\20211012064647_CreateOrderTable.Designer.cs" />
+    <Compile Remove="Migrations\20211012064716_CreateOrderTable.cs" />
+    <Compile Remove="Migrations\20211012064716_CreateOrderTable.Designer.cs" />
   </ItemGroup>
 
   <ItemGroup>

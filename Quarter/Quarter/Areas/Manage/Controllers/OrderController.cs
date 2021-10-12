@@ -22,13 +22,13 @@ namespace Quarter.Areas.Manage.Controllers
 
         public IActionResult Index()
         {
-            List<Order> orders = _context.Orders.Include(x => x.OrderItems).ToList();
+            List<Order> orders = _context.Orders.ToList();
             return View(orders);
         }
 
         public IActionResult Edit(int id)
         {
-            Order order = _context.Orders.Include(x => x.OrderItems).ThenInclude(x => x.House).FirstOrDefault(x => x.Id == id);
+            Order order = _context.Orders.FirstOrDefault(x => x.Id == id);
 
             if (order == null) return NotFound();
 

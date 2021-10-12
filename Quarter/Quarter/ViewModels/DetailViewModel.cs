@@ -14,5 +14,6 @@ namespace Quarter.ViewModels
 
         public List<Ameniti> Amenitis { get; set; }
         public List<HouseType> HouseTypes { get; set; }
+        public List<House> Evler { get; set; }
     }
 }

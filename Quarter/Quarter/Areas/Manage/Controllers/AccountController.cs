@@ -22,7 +22,7 @@ namespace Quarter.Areas.Manage.Controllers
             _roleManager = roleManager;
             _signInManager = signInManager;
         }
-        public async Task<IActionResult> Index()
+        public IActionResult Index()
         {
             /* AppUser admin = new AppUser
              {

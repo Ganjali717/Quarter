@@ -153,7 +153,7 @@ namespace Quarter.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult ShowAccount(AppUser appUser)
+        public async Task<IActionResult> ShowAccount(AppUser appUser)
         {
             AppUser existUser = _context.AppUsers.FirstOrDefault(x => x.Id == appUser.Id);
 
@@ -163,8 +163,8 @@ namespace Quarter.Controllers
             existUser.Email = appUser.Email ?? existUser.Email;
             existUser.UserName = appUser.UserName ?? existUser.UserName;
 
-            _context.SaveChanges();
-
+            await _userManager.UpdateAsync(existUser);
+            await _signInManager.SignInAsync(existUser, true);
             return RedirectToAction("index", "home");
         }
 

@@ -15,8 +15,6 @@
                 <th scope="col">#</th>
                 <th scope="col">Full Name</th>
                 <th scope="col">Email</th>
-                <th scope="col">Item count</th>
-                <th scope="col">Total Amount</th>
                 <th scope="col">Date</th>
                 <th scope="col">Status</th>
             </tr>
@@ -29,8 +27,6 @@
                     <th scope="row">@index</th>
                     <td>@order.FullName</td>
                     <td>@order.Email</td>
-                    <td>@order.OrderItems.Count</td>
-                    <td>@order.TotalAmount</td>
                     <td>@order.CreatedAt.AddHours(4).ToString("HH:mm dd MMM yyyy")</td>
                     <td>
                         <h5>
