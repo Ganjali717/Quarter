@@ -13,5 +13,6 @@ namespace Quarter.ViewModels
         public List<Service> Services { get; set; }
         public List<House> Houses { get; set; }
         public List<Ameniti> Amenitis { get; set; }
+        public Order LastOrder { get; set; }
     }
 }

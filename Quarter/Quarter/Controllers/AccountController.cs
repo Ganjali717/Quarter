@@ -147,7 +147,9 @@ namespace Quarter.Controllers
         {
 
             AppUser appUsers = _context.AppUsers.FirstOrDefault(x => x.Id == id);
-           
+
+            if (appUsers == null) return NotFound();
+
             return View(appUsers);
         }
 
@@ -158,6 +160,10 @@ namespace Quarter.Controllers
             AppUser existUser = _context.AppUsers.FirstOrDefault(x => x.Id == appUser.Id);
 
             if (!ModelState.IsValid) return View();
+
+
+
+            if (_context.AppUsers.Any(x => x.UserName == appUser.UserName && x.Id != appUser.Id)) return NotFound(); 
 
             existUser.FullName = appUser.FullName ?? existUser.FullName;
             existUser.Email = appUser.Email ?? existUser.Email;

@@ -1,6 +1,9 @@
-﻿@model HomeViewModel 
+﻿@model HomeViewModel
 
 @inject LayoutService service
+@{
+    double totalArea = 0;
+}
 
 
 <!-- SLIDER AREA START (slider-3) -->
@@ -46,11 +49,10 @@
                 </div>
             </div>
         }
-       
+
     </div>
 </div>
 <!-- SLIDER AREA END -->
-
 <!-- CAR DEALER FORM AREA START -->
 <div class="ltn__car-dealer-form-area mt--65 mt-120 pb-115---">
     <div class="container">
@@ -70,19 +72,19 @@
                                     <div class="ltn__car-dealer-form-item ltn__custom-icon---- ltn__icon-car---- col-lg-3 col-md-6">
                                         <select class="nice-select" asp-items="@(new SelectList(ViewBag.Cities,"Id","Name"))">
                                             <option>Weheri sech</option>
-                                            
+
                                         </select>
                                     </div>
                                     <div class="ltn__car-dealer-form-item ltn__custom-icon---- ltn__icon-meter---- col-lg-3 col-md-6">
                                         <select class="nice-select" asp-items="@(new SelectList(ViewBag.HouseStatus,"Id","StatusName"))">
                                             <option>House Status</option>
-                                           
+
                                         </select>
                                     </div>
                                     <div class="ltn__car-dealer-form-item ltn__custom-icon---- ltn__icon-calendar---- col-lg-3 col-md-6">
                                         <select class="nice-select" asp-items="@(new SelectList(ViewBag.HouseType,"Id","Name"))">
                                             <option>House Type</option>
-                                         
+
                                         </select>
                                     </div>
                                     <div class="ltn__car-dealer-form-item ltn__custom-icon ltn__icon-calendar col-lg-3 col-md-6">
@@ -141,7 +143,6 @@
     </div>
 </div>
 <!-- CAR DEALER FORM AREA END -->
-
 <!-- ABOUT US AREA START -->
 <div class="ltn__about-us-area pt-120 pb-90 ">
     <div class="container">
@@ -176,7 +177,7 @@
                         {
                             <li>
                                 @Html.Raw(item.Logo)
-                               @item.Title
+                                @item.Title
                             </li>
                         }
                     </ul>
@@ -189,9 +190,8 @@
     </div>
 </div>
 <!-- ABOUT US AREA END -->
-
 <!-- COUNTER UP AREA START -->
-    <div class="ltn__counterup-area section-bg-1 pt-120 pb-70">
+<div class="ltn__counterup-area section-bg-1 pt-120 pb-70">
     <div class="container">
         <div class="row">
             <div class="col-md-3 col-sm-6 align-self-center">
@@ -199,7 +199,12 @@
                     <div class="counter-icon">
                         <i class="flaticon-select"></i>
                     </div>
-                    <h1><span class="counter"></span><span class="counterUp-icon">+</span> </h1>
+                    <h1>
+                        <span class="counter">
+                            @ViewBag.totalArea
+                        </span>
+                        <span class="counterUp-icon">+</span>
+                    </h1>
                     <h6>Total Area Sq</h6>
                 </div>
             </div>
@@ -208,7 +213,7 @@
                     <div class="counter-icon">
                         <i class="flaticon-office"></i>
                     </div>
-                    <h1><span class="counter">197</span><span class="counterUp-letter">K</span><span class="counterUp-icon">+</span> </h1>
+                    <h1><span class="counter">@ViewBag.totalSold</span><span class="counterUp-icon">+</span> </h1>
                     <h6>Apartments Sold</h6>
                 </div>
             </div>
@@ -217,7 +222,7 @@
                     <div class="counter-icon">
                         <i class="flaticon-excavator"></i>
                     </div>
-                    <h1><span class="counter">268</span><span class="counterUp-icon">+</span> </h1>
+                    <h1><span class="counter">@ViewBag.totalCount</span><span class="counterUp-icon">+</span> </h1>
                     <h6>Total Constructions</h6>
                 </div>
             </div>
@@ -226,7 +231,7 @@
                     <div class="counter-icon">
                         <i class="flaticon-armchair"></i>
                     </div>
-                    <h1><span class="counter">340</span><span class="counterUp-icon">+</span> </h1>
+                    <h1><span class="counter">@ViewBag.totalRooms</span><span class="counterUp-icon">+</span> </h1>
                     <h6>Apartio Rooms</h6>
                 </div>
             </div>
@@ -235,72 +240,67 @@
 </div>
 <!-- COUNTER UP AREA END -->
 
-<!-- ABOUT US AREA START -->
-<div class="ltn__about-us-area pt-120 pb-90 ">
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-6 align-self-center">
-                <div class="about-us-info-wrap">
-                    <div class="section-title-area ltn__section-title-2--- mb-30">
-                        <h6 class="section-subtitle section-subtitle-2 ltn__secondary-color">About Us</h6>
-                        <h1 class="section-title">Today Sells Properties</h1>
-                        <p>
-                            Houzez allow you to design unlimited panels and real estate custom
-                            forms to capture leads and keep record of all information
-                        </p>
+
+@if (Model.LastOrder != null)
+{
+    <!-- ABOUT US AREA START -->
+    <div class="ltn__about-us-area pt-120 pb-90 ">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-6 align-self-center">
+                    <div class="about-us-info-wrap">
+                        <div class="section-title-area ltn__section-title-2--- mb-30">
+                            <h6 class="section-subtitle section-subtitle-2 ltn__secondary-color">About Us</h6>
+                            <h1 class="section-title">Bugun satilan evimiz</h1>
+                            <p>
+                                @Model.LastOrder.House.Desc
+                            </p>
+                        </div>
+                        <ul class="ltn__list-item-1 ltn__list-item-1-before clearfix">
+                            @foreach (var item in Model.LastOrder.House.HouseAmenitis)
+                            {
+                                <li> @item.Ameniti.Name</li>
+                            }
+                        </ul>
+                        <ul class="ltn__list-item-2 ltn__list-item-2-before ltn__flat-info">
+                            <li>
+                                <span>@Model.LastOrder.House.Beds <i class="flaticon-bed"></i></span>
+                                Bedrooms
+                            </li>
+                            <li>
+                                <span>@Model.LastOrder.House.Baths <i class="flaticon-clean"></i></span>
+                                Bathrooms
+                            </li>
+                            <li>
+                                <span>@Model.LastOrder.House.Area <i class="flaticon-square-shape-design-interface-tool-symbol"></i></span>
+                                square Ft
+                            </li>
+                        </ul>
+                        <ul class="ltn__list-item-2 ltn__list-item-2-before--- ltn__list-item-2-img mb-50">
+                            @foreach (var item in Model.LastOrder.House.HouseImages.Take(3))
+                            {
+                                <li>
+                                    <a href="img/img-slide/11.jpg" data-rel="lightcase:myCollection">
+                                        <img src="~/uploads/house/@item.Image" alt="Image">
+                                    </a>
+                                </li>
+                            }
+
+                        </ul>
                     </div>
-                    <ul class="ltn__list-item-1 ltn__list-item-1-before clearfix">
-                        <li> Live Music Cocerts at Luviana</li>
-                        <li>Our SecretIsland Boat Tour is Just for You</li>
-                        <li>Live Music Cocerts at Luviana</li>
-                        <li>Live Music Cocerts at Luviana</li>
-                    </ul>
-                    <ul class="ltn__list-item-2 ltn__list-item-2-before ltn__flat-info">
-                        <li>
-                            <span>3 <i class="flaticon-bed"></i></span>
-                            Bedrooms
-                        </li>
-                        <li>
-                            <span>2 <i class="flaticon-clean"></i></span>
-                            Bathrooms
-                        </li>
-                        <li>
-                            <span>2 <i class="flaticon-car"></i></span>
-                            Car parking
-                        </li>
-                        <li>
-                            <span>3450 <i class="flaticon-square-shape-design-interface-tool-symbol"></i></span>
-                            square Ft
-                        </li>
-                    </ul>
-                    <ul class="ltn__list-item-2 ltn__list-item-2-before--- ltn__list-item-2-img mb-50">
-                        <li>
-                            <a href="img/img-slide/11.jpg" data-rel="lightcase:myCollection">
-                                <img src="~/assets/img/img-slide/11.jpg" alt="Image">
-                            </a>
-                        </li>
-                        <li>
-                            <a href="img/img-slide/12.jpg" data-rel="lightcase:myCollection">
-                                <img src="~/assets/img/img-slide/12.jpg" alt="Image">
-                            </a>
-                        </li>
-                        <li>
-                            <a href="img/img-slide/13.jpg" data-rel="lightcase:myCollection">
-                                <img src="~/assets/img/img-slide/13.jpg" alt="Image">
-                            </a>
-                        </li>
-                    </ul>
                 </div>
-            </div>
-            <div class="col-lg-6 align-self-center">
-                <div class="about-us-img-wrap about-img-right">
-                    <img src="~/assets/img/others/9.png" alt="About Us Image">
+                <div class="col-lg-6 align-self-center">
+                    <div class="about-us-img-wrap about-img-right">
+                        <img src="~/uploads/house/@Model.LastOrder.House.HouseImages.FirstOrDefault(x => x.PosterStatus == true).Image" alt="About Us Image">
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-</div>
-<!-- ABOUT US AREA END -->
+    <!-- ABOUT US AREA END -->
+}
+
+
 
 <!-- FEATURE AREA START ( Feature - 6) -->
 <div class="ltn__feature-area section-bg-1 pt-120 pb-90 mb-120---">
@@ -334,7 +334,6 @@
     </div>
 </div>
 <!-- FEATURE AREA END -->
-
 <!-- PRODUCT SLIDER AREA START -->
 <div class="ltn__product-slider-area ltn__product-gutter pt-115 pb-90 plr--7">
     <div class="container-fluid">
@@ -445,8 +444,6 @@
     </div>
 </div>
 <!-- PRODUCT SLIDER AREA END -->
-
-
 <!-- VIDEO AREA START -->
 <div class="ltn__video-popup-area ltn__video-popup-margin---">
     <div class="ltn__video-bg-img ltn__video-popup-height-600--- bg-overlay-black-30 bg-image bg-fixed ltn__animation-pulse1" data-bs-bg="img/bg/19.jpg">
@@ -456,7 +453,6 @@
     </div>
 </div>
 <!-- VIDEO AREA END -->
-
 <!-- CATEGORY AREA START -->
 <div class="ltn__category-area section-bg-1-- ltn__primary-bg before-bg-1 bg-image bg-overlay-theme-black-5--0 pt-115 pb-90 d-none" data-bs-bg="img/bg/5.jpg">
     <div class="container">
@@ -562,7 +558,6 @@
     </div>
 </div>
 <!-- CATEGORY AREA END -->
-
 <!-- CATEGORY AREA START -->
 <div class="ltn__category-area ltn__product-gutter section-bg-1--- pt-115 pb-90 ">
     <div class="container">
@@ -592,7 +587,6 @@
     </div>
 </div>
 <!-- CATEGORY AREA END -->
-
 <!-- TESTIMONIAL AREA START (testimonial-7) -->
 <div class="ltn__testimonial-area section-bg-1--- bg-image-top pt-115 pb-70" data-bs-bg="img/bg/20.jpg">
     <div class="container">
@@ -706,7 +700,6 @@
     </div>
 </div>
 <!-- TESTIMONIAL AREA END -->
-
 <!-- BRAND LOGO AREA START -->
 <div class="ltn__brand-logo-area ltn__brand-logo-1 section-bg-1 pt-290 pb-110 plr--9 d-none">
     <div class="container-fluid">
@@ -745,7 +738,6 @@
     </div>
 </div>
 <!-- BRAND LOGO AREA END -->
-
 <!-- CALL TO ACTION START (call-to-action-6) -->
 <div class="ltn__call-to-action-area call-to-action-6 before-bg-bottom" data-bs-bg="img/1.jpg--">
     <div class="container">
