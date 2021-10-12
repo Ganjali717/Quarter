@@ -129,7 +129,8 @@ namespace Quarter.Controllers
                 HouseTypes = _context.HouseTypes.Include(x=>x.Houses).ToList(),
                 HouseImages = _context.HouseImages.ToList(), 
                 Evler = _context.House.Include(x => x.HouseImages).Include(x => x.HouseStatus).Include(x => x.City).Include(x => x.HouseAmenitis).Include(x => x.Team).ThenInclude(x => x.teamDetail).ToList(),
-                komentariya = _context.Comments.ToList()
+                komentariya = _context.Comments.ToList(),
+                HouseAmenitis = _context.HouseAmenitis.ToList()
             };
             
             return View(detailVM);

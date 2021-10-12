@@ -29,7 +29,7 @@
 <div class="ltn__img-slider-area mb-90">
     <div class="container-fluid">
         <div class="row ltn__image-slider-5-active slick-arrow-1 slick-arrow-1-inner ltn__no-gutter-all">
-            @foreach (var item in Model.HouseImages)
+            @foreach (var item in Model.Houses.HouseImages)
             {
                 <div class="col-lg-12">
                     <div class="ltn__img-slide-item-4">
@@ -94,7 +94,7 @@
                     <div class="ltn__property-details-gallery mb-30">
                         <div class="row">
 
-                            @foreach (var item in Model.HouseImages.Skip(2).Take(2))
+                            @foreach (var item in Model.Houses.HouseImages.Take(2))
                             {
 
                                 <div class="col-md-6">
@@ -112,11 +112,11 @@
                             <div class="col-lg-10 col-md-12">
                                 <div class="ltn__menu-widget">
                                     <ul>
-                                        @for (int i = 0; i < Model.Houses.HouseAmenitis.Count; i++)
+                                        @foreach (var item in Model.Houses.HouseAmenitis)
                                         {
                                             <li>
                                                 <label class="checkbox-item">
-                                                    @Model.Houses.HouseAmenitis[i].Ameniti.Name
+                                                    @item.Ameniti.Name
                                                     <input type="checkbox" checked="checked">
                                                     <span class="checkmark"></span>
                                                 </label>
@@ -142,9 +142,13 @@
                         </a>
                     </div>
 
+                   
                     <div>
-                        <a class="btn-danger" asp-action="checkout" asp-controller="order" asp-route-id="@Model.Houses.Id">BUY</a>
+                        <a class="theme-btn-1 btn btn-effect-1" tabindex="0" asp-action="checkout" asp-controller="order" asp-route-id="@Model.Houses.Id">BUY</a>
                     </div>
+
+                    <br />
+                    <br />
 
                     <div class="ltn__shop-details-tab-content-inner--- ltn__shop-details-tab-inner-2 ltn__product-details-review-inner mb-60">
                         <h4 class="title-2">Customer Reviews</h4>

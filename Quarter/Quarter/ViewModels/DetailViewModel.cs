@@ -18,5 +18,7 @@ namespace Quarter.ViewModels
         public Comment comment { get; set; }
 
         public List<Comment> komentariya { get; set; }
+
+        public List<HouseAmeniti> HouseAmenitis { get; set; }
     }
 }

@@ -216,21 +216,22 @@ namespace Quarter.Areas.Manage.Controllers
             }
 
 
-            existHouse.HouseAmenitis.RemoveAll((x => !house.AmenitiIds.Contains(x.AmenitiId)));
+           /* existHouse.HouseAmenitis.RemoveAll((x => !house.AmenitiIds.Contains(x.AmenitiId)));*/
 
             if (house.AmenitiIds != null)
             {
                 foreach (var amenitiId in house.AmenitiIds.Where(x => !existHouse.HouseAmenitis.Any(bt => bt.AmenitiId == x)))
                 {
-                    HouseAmeniti bookTag = new HouseAmeniti
+                    HouseAmeniti houseAmeniti = new HouseAmeniti
                     {
                         AmenitiId = amenitiId,
                         HouseId = house.Id
                     };
+                    existHouse.HouseAmenitis.Add(houseAmeniti);
                 }
             }
 
-            existHouse.HouseImages.RemoveAll(x => x.PosterStatus == null && !house.HouseImageIds.Contains(x.Id));
+           /* existHouse.HouseImages.RemoveAll(x => x.PosterStatus == null && !house.HouseImageIds.Contains(x.Id));*/
 
             if (house.ImageFiles != null)
             {
@@ -256,8 +257,6 @@ namespace Quarter.Areas.Manage.Controllers
                 }
             }
 
-
-
             existHouse.Area = house.Area;
             existHouse.Baths = house.Baths;
             existHouse.Beds = house.Beds;
@@ -277,12 +276,6 @@ namespace Quarter.Areas.Manage.Controllers
             existHouse.Rooms = house.Rooms;
             existHouse.SalePrice = house.SalePrice;
             _context.SaveChanges();
-
-
-            
-
-
-
 
             return RedirectToAction("index");
         }
