@@ -21,12 +21,13 @@ namespace Quarter.Controllers
             _context = context;
             _userManager = userManager;
         }
-        public IActionResult Index(int page = 1, int? houseTypeId = null, int? amenitiesId = null, int? houseStatusId = null)
+        public IActionResult Index(int page = 1, int? houseTypeId = null, int? amenitiesId = null, int? houseStatusId = null , int? cityId = null)
         {
             var query = _context.House.AsQueryable();
             ViewBag.HouseTypeId = houseTypeId;
             ViewBag.AmenitiesId = amenitiesId;
             ViewBag.HouseStatusesId = houseStatusId;
+            ViewBag.CityId = cityId;
 
             if (houseTypeId != null)
                 query = query.Where(x => x.HouseTypeId == houseTypeId);
@@ -34,6 +35,8 @@ namespace Quarter.Controllers
                 query = query.Where(x => x.HouseAmenitis.Any(a => a.AmenitiId == amenitiesId));
             if (houseStatusId != null)
                 query = query.Where(x => x.HouseStatusId == amenitiesId);
+            if (cityId != null)
+                query = query.Where(x => x.CityId == cityId);
 
             HouseViewModel houseVM = new HouseViewModel
             {
@@ -124,7 +127,8 @@ namespace Quarter.Controllers
                 Amenitis = _context.Amenitis.ToList(),
                 HouseTypes = _context.HouseTypes.Include(x=>x.Houses).ToList(),
                 HouseImages = _context.HouseImages.ToList(), 
-                Evler = _context.House.Include(x => x.HouseImages).Include(x => x.HouseStatus).Include(x => x.City).Include(x => x.HouseAmenitis).Include(x => x.Team).ThenInclude(x => x.teamDetail).ToList()
+                Evler = _context.House.Include(x => x.HouseImages).Include(x => x.HouseStatus).Include(x => x.City).Include(x => x.HouseAmenitis).Include(x => x.Team).ThenInclude(x => x.teamDetail).ToList(),
+                komentariya = _context.Comments.ToList()
             };
             
             return View(detailVM);
@@ -197,6 +201,40 @@ namespace Quarter.Controllers
             House house = _context.House.Include(x => x.HouseImages).Include(x => x.City).Include(z => z.HouseStatus).Include(y => y.HouseType).FirstOrDefault(x => x.Id == id);
 
             return PartialView("_HouseModalPartial", house);
+        }
+
+
+
+
+        [HttpPost]
+        public async Task<IActionResult> AddComment(int id, Comment comment)
+        {
+            var house = _context.House.FirstOrDefault(x => x.Id == id);
+
+            AppUser member = null;
+
+            if (User.Identity.IsAuthenticated)
+            {
+                member = await _userManager.FindByNameAsync(User.Identity.Name);
+            }
+
+            Comment comment1 = new Comment
+            {
+                AppUserId = User.Identity.IsAuthenticated?member.Id:null, 
+                Date = DateTime.UtcNow, 
+                Text = comment.Text, 
+                Username = comment.Username, 
+                Rate = comment.Rate, 
+                Email = comment.Email, 
+                HouseId = id
+            };
+
+            _context.Comments.Add(comment1);
+            _context.SaveChanges();
+
+
+            return Redirect(HttpContext.Request.Headers["Referer"].ToString());
+
         }
     }
 }

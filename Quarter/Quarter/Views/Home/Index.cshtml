@@ -68,29 +68,29 @@
                     <div class="tab-content bg-white box-shadow-1 position-relative pb-10">
                         <div class="tab-pane fade active show" id="ltn__form_tab_1_1">
                             <div class="car-dealer-form-inner">
-                                <form action="#" class="ltn__car-dealer-form-box row">
+                                <form method="get" class="ltn__car-dealer-form-box row" asp-action="index" asp-controller="shop">
                                     <div class="ltn__car-dealer-form-item ltn__custom-icon---- ltn__icon-car---- col-lg-3 col-md-6">
-                                        <select class="nice-select" asp-items="@(new SelectList(ViewBag.Cities,"Id","Name"))">
+                                        <select class="nice-select" name="cityId" asp-items="@(new SelectList(ViewBag.Cities,"Id","Name"))">
                                             <option>Weheri sech</option>
 
                                         </select>
                                     </div>
                                     <div class="ltn__car-dealer-form-item ltn__custom-icon---- ltn__icon-meter---- col-lg-3 col-md-6">
-                                        <select class="nice-select" asp-items="@(new SelectList(ViewBag.HouseStatus,"Id","StatusName"))">
+                                        <select class="nice-select" name="houseStatusId" asp-items="@(new SelectList(ViewBag.HouseStatus,"Id","StatusName"))">
                                             <option>House Status</option>
 
                                         </select>
                                     </div>
                                     <div class="ltn__car-dealer-form-item ltn__custom-icon---- ltn__icon-calendar---- col-lg-3 col-md-6">
-                                        <select class="nice-select" asp-items="@(new SelectList(ViewBag.HouseType,"Id","Name"))">
+                                        <select class="nice-select" name="houseTypeId" asp-items="@(new SelectList(ViewBag.HouseType,"Id","Name"))">
                                             <option>House Type</option>
 
                                         </select>
                                     </div>
                                     <div class="ltn__car-dealer-form-item ltn__custom-icon ltn__icon-calendar col-lg-3 col-md-6">
                                         <div class="btn-wrapper text-center mt-0">
-                                            <!-- <button type="submit" class="btn theme-btn-1 btn-effect-1 text-uppercase">Search Inventory</button> -->
-                                            <a href="shop-right-sidebar.html" class="btn theme-btn-1 btn-effect-1 text-uppercase">Find Now</a>
+                                             <button type="submit" class="btn theme-btn-1 btn-effect-1 text-uppercase">Search Inventory</button> 
+                                          @*  <a asp-action="index" asp-controller="shop" asp-route-houseStatusId="@ViewBag.HouseStatusesId"class="btn theme-btn-1 btn-effect-1 text-uppercase">Find Now</a>*@
                                         </div>
                                     </div>
                                 </form>

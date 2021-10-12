@@ -42,6 +42,7 @@ namespace Quarter.Models
 
         public List<HouseAmeniti> HouseAmenitis { get; set; }
         public List<HouseImage> HouseImages { get; set; }
+        public List<Comment> Comments { get; set; }
         public Team Team { get; set; }
         public HouseType HouseType { get; set; }
         public HouseStatus HouseStatus { get; set; }

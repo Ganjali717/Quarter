@@ -1,7 +1,9 @@
 ﻿@model DetailViewModel
+@inject UserManager<AppUser> userManager
 
 @{
     ViewData["Title"] = "Detail";
+    AppUser member = User.Identity.IsAuthenticated ? userManager.Users.FirstOrDefault(x => x.UserName == User.Identity.Name && !x.IsAdmin) : null;
 }
 
 <!-- BREADCRUMB AREA START -->
@@ -23,8 +25,6 @@
     </div>
 </div>
 <!-- BREADCRUMB AREA END -->
-
-
 <!-- IMAGE SLIDER AREA START (img-slider-3) -->
 <div class="ltn__img-slider-area mb-90">
     <div class="container-fluid">
@@ -43,8 +43,6 @@
     </div>
 </div>
 <!-- IMAGE SLIDER AREA END -->
-
-
 <!-- SHOP DETAILS AREA START -->
 <div class="ltn__shop-details-area pb-10">
     <div class="container">
@@ -71,7 +69,7 @@
                     <label><span class="ltn__secondary-color"><i class="flaticon-pin"></i></span> @Model.Houses.Location, @Model.Houses.City.Name</label>
                     <h4 class="title-2">Description</h4>
                     <p>
-                       @Model.Houses.Desc
+                        @Model.Houses.Desc
                     </p>
                     <p>To the left is the modern kitchen with central island, leading through to the unique breakfast family room which feature glass walls and doors out onto the garden and access to the separate utility room.</p>
 
@@ -98,12 +96,12 @@
 
                             @foreach (var item in Model.HouseImages.Skip(2).Take(2))
                             {
-                               
-                            <div class="col-md-6">
-                                <a href="img/others/14.jpg" data-rel="lightcase:myCollection">
-                                    <img class="mb-30" src="~/uploads/house/@item.Image" alt="Image">
-                                </a>
-                            </div>
+
+                                <div class="col-md-6">
+                                    <a href="img/others/14.jpg" data-rel="lightcase:myCollection">
+                                        <img class="mb-30" src="~/uploads/house/@item.Image" alt="Image">
+                                    </a>
+                                </div>
                             }
                         </div>
                     </div>
@@ -124,7 +122,7 @@
                                                 </label>
                                             </li>
                                         }
-                                        
+
                                     </ul>
                                 </div>
                             </div>
@@ -165,75 +163,34 @@
                         <div class="ltn__comment-area mb-30">
                             <div class="ltn__comment-inner">
                                 <ul>
-                                    <li>
-                                        <div class="ltn__comment-item clearfix">
-                                            <div class="ltn__commenter-img">
-                                                <img src="~/assets/img/testimonial/1.jpg" alt="Image">
-                                            </div>
-                                            <div class="ltn__commenter-comment">
-                                                <h6><a href="#">Adam Smit</a></h6>
-                                                <div class="product-ratting">
-                                                    <ul>
-                                                        <li><a href="#"><i class="fas fa-star"></i></a></li>
-                                                        <li><a href="#"><i class="fas fa-star"></i></a></li>
-                                                        <li><a href="#"><i class="fas fa-star"></i></a></li>
-                                                        <li><a href="#"><i class="fas fa-star-half-alt"></i></a></li>
-                                                        <li><a href="#"><i class="far fa-star"></i></a></li>
-                                                    </ul>
+                                    @foreach (var item in Model.komentariya.Take(3))
+                                    {
+                                        <li>
+                                            <div class="ltn__comment-item clearfix">
+                                                <div class="ltn__commenter-comment">
+                                                    <h6><a href="#">@item.Username</a></h6>
+                                                    <div class="product-ratting">
+                                                        <ul>
+                                                            <li><a href="#"><i class="fas fa-star"></i></a></li>
+                                                            <li><a href="#"><i class="fas fa-star"></i></a></li>
+                                                            <li><a href="#"><i class="fas fa-star"></i></a></li>
+                                                            <li><a href="#"><i class="fas fa-star-half-alt"></i></a></li>
+                                                            <li><a href="#"><i class="far fa-star"></i></a></li>
+                                                        </ul>
+                                                    </div>
+                                                    <p>@item.Text</p>
+                                                    <span class="ltn__comment-reply-btn">@item.Date</span>
                                                 </div>
-                                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Doloribus, omnis fugit corporis iste magnam ratione.</p>
-                                                <span class="ltn__comment-reply-btn">September 3, 2020</span>
                                             </div>
-                                        </div>
-                                    </li>
-                                    <li>
-                                        <div class="ltn__comment-item clearfix">
-                                            <div class="ltn__commenter-img">
-                                                <img src="~/assets/img/testimonial/3.jpg" alt="Image">
-                                            </div>
-                                            <div class="ltn__commenter-comment">
-                                                <h6><a href="#">Adam Smit</a></h6>
-                                                <div class="product-ratting">
-                                                    <ul>
-                                                        <li><a href="#"><i class="fas fa-star"></i></a></li>
-                                                        <li><a href="#"><i class="fas fa-star"></i></a></li>
-                                                        <li><a href="#"><i class="fas fa-star"></i></a></li>
-                                                        <li><a href="#"><i class="fas fa-star-half-alt"></i></a></li>
-                                                        <li><a href="#"><i class="far fa-star"></i></a></li>
-                                                    </ul>
-                                                </div>
-                                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Doloribus, omnis fugit corporis iste magnam ratione.</p>
-                                                <span class="ltn__comment-reply-btn">September 2, 2020</span>
-                                            </div>
-                                        </div>
-                                    </li>
-                                    <li>
-                                        <div class="ltn__comment-item clearfix">
-                                            <div class="ltn__commenter-img">
-                                                <img src="~/assets/img/testimonial/2.jpg" alt="Image">
-                                            </div>
-                                            <div class="ltn__commenter-comment">
-                                                <h6><a href="#">Adam Smit</a></h6>
-                                                <div class="product-ratting">
-                                                    <ul>
-                                                        <li><a href="#"><i class="fas fa-star"></i></a></li>
-                                                        <li><a href="#"><i class="fas fa-star"></i></a></li>
-                                                        <li><a href="#"><i class="fas fa-star"></i></a></li>
-                                                        <li><a href="#"><i class="fas fa-star-half-alt"></i></a></li>
-                                                        <li><a href="#"><i class="far fa-star"></i></a></li>
-                                                    </ul>
-                                                </div>
-                                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Doloribus, omnis fugit corporis iste magnam ratione.</p>
-                                                <span class="ltn__comment-reply-btn">September 2, 2020</span>
-                                            </div>
-                                        </div>
-                                    </li>
+                                        </li>
+                                    }
+
                                 </ul>
                             </div>
                         </div>
                         <!-- comment-reply -->
                         <div class="ltn__comment-reply-area ltn__form-box mb-30">
-                            <form action="#">
+                            <form method="post" action="/shop/addcomment/@Model.Houses.Id">
                                 <h4>Add a Review</h4>
                                 <div class="mb-30">
                                     <div class="add-a-review">
@@ -250,16 +207,13 @@
                                     </div>
                                 </div>
                                 <div class="input-item input-item-textarea ltn__custom-icon">
-                                    <textarea placeholder="Type your comments...."></textarea>
+                                    <textarea placeholder="Type your comments...." asp-for="@Model.comment.Text"></textarea>
                                 </div>
                                 <div class="input-item input-item-name ltn__custom-icon">
-                                    <input type="text" placeholder="Type your name....">
+                                    <input type="text" placeholder="Type your name...." value="@(User.Identity.IsAuthenticated?member.FullName:"")" asp-for="@Model.comment.Username">
                                 </div>
                                 <div class="input-item input-item-email ltn__custom-icon">
-                                    <input type="email" placeholder="Type your email....">
-                                </div>
-                                <div class="input-item input-item-website ltn__custom-icon">
-                                    <input type="text" name="website" placeholder="Type your website....">
+                                    <input type="email" placeholder="Type your email...." value="@(User.Identity.IsAuthenticated?member.Email:"")" asp-for="@Model.comment.Email">
                                 </div>
                                 <label class="mb-0"><input type="checkbox" name="agree"> Save my name, email, and website in this browser for the next time I comment.</label>
                                 <div class="btn-wrapper">
@@ -529,7 +483,7 @@
                             <!--  -->
                         </div>
                     </div>
-                  
+
                     <!-- Social Media Widget -->
                     <div class="widget ltn__social-media-widget">
                         <h4 class="ltn__widget-title ltn__widget-title-border-2">Follow us</h4>
@@ -563,8 +517,6 @@
     </div>
 </div>
 <!-- SHOP DETAILS AREA END -->
-
-
 <!-- PRODUCT SLIDER AREA START -->
 <div class="ltn__product-slider-area ltn__product-gutter pb-70 ">
     <div class="container">
@@ -652,9 +604,6 @@
     </div>
 </div>
 <!-- PRODUCT SLIDER AREA END -->
-
-
-
 <!-- CALL TO ACTION START (call-to-action-6) -->
 <div class="ltn__call-to-action-area call-to-action-6 before-bg-bottom" data-bs-bg="img/1.jpg--">
     <div class="container">
