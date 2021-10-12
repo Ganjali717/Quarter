@@ -71,19 +71,19 @@
                                 <form method="get" class="ltn__car-dealer-form-box row" asp-action="index" asp-controller="shop">
                                     <div class="ltn__car-dealer-form-item ltn__custom-icon---- ltn__icon-car---- col-lg-3 col-md-6">
                                         <select class="nice-select" name="cityId" asp-items="@(new SelectList(ViewBag.Cities,"Id","Name"))">
-                                            <option>Weheri sech</option>
+                                            <option value="null">Weheri sech</option>
 
                                         </select>
                                     </div>
                                     <div class="ltn__car-dealer-form-item ltn__custom-icon---- ltn__icon-meter---- col-lg-3 col-md-6">
                                         <select class="nice-select" name="houseStatusId" asp-items="@(new SelectList(ViewBag.HouseStatus,"Id","StatusName"))">
-                                            <option>House Status</option>
+                                            <option value="null">House Status</option>
 
                                         </select>
                                     </div>
                                     <div class="ltn__car-dealer-form-item ltn__custom-icon---- ltn__icon-calendar---- col-lg-3 col-md-6">
                                         <select class="nice-select" name="houseTypeId" asp-items="@(new SelectList(ViewBag.HouseType,"Id","Name"))">
-                                            <option>House Type</option>
+                                            <option value="null">House Type</option>
 
                                         </select>
                                     </div>

@@ -21,6 +21,7 @@ namespace Quarter.Controllers
             _context = context;
             _userManager = userManager;
         }
+
         public IActionResult Index(int page = 1, int? houseTypeId = null, int? amenitiesId = null, int? houseStatusId = null , int? cityId = null)
         {
             var query = _context.House.AsQueryable();
@@ -34,7 +35,7 @@ namespace Quarter.Controllers
             if(amenitiesId != null)
                 query = query.Where(x => x.HouseAmenitis.Any(a => a.AmenitiId == amenitiesId));
             if (houseStatusId != null)
-                query = query.Where(x => x.HouseStatusId == amenitiesId);
+                query = query.Where(x => x.HouseStatusId == houseStatusId);
             if (cityId != null)
                 query = query.Where(x => x.CityId == cityId);
 
