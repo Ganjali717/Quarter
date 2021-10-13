@@ -146,7 +146,7 @@ namespace Quarter.Controllers
         public IActionResult ShowAccount(string id)
         {
 
-            AppUser appUsers = _context.AppUsers.FirstOrDefault(x => x.Id == id);
+            AppUser appUsers = _context.AppUsers.Include(x => x.Orders).FirstOrDefault(x => x.Id == id);
 
             if (appUsers == null) return NotFound();
 
@@ -157,7 +157,7 @@ namespace Quarter.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> ShowAccount(AppUser appUser)
         {
-            AppUser existUser = _context.AppUsers.FirstOrDefault(x => x.Id == appUser.Id);
+            AppUser existUser = _context.AppUsers.Include(x => x.Orders).FirstOrDefault(x => x.Id == appUser.Id);
 
             if (!ModelState.IsValid) return View();
 

@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Quarter.Areas.Manage.ViewModels;
 using Quarter.Models;
 using System;
 using System.Collections.Generic;
@@ -24,7 +25,14 @@ namespace Quarter.Areas.Manage.Controllers
         public IActionResult Index()
         {
             ViewBag.HouseType = _context.HouseTypes.Include(x => x.Houses).ToList();
-            return View();
+
+            
+
+            DashboardViewModel dashboardVM = new DashboardViewModel
+            {
+                Orders = _context.Orders.ToList()
+            };
+            return View(dashboardVM);
         }
     }
 }

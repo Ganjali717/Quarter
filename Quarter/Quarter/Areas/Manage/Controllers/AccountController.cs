@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Identity;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Quarter.Areas.Manage.ViewModels;
 using Quarter.Models;
@@ -9,6 +10,7 @@ using System.Threading.Tasks;
 
 namespace Quarter.Areas.Manage.Controllers
 {
+    [Authorize(Roles = "Admin,SuperAdmin")]
     [Area("manage")]
     public class AccountController : Controller
     {
@@ -84,6 +86,62 @@ namespace Quarter.Areas.Manage.Controllers
             await _signInManager.SignOutAsync();
 
             return RedirectToAction("login", "account");
+        }
+
+
+        public IActionResult AddAdmin()
+        {
+            return View(); 
+        }
+
+        [Authorize(Roles = "SuperAdmin")]
+        [HttpPost]
+        public async Task<IActionResult> AddAdmin(AdminRegisterViewModel adminRegisterVM)
+        {
+            if (!ModelState.IsValid)
+            {
+                return View();
+            }
+
+            AppUser admin = await _userManager.FindByNameAsync(adminRegisterVM.UserName);
+            if (admin != null)
+            {
+                ModelState.AddModelError("UserName", "UserName already taken!");
+                return View();
+            }
+
+            admin = await _userManager.FindByEmailAsync(adminRegisterVM.Email);
+            if (admin != null)
+            {
+                ModelState.AddModelError("Email", "Email already taken!");
+                return View();
+            }
+
+
+            admin = new AppUser
+            {
+                FullName = adminRegisterVM.FullName,
+                UserName = adminRegisterVM.UserName,
+                Email = adminRegisterVM.Email,
+                IsAdmin = false
+            };
+
+            var result = await _userManager.CreateAsync(admin, adminRegisterVM.Password);
+
+            if (!result.Succeeded)
+            {
+                foreach (var error in result.Errors)
+                {
+                    ModelState.AddModelError("", error.Description);
+                }
+
+                return View();
+            }
+
+            var roleResult = await _userManager.AddToRoleAsync(admin, "Admin");
+            await _signInManager.SignInAsync(admin, true);
+
+            return RedirectToAction("index", "dashboard");
         }
     }
 }
