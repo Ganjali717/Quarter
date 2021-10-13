@@ -29,9 +29,14 @@ namespace Quarter.Controllers
 
         public IActionResult Detail(int id)
         {
-            var detail = _context.Services.Include(x=>x.serviceDetail).FirstOrDefault(x => x.Id == id);
+            ServiceViewModel serviceVM = new ServiceViewModel
+            {
+                Servisler = _context.Services.Include(x => x.serviceDetail).FirstOrDefault(x => x.Id == id),
+                Services = _context.Services.Include(x => x.serviceDetail).ToList()
+            };
+            
 
-            return View(detail);
+            return View(serviceVM);
         }
     }
 }

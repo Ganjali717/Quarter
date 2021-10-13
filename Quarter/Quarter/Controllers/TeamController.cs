@@ -29,6 +29,7 @@ namespace Quarter.Controllers
 
         public IActionResult Detail(int id)
         {
+            ViewBag.Services = _context.Services.ToList();
             var detail = _context.Teams.Include(x => x.teamDetail).FirstOrDefault(f => f.Id == id); 
             return View(detail);
         }

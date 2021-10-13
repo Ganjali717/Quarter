@@ -10,5 +10,7 @@ namespace Quarter.ViewModels
     {
         public List<Setting> Settings { get; set; }
         public List<Service> Services { get; set; }
+
+        public Service Servisler { get; set; }
     }
 }

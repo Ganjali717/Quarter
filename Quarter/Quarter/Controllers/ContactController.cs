@@ -9,6 +9,8 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Net;
+using System.Net.Mail;
 using System.Threading.Tasks;
 
 namespace Quarter.Controllers
@@ -41,35 +43,5 @@ namespace Quarter.Controllers
         }
 
 
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public IActionResult Send(SendEmail sendEmail, IFormFile[] attachments)
-        {
-            var body = "Name: " + sendEmail.Name + "<br>Address: " + sendEmail.Address + "<br>Phone: " + sendEmail.Phone + "<br>";
-            var mailHelper = new MailHelper(configuration);
-            List<string> fileNames = null;
-            if (attachments != null && attachments.Length > 0)
-            {
-                fileNames = new List<string>();
-                foreach (IFormFile attachment in attachments)
-                {
-                    var path = Path.Combine(webHostEnvironment.WebRootPath, "uploads", attachment.FileName);
-                    using (var stream = new FileStream(path, FileMode.Create))
-                    {
-                        attachment.CopyToAsync(stream);
-                    }
-                    fileNames.Add(path);
-                }
-            }
-            if (mailHelper.Send(sendEmail.Email, configuration["Gmail:Username"], sendEmail.Subject, body, fileNames))
-            {
-                ViewBag.msg = "Sent Mail Successfully";
-            }
-            else
-            {
-                ViewBag.msg = "Failed";
-            }
-            return View("Index", new SendEmail());
-        }
     }
 }

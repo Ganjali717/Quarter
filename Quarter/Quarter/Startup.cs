@@ -6,6 +6,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Quarter.Helpers;
 using Quarter.Models;
 using Quarter.Services;
 using System;
@@ -48,6 +49,10 @@ namespace Quarter
             {
 
             });
+
+            services.Configure<MailSettings>(Configuration.GetSection("MailSettings"));
+
+            services.AddTransient<IMailService, MailService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -60,7 +65,7 @@ namespace Quarter
             else
             {
                 app.UseExceptionHandler("/Home/Error");
-               
+
                 app.UseHsts();
             }
             app.UseHttpsRedirection();
@@ -90,3 +95,4 @@ namespace Quarter
         }
     }
 }
+

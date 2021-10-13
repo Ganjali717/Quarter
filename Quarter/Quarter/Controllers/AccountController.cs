@@ -24,7 +24,7 @@ namespace Quarter.Controllers
             _signInManager = signInManager;
             _context = context;
         }
-        public async Task<IActionResult> Index()
+        public IActionResult Index()
         {
             /*AppUser member = new AppUser
             {

@@ -6,11 +6,11 @@
         <div class="row">
             <div class="col-lg-12">
                 <div class="ltn__breadcrumb-inner">
-                    <h1 class="page-title">Agent Details</h1>
+                    <h1 class="page-title">İşçimiz Haqqında</h1>
                     <div class="ltn__breadcrumb-list">
                         <ul>
-                            <li><a href="index.html"><span class="ltn__secondary-color"><i class="fas fa-home"></i></span> Home</a></li>
-                            <li>Agent Details</li>
+                            <li><a href="index.html"><span class="ltn__secondary-color"><i class="fas fa-home"></i></span> Ana Səhifə</a></li>
+                            <li>İşçimiz haqqında</li>
                         </ul>
                     </div>
                 </div>
@@ -47,9 +47,9 @@
                         <div class="col-lg-6">
                             <div class="ltn__team-details-member-about">
                                 <ul>
-                                    <li><strong>Positions:</strong> Makler</li>
-                                    <li><strong>Experience:</strong> @Model.teamDetail.Experience</li>
-                                    <li><strong>Location:</strong> @Model.teamDetail.Location</li>
+                                    <li><strong>Vəzifə:</strong> Makler</li>
+                                    <li><strong>Təcrübə:</strong> @Model.teamDetail.Experience</li>
+                                    <li><strong>Yer:</strong> @Model.teamDetail.Location</li>
                                 </ul>
                             </div>
                         </div>
@@ -57,7 +57,7 @@
                             <div class="ltn__team-details-member-about">
                                 <ul>
                                     <li><strong>Email:</strong> @Model.teamDetail.Email</li>
-                                    <li><strong>Phone:</strong> @Model.teamDetail.PhoneNumber</li>
+                                    <li><strong>Telefon:</strong> @Model.teamDetail.PhoneNumber</li>
                                 </ul>
                             </div>
                         </div>
@@ -65,89 +65,42 @@
                     <hr>
                     <p>@Model.teamDetail.Desc</p>
 
-                    <div class="row ltn__custom-gutter mt-50 mb-20">
-                        <div class="col-xl-4 col-sm-6 col-12">
-                            <div class="ltn__feature-item ltn__feature-item-6 text-center">
-                                <div class="ltn__feature-icon">
-                                    <span><i class="icon-tire"></i></span>
-                                </div>
-                                <div class="ltn__feature-info">
-                                    <h4><a href="service.html">Home Buying</a></h4>
-                                    <p>Lorem ipsum dolor sit ame it, consectetur adipisicing elit, sed do eiusmod te mp or</p>
-                                    <!-- <a class="ltn__service-btn" href="service.html">Read More</a> -->
-                                    <a class="ltn__service-btn" href="service-details.html">Read More <i class="flaticon-right-arrow"></i></a>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-xl-4 col-sm-6 col-12">
-                            <div class="ltn__feature-item ltn__feature-item-6 text-center active">
-                                <div class="ltn__feature-icon">
-                                    <span><i class="icon-mechanic"></i></span>
-                                </div>
-                                <div class="ltn__feature-info">
-                                    <h4><a href="team.html">Home Selling</a></h4>
-                                    <p>Lorem ipsum dolor sit ame it, consectetur adipisicing elit, sed do eiusmod te mp or</p>
-                                    <!-- <a class="ltn__service-btn" href="service.html">Read More</a> -->
-                                    <a class="ltn__service-btn" href="service-details.html">Read More <i class="flaticon-right-arrow"></i></a>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-xl-4 col-sm-6 col-12">
-                            <div class="ltn__feature-item ltn__feature-item-6 text-center">
-                                <div class="ltn__feature-icon">
-                                    <span><i class="icon-wheel-1"></i></span>
-                                </div>
-                                <div class="ltn__feature-info">
-                                    <h4><a href="service-details.html">Escrow Services</a></h4>
-                                    <p>Lorem ipsum dolor sit ame it, consectetur adipisicing elit, sed do eiusmod te mp or</p>
-                                    <!-- <a class="ltn__service-btn" href="service.html">Read More</a> -->
-                                    <a class="ltn__service-btn" href="service-details.html">Read More <i class="flaticon-right-arrow"></i></a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
                     <br />
 
                     <div class="ltn__form-box contact-form-box box-shadow white-bg mt-50">
-                        <h4 class="title-2">Contact for any Inquiry</h4>
+                        <h4 class="title-2">İşçilərimizdən məlumat alın </h4>
                         <form id="contact-form" action="mail.php" method="post">
                             <div class="row">
                                 <div class="col-md-6">
                                     <div class="input-item input-item-name ltn__custom-icon">
-                                        <input type="text" name="name" placeholder="Enter your name">
+                                        <input type="text" name="name" placeholder="Adınızı daxil edin">
                                     </div>
                                 </div>
                                 <div class="col-md-6">
                                     <div class="input-item input-item-email ltn__custom-icon">
-                                        <input type="email" name="email" placeholder="Enter email address">
+                                        <input type="email" name="email" placeholder="Email daxil edin">
                                     </div>
                                 </div>
                                 <div class="col-md-6">
                                     <div class="input-item">
-                                        <select class="nice-select">
-                                            <option>Select Service Type</option>
-                                            <option>Property Management </option>
-                                            <option>Mortgage Service </option>
-                                            <option>Consulting Service</option>
-                                            <option>Home Buying</option>
-                                            <option>Home Selling</option>
-                                            <option>Escrow Services</option>
+                                        <select class="nice-select" asp-items="@(new SelectList(ViewBag.Services, "Id", "Title"))">
+                                            <option>Servis seçin</option>
+                                          
                                         </select>
                                     </div>
                                 </div>
                                 <div class="col-md-6">
                                     <div class="input-item input-item-phone ltn__custom-icon">
-                                        <input type="text" name="phone" placeholder="Enter phone number">
+                                        <input type="text" name="phone" placeholder="Telefon nömrənizi daxil edin">
                                     </div>
                                 </div>
                             </div>
                             <div class="input-item input-item-textarea ltn__custom-icon">
-                                <textarea name="message" placeholder="Enter message"></textarea>
+                                <textarea name="message" placeholder="Mesajınızı daxil edin"></textarea>
                             </div>
-                            <p><label class="input-info-save mb-0"><input type="checkbox" name="agree"> Save my name, email, and website in this browser for the next time I comment.</label></p>
+                            
                             <div class="btn-wrapper mt-0">
-                                <button class="btn theme-btn-1 btn-effect-1 text-uppercase" type="submit">get an free service</button>
+                                <button class="btn theme-btn-1 btn-effect-1 text-uppercase" type="submit">Pulsuz servis əldə et</button>
                             </div>
                             <p class="form-messege mb-0 mt-20"></p>
                         </form>
