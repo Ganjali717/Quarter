@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace Quarter.Areas.Manage.Controllers
 {
-    [Authorize(Roles = "Admin,SuperAdmin")]
+  
     [Area("manage")]
     public class AccountController : Controller
     {
@@ -55,6 +55,7 @@ namespace Quarter.Areas.Manage.Controllers
             return View();
         }
 
+      
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Login(LoginViewModel loginVM)
@@ -89,6 +90,7 @@ namespace Quarter.Areas.Manage.Controllers
         }
 
 
+        [Authorize(Roles = "SuperAdmin")]
         public IActionResult AddAdmin()
         {
             return View(); 
@@ -123,7 +125,7 @@ namespace Quarter.Areas.Manage.Controllers
                 FullName = adminRegisterVM.FullName,
                 UserName = adminRegisterVM.UserName,
                 Email = adminRegisterVM.Email,
-                IsAdmin = false
+                IsAdmin = true
             };
 
             var result = await _userManager.CreateAsync(admin, adminRegisterVM.Password);
