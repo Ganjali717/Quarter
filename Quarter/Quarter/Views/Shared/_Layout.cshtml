@@ -74,18 +74,12 @@
                                             <!-- ltn__social-media -->
                                             <div class="ltn__social-media">
                                                 <ul>
-                                                    <li><a href="#" title="Facebook"><i class="fab fa-facebook-f"></i></a></li>
-                                                    <li><a href="#" title="Twitter"><i class="fab fa-twitter"></i></a></li>
+                                                    <li><a href="https://www.facebook.com/" title="Facebook"><i class="fab fa-facebook-f"></i></a></li>
+                                                    <li><a href="https://www.twitter.com/" title="Twitter"><i class="fab fa-twitter"></i></a></li>
 
-                                                    <li><a href="#" title="Instagram"><i class="fab fa-instagram"></i></a></li>
-                                                    <li><a href="#" title="Dribbble"><i class="fab fa-dribbble"></i></a></li>
+                                                    <li><a href="https://www.instagram.com/" title="Instagram"><i class="fab fa-instagram"></i></a></li>
+                                                    <li><a href="https://www.dribbble.com/" title="Dribbble"><i class="fab fa-dribbble"></i></a></li>
                                                 </ul>
-                                            </div>
-                                        </li>
-                                        <li>
-                                            <!-- header-top-btn -->
-                                            <div class="header-top-btn">
-                                                <a href="add-listing.html">Add Listing</a>
                                             </div>
                                         </li>
                                     </ul>
@@ -122,27 +116,27 @@
                                     <div class="ltn__main-menu">
                                         <ul>
                                             <li class="menu-icon">
-                                                <a asp-action="index" asp-controller="home">Home</a>
+                                                <a asp-action="index" asp-controller="home">Ana səhifə</a>
                                             </li>
                                             <li class="menu-icon">
-                                                <a asp-action="index" asp-controller="about">About</a>
+                                                <a asp-action="index" asp-controller="about">Bizim haqda</a>
                                             </li>
                                             <li class="menu-icon">
-                                                <a asp-action="index" asp-controller="shop">Shop</a>
+                                                <a asp-action="index" asp-controller="shop">Evlər</a>
                                                 <ul>
                                                     <li>
-                                                        <a asp-action="index" asp-controller="order">Orders</a>
+                                                        <a asp-action="index" asp-controller="order">Satılanlar</a>
                                                     </li>
                                                 </ul>
                                             </li>
                                             <li class="menu-icon">
-                                                <a asp-action="index" asp-controller="service">Service</a>
+                                                <a asp-action="index" asp-controller="service">Servislər</a>
                                             </li>
                                             <li class="menu-icon">
-                                                <a asp-action="index" asp-controller="team">Team</a>
+                                                <a asp-action="index" asp-controller="team">Komandamız</a>
                                             </li>
                                             <li>
-                                                <a asp-action="index" asp-controller="contact">Contact</a>
+                                                <a asp-action="index" asp-controller="contact">Əlaqə</a>
                                             </li>
                                         </ul>
                                     </div>
@@ -158,13 +152,16 @@
                                         <i class="icon-cancel  for-search-close"></i>
                                     </div>
                                 </div>
-                                <div class="header-search-1-form">
+                                <div class="header-search-1-form" >
                                     <form id="#" method="get" action="#">
-                                        <input type="text" name="search" value="" placeholder="Search here..." />
+                                        <input type="text" name="search" value="" placeholder="Axtar..." class="house-search" />
                                         <button type="submit">
                                             <span><i class="icon-search"></i></span>
                                         </button>
                                     </form>
+                                    <div id="search-list-box">
+
+                                    </div>
                                 </div>
                             </div>
                             <!-- user-menu -->
@@ -177,14 +174,13 @@
 
                                             @if (User.Identity.IsAuthenticated)
                                             {
-                                                <li>  <a href="login-register.html" class="font-weight-bold">@User.Identity.Name</a></li>
-                                                <li>  <a class="font-weight-bold" asp-action="logout" asp-controller="account">Logout</a></li>
-                                                <li><a asp-action="showaccount" asp-controller="account" asp-route-id="@member.Id" >My Account</a></li>
+                                                <li>  <a asp-action="showaccount" asp-controller="account" asp-route-id="@member.Id" class="font-weight-bold">@User.Identity.Name</a></li>
+                                                <li>  <a class="font-weight-bold" asp-action="logout" asp-controller="account">Çıxış</a></li>
                                             }
                                             else
                                             {
-                                                <li> <a asp-action="login" asp-controller="account">Sign in</a></li>
-                                                <li> <a asp-action="register" asp-controller="account">Register</a></li>
+                                                <li> <a asp-action="login" asp-controller="account">Daxil ol</a></li>
+                                                <li> <a asp-action="register" asp-controller="account">Qeydiyyat</a></li>
                                             }
 
 
@@ -219,7 +215,6 @@
 
         <div id="ltn__utilize-cart-menu" class="ltn__utilize ltn__utilize-cart-menu">
             <div class="ltn__utilize-menu-inner ltn__scrollbar">
-
                 @await Html.PartialAsync("_WishlistPartial", wishlistItem);
             </div>
         </div>
@@ -367,6 +362,27 @@
 
         @RenderBody()
 
+
+        <!-- CALL TO ACTION START (call-to-action-6) -->
+        <div class="ltn__call-to-action-area call-to-action-6 before-bg-bottom" data-bs-bg="img/1.jpg--">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="call-to-action-inner call-to-action-inner-6 ltn__secondary-bg position-relative text-center---">
+                            <div class="coll-to-info text-color-white">
+                                <h1>Arzuladığınız evi axtarırsınız?</h1>
+                                <p>Arzunuzu gerçəkləşdirmək üçün biz sizə kömək edərik</p>
+                            </div>
+                            <div class="btn-wrapper">
+                                <a class="btn btn-effect-3 btn-white" asp-action="index" asp-controller="shop">Ev Axtar <i class="icon-next"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- CALL TO ACTION END -->
+
         <!-- FOOTER AREA START -->
         <footer class="ltn__footer-area  ">
             <div class="footer-top-area  section-bg-2 plr--5">
@@ -379,7 +395,7 @@
                                         <img src="~/assets/img/@setting.FooterLogo" alt="Logo">
                                     </div>
                                 </div>
-                                <p>Lorem Ipsum is simply dummy text of the and typesetting industry. Lorem Ipsum is dummy text of the printing.</p>
+                                <p>Arzuladığınız evi bizimlə tapın</p>
                                 <div class="footer-address">
                                     <ul>
                                         <li>
@@ -410,10 +426,10 @@
                                 </div>
                                 <div class="ltn__social-media mt-20">
                                     <ul>
-                                        <li><a href="#" title="Facebook"><i class="fab fa-facebook-f"></i></a></li>
-                                        <li><a href="#" title="Twitter"><i class="fab fa-twitter"></i></a></li>
-                                        <li><a href="#" title="Linkedin"><i class="fab fa-linkedin"></i></a></li>
-                                        <li><a href="#" title="Youtube"><i class="fab fa-youtube"></i></a></li>
+                                        <li><a href="https://www.facebook.com/" title="Facebook"><i class="fab fa-facebook-f"></i></a></li>
+                                        <li><a href="https://www.twitter.com/" title="Twitter"><i class="fab fa-twitter"></i></a></li>
+                                        <li><a href="https://www.instagram.com/" title="Instagram"><i class="fab fa-instagram"></i></a></li>
+                                        <li><a href="https://www.dribbble.com/" title="Dribbble"><i class="fab fa-dribbble"></i></a></li>
                                     </ul>
                                 </div>
                             </div>
@@ -423,50 +439,49 @@
                                 <h4 class="footer-title">Company</h4>
                                 <div class="footer-menu">
                                     <ul>
-                                        <li><a href="about.html">About</a></li>
-                                        <li><a href="blog.html">Blog</a></li>
-                                        <li><a href="shop.html">All Products</a></li>
-                                        <li><a href="locations.html">Locations Map</a></li>
-                                        <li><a href="faq.html">FAQ</a></li>
-                                        <li><a href="contact.html">Contact us</a></li>
+                                        <li><a asp-action="index" asp-controller="about">Haqqımıza</a></li>
+                                        <li><a asp-action="index" asp-controller="shop">Bütün evlər</a></li>
+                                        <li><a asp-action="index" asp-controller="contact">Əlaqə</a></li>
                                     </ul>
                                 </div>
                             </div>
                         </div>
                         <div class="col-xl-2 col-md-6 col-sm-6 col-12">
                             <div class="footer-widget footer-menu-widget clearfix">
-                                <h4 class="footer-title">Services</h4>
+                                <h4 class="footer-title">Şəxsi profil</h4>
                                 <div class="footer-menu">
                                     <ul>
-                                        <li><a href="order-tracking.html">Order tracking</a></li>
-                                        <li><a href="wishlist.html">Wish List</a></li>
-                                        <li><a href="login.html">Login</a></li>
-                                        <li><a href="account.html">My account</a></li>
-                                        <li><a href="about.html">Terms & Conditions</a></li>
-                                        <li><a href="about.html">Promotional Offers</a></li>
+                                        @if (User.Identity.IsAuthenticated)
+                                        {
+                                            <li>  <a asp-action="showaccount" asp-controller="account" asp-route-id="@member.Id" class="font-weight-bold">@User.Identity.Name</a></li>
+                                            <li>  <a class="font-weight-bold" asp-action="logout" asp-controller="account">Çıxış</a></li>
+                                            <li>  <a class="font-weight-bold" asp-action="order" asp-controller="shop">Alınan Evlər</a></li>
+                                        }
+                                        else
+                                        {
+                                            <li> <a asp-action="login" asp-controller="account">Daxil ol</a></li>
+                                            <li> <a asp-action="register" asp-controller="account">Qeydiyyat</a></li>
+                                        }
+
                                     </ul>
                                 </div>
                             </div>
                         </div>
                         <div class="col-xl-2 col-md-6 col-sm-6 col-12">
                             <div class="footer-widget footer-menu-widget clearfix">
-                                <h4 class="footer-title">Customer Care</h4>
+                                <h4 class="footer-title">Komandamiz və servislər</h4>
                                 <div class="footer-menu">
                                     <ul>
-                                        <li><a href="login.html">Login</a></li>
-                                        <li><a href="account.html">My account</a></li>
-                                        <li><a href="wishlist.html">Wish List</a></li>
-                                        <li><a href="order-tracking.html">Order tracking</a></li>
-                                        <li><a href="faq.html">FAQ</a></li>
-                                        <li><a href="contact.html">Contact us</a></li>
+                                        <li><a asp-action="index" asp-controller="team">Maklerlər</a></li>
+                                        <li><a asp-action="index" asp-controller="service">Servislər</a></li>
                                     </ul>
                                 </div>
                             </div>
                         </div>
                         <div class="col-xl-3 col-md-6 col-sm-12 col-12">
                             <div class="footer-widget footer-newsletter-widget">
-                                <h4 class="footer-title">Newsletter</h4>
-                                <p>Subscribe to our weekly Newsletter and receive updates via email.</p>
+                                <h4 class="footer-title">Məktub</h4>
+                                <p>Aylıq məlumatlara abunə olmaq üçün email göndərin.</p>
                                 <div class="footer-newsletter">
                                     <form action="#">
                                         <input type="email" name="email" placeholder="Email*">
@@ -475,7 +490,7 @@
                                         </div>
                                     </form>
                                 </div>
-                                <h5 class="mt-30">We Accept</h5>
+                                <h5 class="mt-30">Pul köçürmələr</h5>
                                 <img src="~/assets/img/icons/payment-4.png" alt="Payment Image">
                             </div>
                         </div>
@@ -487,7 +502,7 @@
                     <div class="row">
                         <div class="col-md-6 col-12">
                             <div class="ltn__copyright-design clearfix">
-                                <p>All Rights Reserved  Company <span class="current-year"></span></p>
+                                <p>Bütün hüquqlar qorunur  by Ganjali İmanov <span class="current-year"></span></p>
                             </div>
                         </div>
                         <div class="col-md-6 col-12 align-self-center">
@@ -504,17 +519,21 @@
             </div>
         </footer>
         <!-- FOOTER AREA END -->
+
+
         <!-- MODAL AREA START (Quick View Modal) -->
         <div class="ltn__modal-area ltn__quick-view-modal-area">
             <div class="modal fade" id="quick_view_modal" tabindex="-1">
                 <div class="modal-dialog modal-lg" role="document">
                     <div class="modal-content">
-                       
+
                     </div>
                 </div>
             </div>
         </div>
         <!-- MODAL AREA END -->
+
+
         <!-- MODAL AREA START (Add To Cart Modal) -->
         <div class="ltn__modal-area ltn__add-to-cart-modal-area">
             <div class="modal fade" id="add_to_cart_modal" tabindex="-1">
@@ -558,7 +577,7 @@
             </div>
         </div>
         <!-- MODAL AREA END -->
-       
+
 
     </div>
 

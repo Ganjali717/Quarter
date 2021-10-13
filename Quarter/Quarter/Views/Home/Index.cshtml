@@ -33,7 +33,7 @@
                                             <p>@slide.Desc</p>
                                         </div>
                                         <div class="btn-wrapper animated">
-                                            <a href="@slide.RedirectUrl" class="theme-btn-1 btn btn-effect-1">Make An Enquiry</a>
+                                            <a asp-action="register" asp-controller="account" class="theme-btn-1 btn btn-effect-1">Qeydiyyatdan keçin</a>
                                             <a class="ltn__video-play-btn bg-white" href="https://www.youtube.com/embed/HnbMYzdjuBs?autoplay=1&amp;showinfo=0" data-rel="lightcase">
                                                 <i class="icon-play  ltn__secondary-color"></i>
                                             </a>
@@ -53,6 +53,8 @@
     </div>
 </div>
 <!-- SLIDER AREA END -->
+
+
 <!-- CAR DEALER FORM AREA START -->
 <div class="ltn__car-dealer-form-area mt--65 mt-120 pb-115---">
     <div class="container">
@@ -71,25 +73,25 @@
                                 <form method="get" class="ltn__car-dealer-form-box row" asp-action="index" asp-controller="shop">
                                     <div class="ltn__car-dealer-form-item ltn__custom-icon---- ltn__icon-car---- col-lg-3 col-md-6">
                                         <select class="nice-select" name="cityId" asp-items="@(new SelectList(ViewBag.Cities,"Id","Name"))">
-                                            <option value="null">Weheri sech</option>
+                                            <option value="null">Şəhər seçin</option>
 
                                         </select>
                                     </div>
                                     <div class="ltn__car-dealer-form-item ltn__custom-icon---- ltn__icon-meter---- col-lg-3 col-md-6">
                                         <select class="nice-select" name="houseStatusId" asp-items="@(new SelectList(ViewBag.HouseStatus,"Id","StatusName"))">
-                                            <option value="null">House Status</option>
+                                            <option value="null">Status seçin</option>
 
                                         </select>
                                     </div>
                                     <div class="ltn__car-dealer-form-item ltn__custom-icon---- ltn__icon-calendar---- col-lg-3 col-md-6">
                                         <select class="nice-select" name="houseTypeId" asp-items="@(new SelectList(ViewBag.HouseType,"Id","Name"))">
-                                            <option value="null">House Type</option>
+                                            <option value="null">Evin növünü seçin</option>
 
                                         </select>
                                     </div>
                                     <div class="ltn__car-dealer-form-item ltn__custom-icon ltn__icon-calendar col-lg-3 col-md-6">
                                         <div class="btn-wrapper text-center mt-0">
-                                             <button type="submit" class="btn theme-btn-1 btn-effect-1 text-uppercase">Search Inventory</button> 
+                                             <button type="submit" class="btn theme-btn-1 btn-effect-1 text-uppercase">AXTARIŞ ET</button> 
                                           @*  <a asp-action="index" asp-controller="shop" asp-route-houseStatusId="@ViewBag.HouseStatusesId"class="btn theme-btn-1 btn-effect-1 text-uppercase">Find Now</a>*@
                                         </div>
                                     </div>
@@ -143,6 +145,8 @@
     </div>
 </div>
 <!-- CAR DEALER FORM AREA END -->
+
+
 <!-- ABOUT US AREA START -->
 <div class="ltn__about-us-area pt-120 pb-90 ">
     <div class="container">
@@ -182,7 +186,7 @@
                         }
                     </ul>
                     <div class="btn-wrapper animated">
-                        <a asp-action="index" asp-controller="service" class="theme-btn-1 btn btn-effect-1">OUR SERVICES</a>
+                        <a asp-action="index" asp-controller="service" class="theme-btn-1 btn btn-effect-1">BİZİM SERVİSLƏR</a>
                     </div>
                 </div>
             </div>
@@ -190,6 +194,8 @@
     </div>
 </div>
 <!-- ABOUT US AREA END -->
+
+
 <!-- COUNTER UP AREA START -->
 <div class="ltn__counterup-area section-bg-1 pt-120 pb-70">
     <div class="container">
@@ -205,7 +211,7 @@
                         </span>
                         <span class="counterUp-icon">+</span>
                     </h1>
-                    <h6>Total Area Sq</h6>
+                    <h6>Evlərin ümumi sahəsi</h6>
                 </div>
             </div>
             <div class="col-md-3 col-sm-6 align-self-center">
@@ -214,7 +220,7 @@
                         <i class="flaticon-office"></i>
                     </div>
                     <h1><span class="counter">@ViewBag.totalSold</span><span class="counterUp-icon">+</span> </h1>
-                    <h6>Apartments Sold</h6>
+                    <h6>Satılan Evlər</h6>
                 </div>
             </div>
             <div class="col-md-3 col-sm-6 align-self-center">
@@ -223,7 +229,7 @@
                         <i class="flaticon-excavator"></i>
                     </div>
                     <h1><span class="counter">@ViewBag.totalCount</span><span class="counterUp-icon">+</span> </h1>
-                    <h6>Total Constructions</h6>
+                    <h6>Ümumi evlərin sayı</h6>
                 </div>
             </div>
             <div class="col-md-3 col-sm-6 align-self-center">
@@ -232,7 +238,7 @@
                         <i class="flaticon-armchair"></i>
                     </div>
                     <h1><span class="counter">@ViewBag.totalRooms</span><span class="counterUp-icon">+</span> </h1>
-                    <h6>Apartio Rooms</h6>
+                    <h6>Otaqların sayı</h6>
                 </div>
             </div>
         </div>
@@ -256,12 +262,12 @@
                                 @Model.LastOrder.House.Desc
                             </p>
                         </div>
-                        <ul class="ltn__list-item-1 ltn__list-item-1-before clearfix">
+                      @*  <ul class="ltn__list-item-1 ltn__list-item-1-before clearfix">
                             @foreach (var item in Model.LastOrder.House.HouseAmenitis)
                             {
                                 <li> @item.Ameniti.Name</li>
                             }
-                        </ul>
+                        </ul>*@
                         <ul class="ltn__list-item-2 ltn__list-item-2-before ltn__flat-info">
                             <li>
                                 <span>@Model.LastOrder.House.Beds <i class="flaticon-bed"></i></span>
@@ -308,8 +314,8 @@
         <div class="row">
             <div class="col-lg-12">
                 <div class="section-title-area ltn__section-title-2--- text-center">
-                    <h6 class="section-subtitle section-subtitle-2 ltn__secondary-color">Our Services</h6>
-                    <h1 class="section-title">Our Main Focus</h1>
+                    <h6 class="section-subtitle section-subtitle-2 ltn__secondary-color">Bizim servislər</h6>
+                    <h1 class="section-title">Əsas məqsədimiz</h1>
                 </div>
             </div>
         </div>
@@ -325,7 +331,7 @@
                         <div class="ltn__feature-info">
                             <h3><a asp-action="detail" asp-controller="service" asp-route-id="@item.Id">@item.Title</a></h3>
                             <p>@item.Desc</p>
-                            <a class="ltn__service-btn" href="service-details.html">Find A Home <i class="flaticon-right-arrow"></i></a>
+                            <a class="ltn__service-btn" asp-action="detail" asp-controller="service" asp-route-id="@item.Id">Ev Axtar <i class="flaticon-right-arrow"></i></a>
                         </div>
                     </div>
                 </div>
@@ -334,14 +340,16 @@
     </div>
 </div>
 <!-- FEATURE AREA END -->
+
+
 <!-- PRODUCT SLIDER AREA START -->
 <div class="ltn__product-slider-area ltn__product-gutter pt-115 pb-90 plr--7">
     <div class="container-fluid">
         <div class="row">
             <div class="col-lg-12">
                 <div class="section-title-area ltn__section-title-2--- text-center">
-                    <h6 class="section-subtitle section-subtitle-2 ltn__secondary-color">Properties</h6>
-                    <h1 class="section-title">Featured Listings</h1>
+                    <h6 class="section-subtitle section-subtitle-2 ltn__secondary-color">Evlər</h6>
+                    <h1 class="section-title">Xüsusiyyətli evlər</h1>
                 </div>
             </div>
         </div>
@@ -371,10 +379,7 @@
                                     <div class="product-img-gallery">
                                         <ul>
                                             <li>
-                                                <a href="product-details.html"><i class="fas fa-camera"></i> 4</a>
-                                            </li>
-                                            <li>
-                                                <a href="product-details.html"><i class="fas fa-film"></i> 2</a>
+                                                <a asp-action="detail" asp-controller="shop" asp-route-id="@item.Id"><i class="fas fa-camera"></i> @item.HouseImages.Count</a>
                                             </li>
                                         </ul>
                                     </div>
@@ -392,16 +397,16 @@
                                 </div>
                                 <ul class="ltn__list-item-2 ltn__list-item-2-before">
                                     <li>
-                                        <span>@item.Beds <i class="flaticon-bed"></i></span>
-                                        Bedrooms
+                                        <span>@item.Beds </span><i class="flaticon-bed"></i>
+                                        Yataq otağı
                                     </li>
                                     <li>
-                                        <span>@item.Baths <i class="flaticon-clean"></i></span>
-                                        Bathrooms
+                                        <span>@item.Baths </span><i class="flaticon-clean"></i>
+                                      Hamam
                                     </li>
                                     <li>
-                                        <span>@item.Area<i class="flaticon-square-shape-design-interface-tool-symbol"></i></span>
-                                        square Ft
+                                        <span>@item.Area</span> <i class="flaticon-square-shape-design-interface-tool-symbol"></i>
+                                        kv.m
                                     </li>
                                 </ul>
                             </div>
@@ -411,24 +416,24 @@
                                         <a href="team-details.html"><img src="~/uploads/team/@item.Team.Image" alt="#"></a>
                                     </div>
                                     <div class="agent-brief">
-                                        <h6><a href="team-details.html">William Seklo</a></h6>
-                                        <small>Estate Agents</small>
+                                        <h6><a href="team-details.html">@item.Team.Fullname</a></h6>
+                                        <small>Makler</small>
                                     </div>
                                 </div>
                                 <div class="product-hover-action">
                                     <ul>
                                         <li>
-                                            <a href="#" title="Quick View" data-bs-toggle="modal" data-bs-target="#quick_view_modal">
+                                            <a href="#" title="Quick View" data-bs-toggle="modal" data-bs-target="#quick_view_modal" data-id="@item.Id" class="show-modal-house">
                                                 <i class="flaticon-expand"></i>
                                             </a>
                                         </li>
                                         <li>
-                                            <a href="#" title="Wishlist" data-bs-toggle="modal" data-bs-target="#liton_wishlist_modal">
+                                            <a asp-action="addwishlist" asp-controller="shop" asp-route-id="@item.Id" data-id="@item.Id" title="Wishlist" data-bs-toggle="modal" data-bs-target="#liton_wishlist_modal" class="add-wish-btn">
                                                 <i class="flaticon-heart-1"></i>
                                             </a>
                                         </li>
                                         <li>
-                                            <a href="product-details.html" title="Product Details">
+                                            <a asp-action="detail" asp-controller="shop" asp-route-id="@item.Id" title="Product Details">
                                                 <i class="flaticon-add"></i>
                                             </a>
                                         </li>
@@ -444,15 +449,19 @@
     </div>
 </div>
 <!-- PRODUCT SLIDER AREA END -->
+
+
 <!-- VIDEO AREA START -->
 <div class="ltn__video-popup-area ltn__video-popup-margin---">
-    <div class="ltn__video-bg-img ltn__video-popup-height-600--- bg-overlay-black-30 bg-image bg-fixed ltn__animation-pulse1" data-bs-bg="img/bg/19.jpg">
+    <div class="ltn__video-bg-img ltn__video-popup-height-600--- bg-overlay-black-30 bg-image bg-fixed ltn__animation-pulse1" data-bs-bg="assets/img/bg/19.jpg">
         <a class="ltn__video-icon-2 ltn__video-icon-2-border---" href="https://www.youtube.com/embed/X7R-q9rsrtU?autoplay=1&showinfo=0" data-rel="lightcase:myCollection">
             <i class="fa fa-play"></i>
         </a>
     </div>
 </div>
 <!-- VIDEO AREA END -->
+
+
 <!-- CATEGORY AREA START -->
 <div class="ltn__category-area section-bg-1-- ltn__primary-bg before-bg-1 bg-image bg-overlay-theme-black-5--0 pt-115 pb-90 d-none" data-bs-bg="img/bg/5.jpg">
     <div class="container">
@@ -558,14 +567,16 @@
     </div>
 </div>
 <!-- CATEGORY AREA END -->
+
+
 <!-- CATEGORY AREA START -->
 <div class="ltn__category-area ltn__product-gutter section-bg-1--- pt-115 pb-90 ">
     <div class="container">
         <div class="row">
             <div class="col-lg-12">
                 <div class="section-title-area ltn__section-title-2--- text-center">
-                    <h6 class="section-subtitle section-subtitle-2 ltn__secondary-color">Our Aminities</h6>
-                    <h1 class="section-title">Building Aminities</h1>
+                    <h6 class="section-subtitle section-subtitle-2 ltn__secondary-color">Bizim şəraitlər</h6>
+                    <h1 class="section-title">Evlərin Şəraitləri</h1>
                 </div>
             </div>
         </div>
@@ -587,119 +598,46 @@
     </div>
 </div>
 <!-- CATEGORY AREA END -->
+
+
 <!-- TESTIMONIAL AREA START (testimonial-7) -->
 <div class="ltn__testimonial-area section-bg-1--- bg-image-top pt-115 pb-70" data-bs-bg="img/bg/20.jpg">
     <div class="container">
         <div class="row">
             <div class="col-lg-12">
                 <div class="section-title-area ltn__section-title-2--- text-center">
-                    <h6 class="section-subtitle section-subtitle-2 ltn__secondary-color">Our Testimonial</h6>
-                    <h1 class="section-title">Clients Feedback</h1>
+                    <h6 class="section-subtitle section-subtitle-2 ltn__secondary-color">Verilən Qiymətlər</h6>
+                    <h1 class="section-title">Müştərilərin Rəyi</h1>
                 </div>
             </div>
         </div>
         <div class="row ltn__testimonial-slider-5-active slick-arrow-1">
-            <div class="col-lg-4">
-                <div class="ltn__testimonial-item ltn__testimonial-item-7">
-                    <div class="ltn__testimoni-info">
-                        <p>
-                            <i class="flaticon-left-quote-1"></i>
-                            Precious ipsum dolor sit amet
-                            consectetur adipisicing elit, sed dos
-                            mod tempor incididunt ut labore et
-                            dolore magna aliqua. Ut enim ad min
-                            veniam, quis nostrud Precious ips
-                            um dolor sit amet, consecte
-                        </p>
-                        <div class="ltn__testimoni-info-inner">
-                            <div class="ltn__testimoni-img">
-                                <img src="~/assets/img/testimonial/1.jpg" alt="#">
-                            </div>
-                            <div class="ltn__testimoni-name-designation">
-                                <h5>Jacob William</h5>
-                                <label>Selling Agents</label>
+            @foreach (var item in Model.Comments)
+            {
+                <div class="col-lg-4">
+                    <div class="ltn__testimonial-item ltn__testimonial-item-7">
+                        <div class="ltn__testimoni-info">
+                            <p>
+                                <i class="flaticon-left-quote-1"></i>
+                              @item.Text
+                            </p>
+                            <div class="ltn__testimoni-info-inner">
+                                <div class="ltn__testimoni-name-designation">
+                                    <h5>@item.Username</h5>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
-            <div class="col-lg-4">
-                <div class="ltn__testimonial-item ltn__testimonial-item-7">
-                    <div class="ltn__testimoni-info">
-                        <p>
-                            <i class="flaticon-left-quote-1"></i>
-                            Precious ipsum dolor sit amet
-                            consectetur adipisicing elit, sed dos
-                            mod tempor incididunt ut labore et
-                            dolore magna aliqua. Ut enim ad min
-                            veniam, quis nostrud Precious ips
-                            um dolor sit amet, consecte
-                        </p>
-                        <div class="ltn__testimoni-info-inner">
-                            <div class="ltn__testimoni-img">
-                                <img src="~/assets/img/testimonial/2.jpg" alt="#">
-                            </div>
-                            <div class="ltn__testimoni-name-designation">
-                                <h5>Kelian Anderson</h5>
-                                <label>Selling Agents</label>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-4">
-                <div class="ltn__testimonial-item ltn__testimonial-item-7">
-                    <div class="ltn__testimoni-info">
-                        <p>
-                            <i class="flaticon-left-quote-1"></i>
-                            Precious ipsum dolor sit amet
-                            consectetur adipisicing elit, sed dos
-                            mod tempor incididunt ut labore et
-                            dolore magna aliqua. Ut enim ad min
-                            veniam, quis nostrud Precious ips
-                            um dolor sit amet, consecte
-                        </p>
-                        <div class="ltn__testimoni-info-inner">
-                            <div class="ltn__testimoni-img">
-                                <img src="~/assets/img/testimonial/3.jpg" alt="#">
-                            </div>
-                            <div class="ltn__testimoni-name-designation">
-                                <h5>Adam Joseph</h5>
-                                <label>Selling Agents</label>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-4">
-                <div class="ltn__testimonial-item ltn__testimonial-item-7">
-                    <div class="ltn__testimoni-info">
-                        <p>
-                            <i class="flaticon-left-quote-1"></i>
-                            Precious ipsum dolor sit amet
-                            consectetur adipisicing elit, sed dos
-                            mod tempor incididunt ut labore et
-                            dolore magna aliqua. Ut enim ad min
-                            veniam, quis nostrud Precious ips
-                            um dolor sit amet, consecte
-                        </p>
-                        <div class="ltn__testimoni-info-inner">
-                            <div class="ltn__testimoni-img">
-                                <img src="~/assets/img/testimonial/4.jpg" alt="#">
-                            </div>
-                            <div class="ltn__testimoni-name-designation">
-                                <h5>James Carter</h5>
-                                <label>Selling Agents</label>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+            }
+                
             <!--  -->
         </div>
     </div>
 </div>
 <!-- TESTIMONIAL AREA END -->
+
+
 <!-- BRAND LOGO AREA START -->
 <div class="ltn__brand-logo-area ltn__brand-logo-1 section-bg-1 pt-290 pb-110 plr--9 d-none">
     <div class="container-fluid">
@@ -738,22 +676,6 @@
     </div>
 </div>
 <!-- BRAND LOGO AREA END -->
-<!-- CALL TO ACTION START (call-to-action-6) -->
-<div class="ltn__call-to-action-area call-to-action-6 before-bg-bottom" data-bs-bg="img/1.jpg--">
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-12">
-                <div class="call-to-action-inner call-to-action-inner-6 ltn__secondary-bg position-relative text-center---">
-                    <div class="coll-to-info text-color-white">
-                        <h1>Looking for a dream home?</h1>
-                        <p>We can help you realize your dream of a new home</p>
-                    </div>
-                    <div class="btn-wrapper">
-                        <a class="btn btn-effect-3 btn-white" href="contact.html">Explore Properties <i class="icon-next"></i></a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-<!-- CALL TO ACTION END -->
+
+
+

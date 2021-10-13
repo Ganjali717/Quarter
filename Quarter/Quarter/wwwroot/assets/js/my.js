@@ -28,6 +28,7 @@
 
             .then(data => {
 
+
                 $('.ltn__utilize-menu-inner').html(data);
             });
     });
@@ -43,8 +44,20 @@
                 $('.ltn__utilize-menu-inner').html(data);
             })
     });
-   
 
+    $(".house-search").keyup(function (e) {
+        e.preventDefault()
+
+        var search = $(this).val();
+
+        fetch('https://localhost:44369/shop/SearchFilter?search=' + search)
+            .then(response => response.text())
+            .then(data => {
+                $('#search-list-box').html(data);
+                console.log(data)
+               
+            })
+    });
     
 
 })

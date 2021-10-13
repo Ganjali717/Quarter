@@ -1,0 +1,12 @@
+﻿@model HouseViewModel
+
+<ul class="header-search-list">
+    @foreach (var item in Model.Houses)
+    {
+        <li>
+            <a>@item.Location</a>
+        </li>
+    }
+</ul>
+
+

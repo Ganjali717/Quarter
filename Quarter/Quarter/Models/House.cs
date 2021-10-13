@@ -43,6 +43,7 @@ namespace Quarter.Models
         public List<HouseAmeniti> HouseAmenitis { get; set; }
         public List<HouseImage> HouseImages { get; set; }
         public List<Comment> Comments { get; set; }
+        public List<Order> Orders { get; set; }
         public Team Team { get; set; }
         public HouseType HouseType { get; set; }
         public HouseStatus HouseStatus { get; set; }
@@ -58,5 +59,11 @@ namespace Quarter.Models
 
         [NotMapped]
         public List<int> AmenitiIds { get; set; } = new List<int>();
+
+        public List<WishlistItem> WishlistItems { get; set; }
+
+        [NotMapped]
+
+        public bool IsWished { get; set; }
     }
 }

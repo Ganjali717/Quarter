@@ -9,5 +9,7 @@ namespace Quarter.ViewModels
     public class TeamViewModel
     {
         public List<Team> Teams { get; set; }
+
+
     }
 }

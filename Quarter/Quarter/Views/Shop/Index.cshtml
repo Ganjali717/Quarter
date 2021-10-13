@@ -14,11 +14,11 @@
             <div class="row">
                 <div class="col-lg-12">
                     <div class="ltn__breadcrumb-inner">
-                        <h1 class="page-title">Shop</h1>
+                        <h1 class="page-title">Evlər</h1>
                         <div class="ltn__breadcrumb-list">
                             <ul>
-                                <li><a asp-action="index" asp-controller="home"><span class="ltn__secondary-color"><i class="fas fa-home"></i></span> Home</a></li>
-                                <li>Shop</li>
+                                <li><a asp-action="index" asp-controller="home"><span class="ltn__secondary-color"><i class="fas fa-home"></i></span> Ana Səhifə</a></li>
+                                <li>Evlər</li>
                             </ul>
                         </div>
                     </div>
@@ -83,7 +83,7 @@
                                         <!-- Search Widget -->
                                         <div class="ltn__search-widget mb-30">
                                             <form action="#">
-                                                <input type="text" name="search" placeholder="Search your keyword...">
+                                                <input type="text" name="search" placeholder="Kateqoriya daxil edin...">
                                                 <button type="submit"><i class="fas fa-search"></i></button>
                                             </form>
                                         </div>
@@ -136,9 +136,9 @@
                                                                     <i class="flaticon-expand"></i>
                                                                 </a>
                                                             </li>
-                                                            <li>
-                                                                <a asp-action="addwishlist" asp-controller="shop" asp-route-id="@item.Id" data-id="@item.Id" title="Wishlist" data-bs-toggle="modal" data-bs-target="#liton_wishlist_modal" class="add-wish-btn">
-                                                                    <i class="flaticon-heart-1"></i>
+                                                            <li  style="background-color:@(item.IsWished?"#FF5A3C":"")"   >
+                                                                <a   asp-action="addwishlist" asp-controller="shop" asp-route-id="@item.Id" data-id="@item.Id" title="Wishlist" data-bs-toggle="modal" data-bs-target="#liton_wishlist_modal" class="add-wish-btn">
+                                                                    <i class="flaticon-heart-1"  style="color:@(item.IsWished?"white":"")"></i>
                                                                 </a>
                                                             </li>
                                                             <li>
@@ -573,11 +573,11 @@
                 </div>
                 <div class="col-lg-4">
                     <aside class="sidebar ltn__shop-sidebar ltn__right-sidebar">
-                        <h3 class="mb-10">Advance Information</h3>
-                        <label class="mb-30"><small>About 9,620 results (0.62 seconds) </small></label>
+                        <h3 class="mb-10">Ətrafli məlumat</h3>
+                        <label class="mb-30"><small>@Model.Houses.Count yaxın ev</small></label>
                         <!-- Advance Information widget -->
                         <div class="widget ltn__menu-widget">
-                            <h4 class="ltn__widget-title">Category</h4>
+                            <h4 class="ltn__widget-title">Kateqoriya</h4>
                             <ul>
                                 @foreach (var item in Model.HouseStatuses)
                                 {
@@ -595,7 +595,7 @@
 
                             </ul>
                             <hr />
-                            <h4 class="ltn__widget-title">Property Type</h4>
+                            <h4 class="ltn__widget-title">Ev Növü</h4>
                             <ul>
                                 @foreach (var item in Model.HouseTypes)
                                 {
@@ -612,7 +612,7 @@
                                 }
                             </ul>
                             <hr>
-                            <h4 class="ltn__widget-title">Amenities</h4>
+                            <h4 class="ltn__widget-title">Şəraitlər</h4>
                             <ul>
                                 @foreach (var item in Model.Amenitis)
                                 {
@@ -629,11 +629,11 @@
                                 }
                             </ul>
                             <hr>
-                            <h4 class="ltn__widget-title">Price Renge</h4>
+                            <h4 class="ltn__widget-title">Qiymət Aralığı</h4>
                             <ul>
                                 <li>
                                     <label class="checkbox-item">
-                                        Low Budget
+                                         Aşağı qiymət
                                         <input type="checkbox">
                                         <span class="checkmark"></span>
                                     </label>
@@ -641,7 +641,7 @@
                                 </li>
                                 <li>
                                     <label class="checkbox-item">
-                                        Medium
+                                        Orta
                                         <input type="checkbox" checked="checked">
                                         <span class="checkmark"></span>
                                     </label>
@@ -649,7 +649,7 @@
                                 </li>
                                 <li>
                                     <label class="checkbox-item">
-                                        High Budget
+                                        Yüksək qiymət
                                         <input type="checkbox">
                                         <span class="checkmark"></span>
                                     </label>
@@ -659,10 +659,10 @@
                             <hr>
                             <!-- Price Filter Widget -->
                             <div class="widget--- ltn__price-filter-widget">
-                                <h4 class="ltn__widget-title ltn__widget-title-border---">Filter by price</h4>
+                                <h4 class="ltn__widget-title ltn__widget-title-border---">Qiymətə görə filtirizasiya</h4>
                                 <div class="price_filter">
                                     <div class="price_slider_amount">
-                                        <input type="submit" value="Your range:" />
+                                        <input type="submit" value="Aralığ:" />
                                         <input type="text" class="amount" name="price" placeholder="Add Your Price" />
                                     </div>
                                     <div class="slider-range"></div>
@@ -684,26 +684,3 @@
     </div>
     <!-- PRODUCT DETAILS AREA END -->
 
-
-
-
-
-    <!-- CALL TO ACTION START (call-to-action-6) -->
-    <div class="ltn__call-to-action-area call-to-action-6 before-bg-bottom" data-bs-bg="img/1.jpg--">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-12">
-                    <div class="call-to-action-inner call-to-action-inner-6 ltn__secondary-bg position-relative text-center---">
-                        <div class="coll-to-info text-color-white">
-                            <h1>Looking for a dream home?</h1>
-                            <p>We can help you realize your dream of a new home</p>
-                        </div>
-                        <div class="btn-wrapper">
-                            <a class="btn btn-effect-3 btn-white" href="contact.html">Explore Properties <i class="icon-next"></i></a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!-- CALL TO ACTION END -->

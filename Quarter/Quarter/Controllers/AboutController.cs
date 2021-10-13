@@ -24,7 +24,9 @@ namespace Quarter.Controllers
                 Settings = _context.Settings.ToList(),
                 Abouts = _context.Abouts.ToList(), 
                 Teams = _context.Teams.Include(x => x.teamDetail).Skip(3).Take(3).ToList(),
-                Services = _context.Services.Take(3).ToList()
+                Services = _context.Services.Take(3).ToList(),
+                Comments = _context.Comments.ToList()
+                
             };
             return View(aboutVM);
         }

@@ -42,4 +42,10 @@
     <Folder Include="wwwroot\uploads\slider\" />
   </ItemGroup>
 
+  <ItemGroup>
+    <None Include="Areas\Manage\Views\Role\Create.cshtml" />
+    <None Include="Areas\Manage\Views\Role\Edit.cshtml" />
+    <None Include="Areas\Manage\Views\Role\Index.cshtml" />
+  </ItemGroup>
+
 </Project>

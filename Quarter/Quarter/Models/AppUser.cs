@@ -12,5 +12,9 @@ namespace Quarter.Models
         public bool IsAdmin { get; set; }
 
         public List<Comment> Comments { get; set; }
+
+        public List<WishlistItem> WishlistItems { get; set; }
+
+        public List<Order> Orders { get; set; }
     }
 }

@@ -30,7 +30,8 @@ namespace Quarter.Controllers
                 Services = _context.Services.ToList(),
                 Houses = _context.House.Include(x => x.HouseAmenitis).Include(x => x.HouseImages).Include(x => x.HouseStatus).Include(x => x.HouseType).Include(x => x.Team).Include(x=>x.City).ToList(),
                 Amenitis = _context.Amenitis.Take(8).ToList(),
-                LastOrder = _context.Orders.Include(x => x.House).ThenInclude(x => x.HouseImages).OrderByDescending(x=>x.Id).FirstOrDefault()
+                LastOrder = _context.Orders.Include(x => x.House).ThenInclude(x => x.HouseImages).OrderByDescending(x=>x.Id).FirstOrDefault(), 
+                Comments = _context.Comments.ToList()
             };
 
             var houses = _context.House.ToList();
@@ -58,8 +59,6 @@ namespace Quarter.Controllers
 
             return View(homeVM);
         }
-
-
 
     }
 }

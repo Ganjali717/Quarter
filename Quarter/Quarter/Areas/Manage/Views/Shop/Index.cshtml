@@ -42,8 +42,9 @@
                     <td>@house.SalePrice AZN</td>
                     <td><img src="~/uploads/house/@house.HouseImages.FirstOrDefault(x => x.PosterStatus == true)?.Image" style="max-width:100px" alt="Alternate Text" /></td>
                     <td>
-                        <a asp-action="edit"  asp-route-id="@house.Id" class="btn btn-warning">Edit</a>
+                        <a asp-action="edit" asp-route-id="@house.Id" class="btn btn-warning">Edit</a>
                         <a asp-action="deletehousefetch" asp-route-id="@house.Id" class="btn btn-danger btn-item-delete">Delete</a>
+                        <a asp-action="comment" asp-route-id="@house.Id" class="btn btn-success">Comments</a>
                     </td>
                 </tr>
             }

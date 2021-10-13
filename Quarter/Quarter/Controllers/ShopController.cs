@@ -24,6 +24,8 @@ namespace Quarter.Controllers
 
         public IActionResult Index(int page = 1, int? houseTypeId = null, int? amenitiesId = null, int? houseStatusId = null , int? cityId = null)
         {
+            AppUser member = User.Identity.IsAuthenticated ? _userManager.Users.FirstOrDefault(x => x.UserName == User.Identity.Name && !x.IsAdmin) : null;
+
             var query = _context.House.AsQueryable();
             ViewBag.HouseTypeId = houseTypeId;
             ViewBag.AmenitiesId = amenitiesId;
@@ -41,12 +43,17 @@ namespace Quarter.Controllers
 
             HouseViewModel houseVM = new HouseViewModel
             {
-                Houses = query.Include(x => x.HouseImages).Include(x => x.City).Include(z => z.HouseStatus).Include(y => y.HouseType).ToList(),
+                Houses = query.Include(x => x.HouseImages).Include(x => x.WishlistItems).Include(x => x.City).Include(z => z.HouseStatus).Include(y => y.HouseType).ToList(),
                 HouseTypes = _context.HouseTypes.Include(x => x.Houses).ToList(), 
                 HouseStatuses = _context.HouseStatuses.Include(x=>x.Houses).ToList(),
                 Amenitis = _context.Amenitis.Include(x=> x.HouseAmenitis).ToList(),
                 Teams = _context.Teams.ToList()   
             };
+
+            foreach (var item in houseVM.Houses)
+            {
+                item.IsWished = item.WishlistItems.Any(x => x.AppUserId == member.Id);
+            }
 
             ViewBag.SelectedPage = page;
             ViewBag.TotalPage = Math.Ceiling(query.Count() / 4m);
@@ -103,7 +110,8 @@ namespace Quarter.Controllers
                     {
                         AppUserId = member.Id,
                         HouseId = id,
-                        Count = 1
+                        Count = 1,
+                        
                     };
                     _context.WishlistItems.Add(memberWishlistItem);
                 }
@@ -141,6 +149,7 @@ namespace Quarter.Controllers
 
             House house = _context.House.Include(x => x.HouseImages).FirstOrDefault(x => x.Id == id);
             WishlistItemViewModel wishlistItem = null;
+           
             if (house == null) return NotFound();
 
             AppUser member = null;
@@ -162,32 +171,23 @@ namespace Quarter.Controllers
                 wishlistItem = houses.FirstOrDefault(x => x.HouseId == id);
 
 
-                if (wishlistItem.Count == 1)
-                {
-
                     houses.Remove(wishlistItem);
-                }
-                else
-                {
+               
                     wishlistItem.Count--;
-                }
+                
                 houseStr = JsonConvert.SerializeObject(houses);
                 HttpContext.Response.Cookies.Append("Houses", houseStr);
             }
-
             else
             {
                 WishlistItem memberWishlistItem = _context.WishlistItems.Include(x => x.House).FirstOrDefault(x => x.AppUserId == member.Id && x.HouseId == id);
 
-                if (memberWishlistItem.Count == 1)
-                {
-
+               
                     _context.WishlistItems.Remove(memberWishlistItem);
-                }
-                else
-                {
+                
+                
                     memberWishlistItem.Count--;
-                }
+                
 
                 _context.SaveChanges();
 
@@ -205,7 +205,25 @@ namespace Quarter.Controllers
             return PartialView("_HouseModalPartial", house);
         }
 
+        public IActionResult SearchFilter(string search)
+        {
+            var query = _context.House.AsQueryable();
 
+            HouseViewModel houseVM = new HouseViewModel
+            {
+                Houses = new List<House>()
+            };
+
+            if (!String.IsNullOrEmpty(search))
+            {
+                query = query.Where(x => x.Location.Contains(search));
+                houseVM.Houses = query.ToList();
+            }
+
+        
+
+            return PartialView("_SearchPartial", houseVM);
+        }
 
 
         [HttpPost]

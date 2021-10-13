@@ -137,6 +137,8 @@ namespace Quarter.Areas.Manage.Controllers
             existSlider.Title2 = slider.Title2;
             existSlider.RedirectUrl = slider.RedirectUrl;
             existSlider.Order = slider.Order;
+            existSlider.MiniTitle = slider.MiniTitle;
+            existSlider.Desc = slider.Desc;
 
             _context.SaveChanges();
             return RedirectToAction("index");
