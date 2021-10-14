@@ -43,7 +43,7 @@ namespace Quarter.Controllers
 
             HouseViewModel houseVM = new HouseViewModel
             {
-                Houses = query.Include(x => x.HouseImages).Include(x => x.WishlistItems).Include(x => x.City).Include(z => z.HouseStatus).Include(y => y.HouseType).ToList(),
+                Houses = query.Include(x => x.HouseImages).Include(x => x.WishlistItems).Include(x => x.City).Include(z => z.HouseStatus).Include(y => y.HouseType).Skip((page - 1) * 4).Take(4).ToList(),
                 HouseTypes = _context.HouseTypes.Include(x => x.Houses).ToList(), 
                 HouseStatuses = _context.HouseStatuses.Include(x=>x.Houses).ToList(),
                 Amenitis = _context.Amenitis.Include(x=> x.HouseAmenitis).ToList(),
@@ -132,7 +132,7 @@ namespace Quarter.Controllers
         {
             DetailViewModel detailVM = new DetailViewModel
             {
-                Houses = _context.House.Include(x => x.HouseImages).Include(x => x.HouseStatus).Include(x => x.City).Include(x => x.HouseAmenitis).Include(x => x.Team).ThenInclude(x=> x.teamDetail).FirstOrDefault(x => x.Id == id),
+                Houses = _context.House.Include(x => x.HouseImages).Include(x => x.Comments).Include(x => x.HouseStatus).Include(x => x.City).Include(x => x.HouseAmenitis).Include(x => x.Team).ThenInclude(x=> x.teamDetail).FirstOrDefault(x => x.Id == id),
                 Amenitis = _context.Amenitis.ToList(),
                 HouseTypes = _context.HouseTypes.Include(x=>x.Houses).ToList(),
                 HouseImages = _context.HouseImages.ToList(), 

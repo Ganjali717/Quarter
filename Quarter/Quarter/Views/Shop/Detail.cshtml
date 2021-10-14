@@ -65,7 +65,7 @@
                                 <i class="far fa-calendar-alt"></i>@Model.Houses.Date
                             </li>
                             <li>
-                                <a href="#"><i class="far fa-comments"></i>35 Comments</a>
+                                <a href="#"><i class="far fa-comments"></i>@Model.Houses.Comments.Count Comments</a>
                             </li>
                         </ul>
                     </div>
@@ -269,24 +269,62 @@
                             </div>
                         </div>
                     </div>
-                    <!-- Search Widget -->
-                    <div class="widget ltn__search-widget">
-                        <h4 class="ltn__widget-title ltn__widget-title-border-2">Search Objects</h4>
-                        <form action="#">
-                            <input type="text" name="search" placeholder="Search your keyword...">
-                            <button type="submit"><i class="fas fa-search"></i></button>
-                        </form>
+                    <!-- Popular Product Widget -->
+                    <div class="widget ltn__popular-product-widget">
+                        <h4 class="ltn__widget-title ltn__widget-title-border-2">Popular Evlər</h4>
+                        <div class="row ltn__popular-product-widget-active slick-arrow-1">
+                            @foreach (var item in Model.Evler)
+                            {
+                                if (item.IsPopular == true)
+                                {
+                                    <!-- ltn__product-item -->
+                                    <div class="col-12">
+                                        <div class="ltn__product-item ltn__product-item-4 ltn__product-item-5 text-center---">
+                                            <div class="product-img">
+                                                <a asp-action="detail" asp-controller="shop" asp-route-id="@item.Id"><img src="~/uploads/house/@item.HouseImages.FirstOrDefault(x => x.PosterStatus == true)?.Image" alt="#"></a>
+                                                <div class="real-estate-agent">
+                                                    <div class="agent-img">
+                                                        <a href="#"><img src="~/uploads/team/@item.Team.Image" alt="#"></a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="product-info">
+                                                <div class="product-price">
+                                                    <span>@item.SalePrice AZN<label>@(item.HouseStatus.StatusName == "Kiraye"?"/Month":"")</label></span>
+                                                </div>
+                                                <h2 class="product-title"><a asp-action="detail" asp-controller="shop" asp-route-id="@item.Id">@item.Location</a></h2>
+                                                <div class="product-img-location">
+                                                    <ul>
+                                                        <li>
+                                                            <a asp-action="detail" asp-controller="shop" asp-route-id="@item.Id"><i class="flaticon-pin"></i> @item.Location, @item.City.Name</a>
+                                                        </li>
+                                                    </ul>
+                                                </div>
+                                                <ul class="ltn__list-item-2--- ltn__list-item-2-before--- ltn__plot-brief">
+                                                    <li>
+                                                        <span>@item.Beds </span>
+                                                       Yataq otaqı
+                                                    </li>
+                                                    <li>
+                                                        <span>@item.Baths </span>
+                                                        Hamam
+                                                    </li>
+                                                    <li>
+                                                        <span>@item.Area </span>
+                                                        kv.m
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!--  --> 
+                                }
+                            }
+                            
+                        </div>
                     </div>
-                    <!-- Form Widget -->
-                    <div class="widget ltn__form-widget">
-                        <h4 class="ltn__widget-title ltn__widget-title-border-2">Drop Messege For Book</h4>
-                        <form action="#">
-                            <input type="text" name="yourname" placeholder="Your Name*">
-                            <input type="text" name="youremail" placeholder="Your e-Mail*">
-                            <textarea name="yourmessage" placeholder="Write Message..."></textarea>
-                            <button type="submit" class="btn theme-btn-1">Send Messege</button>
-                        </form>
-                    </div>
+                   
+                 
                     <!-- Top Rated Product Widget -->
                     <div class="widget ltn__top-rated-product-widget">
                         <h4 class="ltn__widget-title ltn__widget-title-border-2">Top Rated Product</h4>
@@ -372,133 +410,7 @@
                             }
                         </ul>
                     </div>
-                    <!-- Popular Product Widget -->
-                    <div class="widget ltn__popular-product-widget">
-                        <h4 class="ltn__widget-title ltn__widget-title-border-2">Popular Properties</h4>
-                        <div class="row ltn__popular-product-widget-active slick-arrow-1">
-                            <!-- ltn__product-item -->
-                            <div class="col-12">
-                                <div class="ltn__product-item ltn__product-item-4 ltn__product-item-5 text-center---">
-                                    <div class="product-img">
-                                        <a href="product-details.html"><img src="~/assets/img/product-3/6.jpg" alt="#"></a>
-                                        <div class="real-estate-agent">
-                                            <div class="agent-img">
-                                                <a href="team-details.html"><img src="~/assets/img/blog/author.jpg" alt="#"></a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="product-info">
-                                        <div class="product-price">
-                                            <span>$349,00<label>/Month</label></span>
-                                        </div>
-                                        <h2 class="product-title"><a href="product-details.html">New Apartment Nice View</a></h2>
-                                        <div class="product-img-location">
-                                            <ul>
-                                                <li>
-                                                    <a href="product-details.html"><i class="flaticon-pin"></i> Belmont Gardens, Chicago</a>
-                                                </li>
-                                            </ul>
-                                        </div>
-                                        <ul class="ltn__list-item-2--- ltn__list-item-2-before--- ltn__plot-brief">
-                                            <li>
-                                                <span>3 </span>
-                                                Bedrooms
-                                            </li>
-                                            <li>
-                                                <span>2 </span>
-                                                Bathrooms
-                                            </li>
-                                            <li>
-                                                <span>3450 </span>
-                                                square Ft
-                                            </li>
-                                        </ul>
-                                    </div>
-                                </div>
-                            </div>
-                            <!-- ltn__product-item -->
-                            <div class="col-12">
-                                <div class="ltn__product-item ltn__product-item-4 ltn__product-item-5 text-center---">
-                                    <div class="product-img">
-                                        <a href="product-details.html"><img src="~/assets/img/product-3/4.jpg" alt="#"></a>
-                                        <div class="real-estate-agent">
-                                            <div class="agent-img">
-                                                <a href="team-details.html"><img src="~/assets/img/blog/author.jpg" alt="#"></a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="product-info">
-                                        <div class="product-price">
-                                            <span>$349,00<label>/Month</label></span>
-                                        </div>
-                                        <h2 class="product-title"><a href="product-details.html">New Apartment Nice View</a></h2>
-                                        <div class="product-img-location">
-                                            <ul>
-                                                <li>
-                                                    <a href="product-details.html"><i class="flaticon-pin"></i> Belmont Gardens, Chicago</a>
-                                                </li>
-                                            </ul>
-                                        </div>
-                                        <ul class="ltn__list-item-2--- ltn__list-item-2-before--- ltn__plot-brief">
-                                            <li>
-                                                <span>3 </span>
-                                                Bedrooms
-                                            </li>
-                                            <li>
-                                                <span>2 </span>
-                                                Bathrooms
-                                            </li>
-                                            <li>
-                                                <span>3450 </span>
-                                                square Ft
-                                            </li>
-                                        </ul>
-                                    </div>
-                                </div>
-                            </div>
-                            <!-- ltn__product-item -->
-                            <div class="col-12">
-                                <div class="ltn__product-item ltn__product-item-4 ltn__product-item-5 text-center---">
-                                    <div class="product-img">
-                                        <a href="product-details.html"><img src="~/assets/img/product-3/5.jpg" alt="#"></a>
-                                        <div class="real-estate-agent">
-                                            <div class="agent-img">
-                                                <a href="team-details.html"><img src="~/assets/img/blog/author.jpg" alt="#"></a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="product-info">
-                                        <div class="product-price">
-                                            <span>$349,00<label>/Month</label></span>
-                                        </div>
-                                        <h2 class="product-title"><a href="product-details.html">New Apartment Nice View</a></h2>
-                                        <div class="product-img-location">
-                                            <ul>
-                                                <li>
-                                                    <a href="product-details.html"><i class="flaticon-pin"></i> Belmont Gardens, Chicago</a>
-                                                </li>
-                                            </ul>
-                                        </div>
-                                        <ul class="ltn__list-item-2--- ltn__list-item-2-before--- ltn__plot-brief">
-                                            <li>
-                                                <span>3 </span>
-                                                Bedrooms
-                                            </li>
-                                            <li>
-                                                <span>2 </span>
-                                                Bathrooms
-                                            </li>
-                                            <li>
-                                                <span>3450 </span>
-                                                square Ft
-                                            </li>
-                                        </ul>
-                                    </div>
-                                </div>
-                            </div>
-                            <!--  -->
-                        </div>
-                    </div>
+
 
                     <!-- Social Media Widget -->
                     <div class="widget ltn__social-media-widget">

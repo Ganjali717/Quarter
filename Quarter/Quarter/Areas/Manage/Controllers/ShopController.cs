@@ -269,6 +269,7 @@ namespace Quarter.Areas.Manage.Controllers
             existHouse.HouseStatusId = house.HouseStatusId;
             existHouse.IsFeatured = house.IsFeatured;
             existHouse.IsRelated = house.IsRelated;
+            existHouse.IsPopular = house.IsPopular;
             existHouse.Location = house.Location;
             existHouse.YearBuilt = house.YearBuilt;
             existHouse.TeamId = house.TeamId;

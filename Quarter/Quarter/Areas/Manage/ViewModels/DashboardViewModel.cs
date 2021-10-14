@@ -9,5 +9,7 @@ namespace Quarter.Areas.Manage.ViewModels
     public class DashboardViewModel
     {
          public List<Order> Orders { get; set; }
+
+        
     }
 }

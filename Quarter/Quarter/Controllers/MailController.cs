@@ -23,10 +23,11 @@ namespace Quarter.Controllers
             try
             {
                 await mailService.SendEmailAsync(request);
-                return Ok();
+                return RedirectToAction("index", "contact");
             }
             catch (Exception ex)
             {
+
                 throw;
             }
 

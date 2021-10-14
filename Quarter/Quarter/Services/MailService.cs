@@ -26,7 +26,6 @@ namespace Quarter.Services
             var email = new MimeMessage();
             email.Sender = MailboxAddress.Parse(_mailSettings.Mail);
             email.To.Add(MailboxAddress.Parse(mailRequest.Email));
-            email.Subject = mailRequest.Content;
             var builder = new BodyBuilder();
          
             builder.HtmlBody = mailRequest.Content;

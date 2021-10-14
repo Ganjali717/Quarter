@@ -352,6 +352,9 @@ namespace Quarter.Migrations
                     b.Property<bool>("IsFeatured")
                         .HasColumnType("bit");
 
+                    b.Property<bool>("IsPopular")
+                        .HasColumnType("bit");
+
                     b.Property<bool>("IsRelated")
                         .HasColumnType("bit");
 
@@ -883,11 +886,11 @@ namespace Quarter.Migrations
             modelBuilder.Entity("Quarter.Models.Order", b =>
                 {
                     b.HasOne("Quarter.Models.AppUser", "AppUser")
-                        .WithMany()
+                        .WithMany("Orders")
                         .HasForeignKey("AppUserId");
 
                     b.HasOne("Quarter.Models.House", "House")
-                        .WithMany()
+                        .WithMany("Orders")
                         .HasForeignKey("HouseId");
                 });
 
@@ -912,11 +915,11 @@ namespace Quarter.Migrations
             modelBuilder.Entity("Quarter.Models.WishlistItem", b =>
                 {
                     b.HasOne("Quarter.Models.AppUser", "AppUser")
-                        .WithMany()
+                        .WithMany("WishlistItems")
                         .HasForeignKey("AppUserId");
 
                     b.HasOne("Quarter.Models.House", "House")
-                        .WithMany()
+                        .WithMany("WishlistItems")
                         .HasForeignKey("HouseId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();

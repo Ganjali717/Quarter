@@ -36,6 +36,8 @@ namespace Quarter.Models
         [Required]
         public bool IsRelated { get; set; }
         [Required]
+        public bool IsPopular { get; set; }
+        [Required]
         public int Rate { get; set; }
         public int Floor { get; set; }
         public int? CurrentFloor { get; set; }
