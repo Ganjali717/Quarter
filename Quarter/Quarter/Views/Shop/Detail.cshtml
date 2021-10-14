@@ -161,12 +161,12 @@
                         <h4 class="title-2">Customer Reviews</h4>
                         <div class="product-ratting">
                             <ul>
-                                <li><a href="#"><i class="fas fa-star"></i></a></li>
-                                <li><a href="#"><i class="fas fa-star"></i></a></li>
-                                <li><a href="#"><i class="fas fa-star"></i></a></li>
-                                <li><a href="#"><i class="fas fa-star-half-alt"></i></a></li>
-                                <li><a href="#"><i class="far fa-star"></i></a></li>
-                                <li class="review-total"> <a href="#"> ( 95 Reviews )</a></li>
+                                @for (int i = 0; i < Model.komentariya.Average(x => x.Rate); i++)
+                                {
+                                    <li><a href="#"><i class="fas fa-star"></i></a></li>
+                                }
+
+                                <li class="review-total"> <a href="#"> ( @Math.Ceiling(Model.komentariya.Average(x => x.Rate)   ) Reviews )</a></li>
                             </ul>
                         </div>
                         <hr>
@@ -175,7 +175,7 @@
                             <div class="ltn__comment-inner">
                                 <ul>
 
-                                    @foreach (var item in Model.komentariya.Take(3))
+                                    @foreach (var item in Model.komentariya)
                                     {
                                         @if (Model.Houses.Id == item.HouseId)
                                         {
@@ -185,11 +185,10 @@
                                                         <h6><a href="#">@item.Username</a></h6>
                                                         <div class="product-ratting">
                                                             <ul>
-                                                                <li><a href="#"><i class="fas fa-star"></i></a></li>
-                                                                <li><a href="#"><i class="fas fa-star"></i></a></li>
-                                                                <li><a href="#"><i class="fas fa-star"></i></a></li>
-                                                                <li><a href="#"><i class="fas fa-star-half-alt"></i></a></li>
-                                                                <li><a href="#"><i class="far fa-star"></i></a></li>
+                                                                @for (int i = 0; i < item.Rate; i++)
+                                                                {
+                                                                    <li><a href="#"><i class="fas fa-star"></i></a></li>
+                                                                }
                                                             </ul>
                                                         </div>
                                                         <p>@item.Text</p>
@@ -212,13 +211,7 @@
                                     <div class="add-a-review">
                                         <h6>Your Ratings:</h6>
                                         <div class="product-ratting">
-                                            <ul>
-                                                <li><a href="#"><i class="fas fa-star"></i></a></li>
-                                                <li><a href="#"><i class="fas fa-star"></i></a></li>
-                                                <li><a href="#"><i class="fas fa-star"></i></a></li>
-                                                <li><a href="#"><i class="fas fa-star"></i></a></li>
-                                                <li><a href="#"><i class="fas fa-star"></i></a></li>
-                                            </ul>
+                                            <input type="text" asp-for="@Model.comment.Rate" placeholder="Nece ulduz verirsiniz?" style="width:200px; height:20px; margin-top:36px;"/> <li><a href="#"><i class="fas fa-star"></i></a></li>
                                         </div>
                                     </div>
                                 </div>

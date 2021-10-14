@@ -286,7 +286,7 @@
                             @foreach (var item in Model.LastOrder.House.HouseImages.Take(3))
                             {
                                 <li>
-                                    <a href="img/img-slide/11.jpg" data-rel="lightcase:myCollection">
+                                    <a href="~/uploads/house/@item.Image" data-rel="lightcase:myCollection">
                                         <img src="~/uploads/house/@item.Image" alt="Image">
                                     </a>
                                 </li>
@@ -362,7 +362,7 @@
                     <div class="col-lg-12">
                         <div class="ltn__product-item ltn__product-item-4 text-center---">
                             <div class="product-img">
-                                <a href="product-details.html"><img src="~/uploads/house/@item.HouseImages.FirstOrDefault(x => x.PosterStatus ==true)?.Image" alt="#"></a>
+                                <a asp-action="detail" asp-controller="shop" asp-route-id="@item.Id"><img src="~/uploads/house/@item.HouseImages.FirstOrDefault(x => x.PosterStatus ==true)?.Image" alt="#"></a>
                                 <div class="product-badge">
                                     <ul>
                                         <li class="sale-badge bg-green">@item.HouseStatus.StatusName</li>
@@ -372,7 +372,7 @@
                                     <div class="product-img-location">
                                         <ul>
                                             <li>
-                                                <a href="locations.html"><i class="flaticon-pin"></i> @item.Location, @item.City.Name</a>
+                                                <a href="#"><i class="flaticon-pin"></i> @item.Location, @item.City.Name</a>
                                             </li>
                                         </ul>
                                     </div>
@@ -387,7 +387,7 @@
                             </div>
                             <div class="product-info">
                                 <div class="product-price">
-                                    <span>@item.SalePrice AZN<label>@(item.HouseStatus.StatusName == "Kiraye"?"/Month":"")</label></span>
+                                    <span>@item.SalePrice AZN<label>@(item.HouseStatus.Id == 2 ?"/Aylıq":"")</label></span>
                                 </div>
                                 <h2 class="product-title"><a asp-action="detail" asp-controller="shop" asp-route-id="@item.Id">@item.HouseType.Name</a></h2>
                                 <div class="product-description">
@@ -413,10 +413,10 @@
                             <div class="product-info-bottom">
                                 <div class="real-estate-agent">
                                     <div class="agent-img">
-                                        <a href="team-details.html"><img src="~/uploads/team/@item.Team.Image" alt="#"></a>
+                                        <a asp-action="detail" asp-controller="team" asp-route-id="@item.Team.Id"><img src="~/uploads/team/@item.Team.Image" alt="#"></a>
                                     </div>
                                     <div class="agent-brief">
-                                        <h6><a href="team-details.html">@item.Team.Fullname</a></h6>
+                                        <h6><a asp-action="detail" asp-controller="team" asp-route-id="@item.Team.Id">@item.Team.Fullname</a></h6>
                                         <small>Makler</small>
                                     </div>
                                 </div>
@@ -585,7 +585,7 @@
             {
                 <div class="col-lg-3 col-md-4 col-sm-6 col-6">
                     <div class="ltn__category-item ltn__category-item-5 text-center">
-                        <a href="shop.html">
+                        <a asp-action="index" asp-controller="shop" >
                             <span class="category-icon">@Html.Raw(item.Logo)</span>
                             <span class="category-title">@item.Name</span>
                             <span class="category-btn"><i class="flaticon-right-arrow"></i></span>

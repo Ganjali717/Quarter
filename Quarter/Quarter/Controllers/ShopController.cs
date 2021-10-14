@@ -32,6 +32,8 @@ namespace Quarter.Controllers
             ViewBag.HouseStatusesId = houseStatusId;
             ViewBag.CityId = cityId;
 
+            ViewBag.Maxprice = query.Where(x => x.SalePrice > 1000 && x.SalePrice < 30000);
+
             if (houseTypeId != null)
                 query = query.Where(x => x.HouseTypeId == houseTypeId);
             if(amenitiesId != null)
@@ -40,6 +42,7 @@ namespace Quarter.Controllers
                 query = query.Where(x => x.HouseStatusId == houseStatusId);
             if (cityId != null)
                 query = query.Where(x => x.CityId == cityId);
+         
 
             HouseViewModel houseVM = new HouseViewModel
             {
@@ -47,6 +50,8 @@ namespace Quarter.Controllers
                 HouseTypes = _context.HouseTypes.Include(x => x.Houses).ToList(), 
                 HouseStatuses = _context.HouseStatuses.Include(x=>x.Houses).ToList(),
                 Amenitis = _context.Amenitis.Include(x=> x.HouseAmenitis).ToList(),
+                MaxPrice = _context.House.Max(x => x.SalePrice),
+                MinPrice = _context.House.Min(x => x.SalePrice),
                 Teams = _context.Teams.ToList()   
             };
 
@@ -256,5 +261,9 @@ namespace Quarter.Controllers
             return Redirect(HttpContext.Request.Headers["Referer"].ToString());
 
         }
+
+
+
+       
     }
 }

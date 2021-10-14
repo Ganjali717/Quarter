@@ -24,9 +24,12 @@ namespace Quarter.Areas.Manage.Controllers
             _context = context;
             _env = env;
         }
-        public IActionResult Index()
+        public IActionResult Index(int page = 1)
         {
-            List<House> house = _context.House.Include(x => x.HouseAmenitis).Include(x => x.HouseImages).Include(x => x.HouseStatus).Include(x => x.HouseType).Include(x => x.Team).Include(x => x.City).ToList();
+            List<House> house = _context.House.Include(x => x.HouseAmenitis).Include(x => x.HouseImages).Include(x => x.HouseStatus).Include(x => x.HouseType).Include(x => x.Team).Include(x => x.City).Skip((page - 1) * 4).Take(4).ToList();
+
+            ViewBag.TotalPage = Math.Ceiling(_context.House.Count() / 4m);
+            ViewBag.SelectedPage = page;
             return View(house);
         }
 

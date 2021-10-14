@@ -121,7 +121,7 @@
                             <img src="~/uploads/team/@item.Image" alt="Image">
                         </div>
                         <div class="team-info">
-                            <h4><a href="team-details.html">@item.Fullname</a></h4>
+                            <h4><a asp-action="detail" asp-controller="team" asp-route-id="@item.Id">@item.Fullname</a></h4>
                             <h6 class="ltn__secondary-color">Makler</h6>
                             <div class="ltn__social-media">
                                 <ul>

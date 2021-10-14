@@ -62,17 +62,6 @@
                                     </select>
                                 </div>
                             </li>
-                            <li>
-                                <div class="short-by text-center">
-                                    <select class="nice-select">
-                                        <option>Per Page: 12</option>
-                                        <option>Per Page: 20</option>
-                                        <option>Per Page: 30</option>
-                                        <option>Per Page: 50</option>
-                                        <option>Per Page: 100</option>
-                                    </select>
-                                </div>
-                            </li>
                         </ul>
                     </div>
                     <div class="tab-content">
@@ -97,7 +86,7 @@
                                                     <a asp-action="detail" asp-controller="shop" asp-route-id="@item.Id"><img src="~/uploads/house/@item.HouseImages.FirstOrDefault(x => x.PosterStatus == true)?.Image" alt="#"></a>
                                                     <div class="real-estate-agent">
                                                         <div class="agent-img">
-                                                            <a href="#"><img src="~/uploads/team/@item.Team.Image" alt="#"></a>
+                                                            <a asp-action="detail" asp-controller="team" asp-route-id="@item.Team.Id"><img src="~/uploads/team/@item.Team.Image" alt="#"></a>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -151,7 +140,7 @@
                                                 </div>
                                                 <div class="product-info-bottom">
                                                     <div class="product-price">
-                                                        <span>@item.SalePrice AZN<label>@(item.HouseStatus.StatusName == "Kiraye"?"/Month":"")</label></span>
+                                                        <span>@item.SalePrice AZN<label>@(item.HouseStatus.Id == 2? "/Aylıq" : "")</label></span>
                                                     </div>
                                                 </div>
                                             </div>
@@ -187,10 +176,10 @@
                                                             </ul>
                                                         </div>
                                                         <div class="product-price">
-                                                            <span>@item.SalePrice AZN<label>@(item.HouseStatus.StatusName == "Kiraye"?"/Month":"")</label></span>
+                                                            <span>@item.SalePrice AZN<label>@(item.HouseStatus.Id == 2?"/Aylıq":"")</label></span>
                                                         </div>
                                                     </div>
-                                                    <h2 class="product-title"><a href="product-details.html">New Apartment Nice View</a></h2>
+                                                    <h2 class="product-title"><a asp-action="detail" asp-controller="shop" asp-route-id="@item.Id">@item.HouseType.Name</a></h2>
                                                     <div class="product-img-location">
                                                         <ul>
                                                             <li>
@@ -350,11 +339,14 @@
                             <ul>
                                 <li>
                                     <label class="checkbox-item">
-                                         Aşağı qiymət
-                                        <input type="checkbox">
-                                        <span class="checkmark"></span>
+                                       
+                                            Aşağı qiymət
+                                            <input type="checkbox">
+                                            <span class="checkmark"></span>
+                                       
+                                        <span class="categorey-no">1,000  - 30,000 </span>    
                                     </label>
-                                    <span class="categorey-no">$5,000 - $10,000</span>
+                                   
                                 </li>
                                 <li>
                                     <label class="checkbox-item">

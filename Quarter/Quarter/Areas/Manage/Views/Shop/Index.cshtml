@@ -1,7 +1,7 @@
 ﻿@model List<House>
 @{
     ViewData["Title"] = "Index";
-    int order = 0;
+    int order = (ViewBag.SelectedPage - 1) * 4;
 }
 
 
@@ -51,4 +51,33 @@
 
         </tbody>
     </table>
+
+
+
+
+    <div class="d-flex justify-content-center">
+        <nav aria-label="Page navigation example">
+            <ul class="pagination">
+                <li class="page-item @(ViewBag.SelectedPage==1?"disabled":"")">
+                    <a class="page-link" asp-action="index" asp-route-page="@(ViewBag.SelectedPage-1)" aria-label="Previous">
+                        <span aria-hidden="true">&laquo;</span>
+                        <span class="sr-only">Previous</span>
+                    </a>
+                </li>
+                @for (int i = 1; i <= ViewBag.TotalPage; i++)
+                {
+                    <li class="page-item @(i==ViewBag.SelectedPage?"active":"")"><a class="page-link" asp-action="index" asp-route-page="@i">@i</a></li>
+                }
+                <li class="page-item @(ViewBag.SelectedPage==ViewBag.TotalPage?"disabled":"")">
+                    <a class="page-link" asp-action="index" asp-route-page="@(ViewBag.SelectedPage+1)" aria-label="Next">
+                        <span aria-hidden="true">&raquo;</span>
+                        <span class="sr-only">Next</span>
+                    </a>
+                </li>
+            </ul>
+        </nav>
+    </div>
+
+
+
 </div>
