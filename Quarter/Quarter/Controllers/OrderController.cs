@@ -61,6 +61,19 @@ namespace Quarter.Controllers
 
         
 
+        public IActionResult DeleteFromOrder(int id)
+        {
+            Order order = _context.Orders.FirstOrDefault(x => x.Id == id);
+
+            if (order == null) return NotFound();
+
+            _context.Orders.Remove(order);
+            _context.SaveChanges();
+
+            return RedirectToAction("index", "order");
+
+        }
+
        
 
     }

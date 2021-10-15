@@ -35,7 +35,7 @@ namespace Quarter.Areas.Manage.Controllers
 
             double acceptedCount = _context.Orders.Where(x => x.Status == Models.Enums.OrderStatus.Accepted).Count();
             double totalCount = _context.Orders.Count();
-            ViewBag.AcceptedOrdersPercent = acceptedCount / totalCount * 100;
+            ViewBag.AcceptedOrdersPercent = Math.Ceiling(acceptedCount / totalCount * 100);
             return View(dashboardVM);
         }
 
