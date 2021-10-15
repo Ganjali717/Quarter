@@ -24,6 +24,10 @@ namespace Quarter.Controllers
 
         public IActionResult Index(int page = 1, int? houseTypeId = null, int? amenitiesId = null, int? houseStatusId = null , int? cityId = null)
         {
+            if (page<=0)
+            {
+                return RedirectToAction("index", "error");
+            }
             AppUser member = User.Identity.IsAuthenticated ? _userManager.Users.FirstOrDefault(x => x.UserName == User.Identity.Name && !x.IsAdmin) : null;
 
             var query = _context.House.AsQueryable();
@@ -71,7 +75,7 @@ namespace Quarter.Controllers
             WishlistItemViewModel wishlistItem = null;
             List<WishlistItemViewModel> houses = new List<WishlistItemViewModel>();
 
-            if (house == null) return NotFound();
+            if (house == null) return RedirectToAction("index", "error");
 
             AppUser member = null;
 
@@ -135,12 +139,16 @@ namespace Quarter.Controllers
 
         public IActionResult Detail(int id)
         {
+            if(id <= 0 || id > _context.House.OrderByDescending(x => x.Id).FirstOrDefault().Id)
+            {
+                return RedirectToAction("index", "error");
+            }
             DetailViewModel detailVM = new DetailViewModel
             {
                 Houses = _context.House.Include(x => x.HouseImages).Include(x => x.Comments).Include(x => x.HouseStatus).Include(x => x.City).Include(x => x.HouseAmenitis).Include(x => x.Team).ThenInclude(x=> x.teamDetail).FirstOrDefault(x => x.Id == id),
                 Amenitis = _context.Amenitis.ToList(),
                 HouseTypes = _context.HouseTypes.Include(x=>x.Houses).ToList(),
-                HouseImages = _context.HouseImages.ToList(), 
+                HouseImages = _context.HouseImages.Include(x => x.House).ToList(), 
                 Evler = _context.House.Include(x => x.HouseImages).Include(x => x.HouseStatus).Include(x => x.City).Include(x => x.HouseAmenitis).Include(x => x.Team).ThenInclude(x => x.teamDetail).ToList(),
                 komentariya = _context.Comments.ToList(),
                 HouseAmenitis = _context.HouseAmenitis.ToList()
@@ -155,7 +163,7 @@ namespace Quarter.Controllers
             House house = _context.House.Include(x => x.HouseImages).FirstOrDefault(x => x.Id == id);
             WishlistItemViewModel wishlistItem = null;
            
-            if (house == null) return NotFound();
+            if (house == null) return RedirectToAction("index", "error");
 
             AppUser member = null;
 

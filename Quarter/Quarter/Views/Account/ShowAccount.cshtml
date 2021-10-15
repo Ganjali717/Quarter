@@ -1,7 +1,8 @@
-﻿@model AppUser
+﻿@model ChangePasswordViewModel
 
 @{ 
     int order = 0;
+
 }
 
 
@@ -38,10 +39,10 @@
                                 <div class="col-lg-3">
                                     <div class="ltn__tab-menu-list mb-50">
                                         <div class="nav">
-                                            <a class="active show" data-bs-toggle="tab" href="#liton_tab_1_1">Dashboard <i class="fas fa-home"></i></a>
-                                            <a data-bs-toggle="tab" href="#liton_tab_1_2">Orders <i class="fas fa-file-alt"></i></a>
-                                            <a data-bs-toggle="tab" href="#liton_tab_1_5">Account Details <i class="fas fa-user"></i></a>
-                                            <a asp-action="logout" asp-controller="account">Logout <i class="fas fa-sign-out-alt"></i></a>
+                                            <a class="active show" data-bs-toggle="tab" href="#liton_tab_1_1">Tablo <i class="fas fa-home"></i></a>
+                                            <a data-bs-toggle="tab" href="#liton_tab_1_2">Sifarişlər <i class="fas fa-file-alt"></i></a>
+                                            <a data-bs-toggle="tab" href="#liton_tab_1_5">Account Detalları <i class="fas fa-user"></i></a>
+                                            <a asp-action="logout" asp-controller="account">Çıxış et <i class="fas fa-sign-out-alt"></i></a>
                                         </div>
                                     </div>
                                 </div>
@@ -49,7 +50,7 @@
                                     <div class="tab-content">
                                         <div class="tab-pane fade active show" id="liton_tab_1_1">
                                             <div class="ltn__myaccount-tab-content-inner">
-                                                <p>Hello <strong>@Model.UserName</strong> (not <strong>@Model.UserName</strong>? <small><a asp-action="logout" asp-controller="account">Log out</a></small> )</p>
+                                                <p>Salam <strong>@Model.appUser.UserName</strong> (bu <strong>@Model.appUser.UserName</strong> profil deil? <small><a asp-action="logout" asp-controller="account">Çıxış et</a></small> )</p>
                                                 <p></p>
                                             </div>
                                         </div>
@@ -59,15 +60,15 @@
                                                     <table class="table">
                                                         <thead>
                                                             <tr>
-                                                                <th>Order</th>
-                                                                <th>Image</th>
+                                                                <th>Sifariş</th>
+                                                                <th>Şəkil</th>
                                                                 <th>Status</th>
-                                                                <th>Sale Price</th>
+                                                                <th>Satış Qiymeti</th>
                                                                 <th>Action</th>
                                                             </tr>
                                                         </thead>
                                                         <tbody>
-                                                            @foreach (var item in Model.Orders)
+                                                            @foreach (var item in Model.appUser.Orders)
                                                             {
                                                                 order++;
                                                                 <tr>
@@ -88,7 +89,7 @@
                                                                         }
                                                                     </td>
                                                                     <td>@item.SalePrice AZN</td>
-                                                                    <td><a href="cart.html">View</a></td>
+                                                                    <td><a asp-action="detail" asp-controller="shop" asp-route-id="@item.House.Id">Detallı göstər</a></td>
                                                                 </tr>
                                                              }
                                                         </tbody>
@@ -101,34 +102,34 @@
                                                 <p>The following addresses will be used on the checkout page by default.</p>
                                                 <div class="ltn__form-box">
                                                     <form method="post" enctype="multipart/form-data">
-                                                        <input type="hidden" asp-for="Id" />
+                                                        <input type="hidden" asp-for="@Model.appUser.Id" />
                                                         <div class="row mb-50">
                                                             <div class="col-md-12">
-                                                                <label asp-for="FullName">Fullname:</label>
-                                                                <input asp-for="FullName" class="form-control" placeholder="Area">
-                                                                <span class="text-danger" asp-validation-for="FullName"></span>
+                                                                <label asp-for="@Model.appUser.FullName">Fullname:</label>
+                                                                <input asp-for="@Model.appUser.FullName" class="form-control" placeholder="Area">
+                                                                <span class="text-danger" asp-validation-for="@Model.appUser.FullName"></span>
                                                             </div>
                                                             <div class="col-md-6">
-                                                                <label asp-for="UserName">Display Name:</label>
-                                                                <input asp-for="UserName" class="form-control" placeholder="Username">
-                                                                <span class="text-danger" asp-validation-for="UserName"></span>
+                                                                <label asp-for="@Model.appUser.UserName">Display Name:</label>
+                                                                <input asp-for="@Model.appUser.UserName" class="form-control" placeholder="Username">
+                                                                <span class="text-danger" asp-validation-for="@Model.appUser.UserName"></span>
                                                             </div>
                                                             <div class="col-md-6">
-                                                                <label asp-for="Email">Email:</label>
-                                                                <input asp-for="Email" class="form-control" placeholder="Email">
-                                                                <span class="text-danger" asp-validation-for="Email"></span>
+                                                                <label asp-for="@Model.appUser.Email">Email:</label>
+                                                                <input asp-for="@Model.appUser.Email" class="form-control" placeholder="Email">
+                                                                <span class="text-danger" asp-validation-for="@Model.appUser.Email"></span>
                                                             </div>
                                                         </div>
                                                         <fieldset>
                                                             <legend>Password change</legend>
                                                             <div class="row">
                                                                 <div class="col-md-12">
-                                                                    <label>Current password (leave blank to leave unchanged):</label>
-                                                                    <input type="password" name="ltn__name">
-                                                                    <label>New password (leave blank to leave unchanged):</label>
-                                                                    <input type="password" name="ltn__lastname">
-                                                                    <label>Confirm new password:</label>
-                                                                    <input type="password" name="ltn__lastname">
+                                                                    <label asp-for="OldPassword">Current password (leave blank to leave unchanged):</label>
+                                                                    <input type="password"  asp-for="OldPassword">
+                                                                    <label asp-for="NewPassword">New password (leave blank to leave unchanged):</label>
+                                                                    <input type="password"  asp-for="NewPassword">
+                                                                    <label asp-for="ConfirmPassword">Confirm new password:</label>
+                                                                    <input type="password" asp-for="ConfirmPassword">
                                                                 </div>
                                                             </div>
                                                         </fieldset>

@@ -29,6 +29,11 @@ namespace Quarter.Controllers
 
         public IActionResult Detail(int id)
         {
+            if (id <= 0 || id > _context.Services.OrderByDescending(x => x.Id).FirstOrDefault().Id)
+            {
+               return RedirectToAction("index", "error");
+            }
+
             ServiceViewModel serviceVM = new ServiceViewModel
             {
                 Servisler = _context.Services.Include(x => x.serviceDetail).FirstOrDefault(x => x.Id == id),

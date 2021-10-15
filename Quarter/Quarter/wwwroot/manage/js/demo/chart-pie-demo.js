@@ -17,10 +17,10 @@ $(document).ready(function () {
                 var myPieChart = new Chart(ctx, {
                     type: 'doughnut',
                     data: {
-                        labels: ["Villa", "Yeni Tikili", "Kohne Tikili"],
+                        labels: ["Heyet Evi","Villa", "Yeni Tikili", "Kohne Tikili", "Bag Evi"],
                         datasets: [{
-                            data: [data.villasCount, data.yeniTikiliCount, data.kohneTikiliCount],
-                            backgroundColor: ['#4e73df', '#1cc88a', '#36b9cc'],
+                            data: [data.heyetEviCount, data.villasCount, data.yeniTikiliCount, data.kohneTikiliCount, data.bagCount],
+                            backgroundColor: ['#CC0000', '#4e73df', '#1cc88a', '#36b9cc', '#f6c23e'],
                             hoverBackgroundColor: ['#2e59d9', '#17a673', '#2c9faf'],
                             hoverBorderColor: "rgba(234, 236, 244, 1)",
                         }],

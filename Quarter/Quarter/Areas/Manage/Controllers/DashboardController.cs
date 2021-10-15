@@ -44,9 +44,11 @@ namespace Quarter.Areas.Manage.Controllers
         {
             PieChartViewModel pieChartVM = new PieChartViewModel
             {
+                HeyetEviCount = _context.House.Where(x => x.HouseType.Id == 1).Count(),
                 YeniTikiliCount = _context.House.Where(x => x.HouseType.Id == 2).Count(),
                 KohneTikiliCount = _context.House.Where(x => x.HouseType.Id == 3).Count(), 
-                VillasCount = _context.House.Where(x => x.HouseType.Id == 4).Count()
+                VillasCount = _context.House.Where(x => x.HouseType.Id == 4).Count(),
+                BagCount = _context.House.Where(x => x.HouseType.Id == 5).Count()
             };
 
             return Json(pieChartVM);

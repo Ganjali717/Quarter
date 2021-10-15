@@ -103,7 +103,7 @@ $(document).ready(function () {
                     },
                     tooltips: {
                         backgroundColor: "rgb(255,255,255)",
-                        bodyFontColor: "#858796",
+                        bodyFontColor: "#CC0000",
                         titleMarginBottom: 10,
                         titleFontColor: '#6e707e',
                         titleFontSize: 14,

@@ -145,35 +145,52 @@ namespace Quarter.Controllers
 
         public IActionResult ShowAccount(string id)
         {
+            AppUser appUsers = _context.AppUsers.Include(x => x.Orders).ThenInclude(x => x.House).FirstOrDefault(x => x.Id == id);
 
-            AppUser appUsers = _context.AppUsers.Include(x => x.Orders).FirstOrDefault(x => x.Id == id);
+            if (appUsers == null || appUsers.Id != id) return RedirectToAction("index", "error");
 
-            if (appUsers == null) return NotFound();
+            ChangePasswordViewModel passwordVM = new ChangePasswordViewModel
+            {
+                appUser = appUsers
+            };
 
-            return View(appUsers);
+            return View(passwordVM);
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> ShowAccount(AppUser appUser)
+        public async Task<IActionResult> ShowAccount(ChangePasswordViewModel model)
         {
-            AppUser existUser = _context.AppUsers.Include(x => x.Orders).FirstOrDefault(x => x.Id == appUser.Id);
+            AppUser existUser = _context.AppUsers.Include(x => x.Orders).ThenInclude(x => x.House).FirstOrDefault(x => x.Id == model.appUser.Id);
+            var result = await _userManager.RemovePasswordAsync(existUser);
+            if (result.Succeeded)
+            {
+                result = await _userManager.AddPasswordAsync(existUser, model.NewPassword);
+                if (result.Succeeded)
+                {
+                    return RedirectToAction("index", "home");
+                }
 
-            if (!ModelState.IsValid) return View();
+            }
+            else
+            {
+                ModelState.AddModelError("", "istifadeci adi ve ya sifre yanlisdir!");
+            }
+           
+            if (_context.AppUsers.Any(x => x.UserName == model.appUser.UserName && x.Id != model.appUser.Id)) return RedirectToAction("index", "error"); 
 
+            existUser.FullName = model.appUser.FullName ?? existUser.FullName;
+            existUser.Email = model.appUser.Email ?? existUser.Email;
+            existUser.UserName = model.appUser.UserName ?? existUser.UserName;
 
+            
 
-            if (_context.AppUsers.Any(x => x.UserName == appUser.UserName && x.Id != appUser.Id)) return NotFound(); 
-
-            existUser.FullName = appUser.FullName ?? existUser.FullName;
-            existUser.Email = appUser.Email ?? existUser.Email;
-            existUser.UserName = appUser.UserName ?? existUser.UserName;
 
             await _userManager.UpdateAsync(existUser);
             await _signInManager.SignInAsync(existUser, true);
+
             return RedirectToAction("index", "home");
         }
-
 
     }
 }

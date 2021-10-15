@@ -351,3 +351,4 @@ C:\Users\LENOVO\OneDrive\Desktop\Layihe\Quarter\Quarter\Quarter\bin\Debug\netcor
 C:\Users\LENOVO\OneDrive\Desktop\Layihe\Quarter\Quarter\Quarter\bin\Debug\netcoreapp3.1\MimeKit.dll
 C:\Users\LENOVO\OneDrive\Desktop\Layihe\Quarter\Quarter\Quarter\bin\Debug\netcoreapp3.1\NETCore.MailKit.dll
 C:\Users\LENOVO\OneDrive\Desktop\Layihe\Quarter\Quarter\Quarter\bin\Debug\netcoreapp3.1\BouncyCastle.Crypto.dll
+C:\Users\LENOVO\OneDrive\Desktop\Layihe\Quarter\Quarter\Quarter\obj\Debug\netcoreapp3.1\Razor\Views\Error\Index.cshtml.g.cs

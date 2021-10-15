@@ -163,10 +163,20 @@
                             <ul>
                                 @for (int i = 0; i < Model.komentariya.Average(x => x.Rate); i++)
                                 {
-                                    <li><a href="#"><i class="fas fa-star"></i></a></li>
+                                    @if (Model.Houses.Id == Model.komentariya[i].HouseId)
+                                    {
+                                        <li><a href="#"><i class="fas fa-star"></i></a></li>
+                                    }
+
                                 }
 
-                                <li class="review-total"> <a href="#"> ( @Math.Ceiling(Model.komentariya.Average(x => x.Rate)   ) Reviews )</a></li>
+                                <li class="review-total"> 
+                                    <a href="#"> 
+                                         
+                                             @Math.Ceiling(Model.komentariya.Average(x => x.Rate)) Reviews 
+                                      
+                                    </a>
+                                </li>
                             </ul>
                         </div>
                         <hr>
@@ -320,82 +330,41 @@
                  
                     <!-- Top Rated Product Widget -->
                     <div class="widget ltn__top-rated-product-widget">
-                        <h4 class="ltn__widget-title ltn__widget-title-border-2">Top Rated Product</h4>
+                        <h4 class="ltn__widget-title ltn__widget-title-border-2">Ən çox reytingli evlər</h4>
                         <ul>
-                            <li>
-                                <div class="top-rated-product-item clearfix">
-                                    <div class="top-rated-product-img">
-                                        <a href="product-details.html"><img src="~/assets/img/product/1.png" alt="#"></a>
-                                    </div>
-                                    <div class="top-rated-product-info">
-                                        <div class="product-ratting">
-                                            <ul>
-                                                <li><a href="#"><i class="fas fa-star"></i></a></li>
-                                                <li><a href="#"><i class="fas fa-star"></i></a></li>
-                                                <li><a href="#"><i class="fas fa-star"></i></a></li>
-                                                <li><a href="#"><i class="fas fa-star"></i></a></li>
-                                                <li><a href="#"><i class="fas fa-star"></i></a></li>
-                                            </ul>
+                            @foreach (var item in Model.Evler)
+                            {
+                                @if (item.Rate >= 5)
+                                {
+                                    <li>
+                                        <div class="top-rated-product-item clearfix">
+                                            <div class="top-rated-product-img">
+                                                <a asp-action="detail" asp-controller="shop" asp-route-id="@item.Id"><img src="~/uploads/house/@item.HouseImages.FirstOrDefault(x => x.PosterStatus == true).Image" alt="#"></a>
+                                            </div>
+                                            <div class="top-rated-product-info">
+                                                <div class="product-ratting">
+                                                    <ul>
+                                                        @for (int i = 0; i < item.Rate; i++)
+                                                        {
+                                                            <li><a href="#"><i class="fas fa-star"></i></a></li>
+                                                        }
+                                                    </ul>
+                                                </div>
+                                                <h6><a asp-action="detail" asp-controller="shop" asp-route-id="@item.Id">@item.Location </a></h6>
+                                                <div class="product-price">
+                                                    <span>@item.SalePrice AZN</span>
+                                                </div>
+                                            </div>
                                         </div>
-                                        <h6><a href="product-details.html">Luxury House In Greenville </a></h6>
-                                        <div class="product-price">
-                                            <span>$30,000.00</span>
-                                            <del>$35,000.00</del>
-                                        </div>
-                                    </div>
-                                </div>
-                            </li>
-                            <li>
-                                <div class="top-rated-product-item clearfix">
-                                    <div class="top-rated-product-img">
-                                        <a href="product-details.html"><img src="~/assets/img/product/2.png" alt="#"></a>
-                                    </div>
-                                    <div class="top-rated-product-info">
-                                        <div class="product-ratting">
-                                            <ul>
-                                                <li><a href="#"><i class="fas fa-star"></i></a></li>
-                                                <li><a href="#"><i class="fas fa-star"></i></a></li>
-                                                <li><a href="#"><i class="fas fa-star"></i></a></li>
-                                                <li><a href="#"><i class="fas fa-star"></i></a></li>
-                                                <li><a href="#"><i class="fas fa-star"></i></a></li>
-                                            </ul>
-                                        </div>
-                                        <h6><a href="product-details.html">Apartment with Subunits</a></h6>
-                                        <div class="product-price">
-                                            <span>$30,000.00</span>
-                                            <del>$35,000.00</del>
-                                        </div>
-                                    </div>
-                                </div>
-                            </li>
-                            <li>
-                                <div class="top-rated-product-item clearfix">
-                                    <div class="top-rated-product-img">
-                                        <a href="product-details.html"><img src="~/assets/img/product/3.png" alt="#"></a>
-                                    </div>
-                                    <div class="top-rated-product-info">
-                                        <div class="product-ratting">
-                                            <ul>
-                                                <li><a href="#"><i class="fas fa-star"></i></a></li>
-                                                <li><a href="#"><i class="fas fa-star"></i></a></li>
-                                                <li><a href="#"><i class="fas fa-star"></i></a></li>
-                                                <li><a href="#"><i class="fas fa-star-half-alt"></i></a></li>
-                                                <li><a href="#"><i class="far fa-star"></i></a></li>
-                                            </ul>
-                                        </div>
-                                        <h6><a href="product-details.html">3 Rooms Manhattan</a></h6>
-                                        <div class="product-price">
-                                            <span>$30,000.00</span>
-                                            <del>$35,000.00</del>
-                                        </div>
-                                    </div>
-                                </div>
-                            </li>
+                                    </li>
+                                }
+                            }
+
                         </ul>
                     </div>
                     <!-- Menu Widget (Category) -->
                     <div class="widget ltn__menu-widget ltn__menu-widget-2--- ltn__menu-widget-2-color-2---">
-                        <h4 class="ltn__widget-title ltn__widget-title-border-2">Top Categories</h4>
+                        <h4 class="ltn__widget-title ltn__widget-title-border-2">Kateqoriyalar</h4>
                         <ul>
                             @foreach (var item in Model.HouseTypes)
                             {
@@ -407,20 +376,20 @@
 
                     <!-- Social Media Widget -->
                     <div class="widget ltn__social-media-widget">
-                        <h4 class="ltn__widget-title ltn__widget-title-border-2">Follow us</h4>
+                        <h4 class="ltn__widget-title ltn__widget-title-border-2">Bizi izləyin</h4>
                         <div class="ltn__social-media-2">
                             <ul>
-                                <li><a href="#" title="Facebook"><i class="fab fa-facebook-f"></i></a></li>
-                                <li><a href="#" title="Twitter"><i class="fab fa-twitter"></i></a></li>
-                                <li><a href="#" title="Linkedin"><i class="fab fa-linkedin"></i></a></li>
-                                <li><a href="#" title="Instagram"><i class="fab fa-instagram"></i></a></li>
+                                <li><a href="https://www.facebook.com/" title="Facebook"><i class="fab fa-facebook-f"></i></a></li>
+                                <li><a href="https://twitter.com/" title="Twitter"><i class="fab fa-twitter"></i></a></li>
+                                <li><a href="https://www.linkedin.com/" title="Linkedin"><i class="fab fa-linkedin"></i></a></li>
+                                <li><a href="https://www.instagram.com/?hl=en" title="Instagram"><i class="fab fa-instagram"></i></a></li>
 
                             </ul>
                         </div>
                     </div>
                     <!-- Tagcloud Widget -->
                     <div class="widget ltn__tagcloud-widget">
-                        <h4 class="ltn__widget-title ltn__widget-title-border-2">Popular Tags</h4>
+                        <h4 class="ltn__widget-title ltn__widget-title-border-2">Məhşur seçimlər</h4>
                         <ul>
                             @foreach (var item in Model.Amenitis)
                             {

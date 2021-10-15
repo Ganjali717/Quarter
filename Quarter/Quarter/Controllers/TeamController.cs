@@ -29,6 +29,10 @@ namespace Quarter.Controllers
 
         public IActionResult Detail(int id)
         {
+            if (id <= 0 || id > _context.Teams.OrderByDescending(x => x.Id).FirstOrDefault().Id)
+            {
+                return RedirectToAction("index", "error");
+            }
             ViewBag.Services = _context.Services.ToList();
             var detail = _context.Teams.Include(x => x.teamDetail).FirstOrDefault(f => f.Id == id); 
             return View(detail);
