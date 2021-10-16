@@ -1,9 +1,7 @@
 ﻿@model HouseViewModel
 @{ 
     ViewData["Title"] = "Index";
-    int order = (ViewBag.SelectedPage - 1) * 4;
-    int selectedPage = ViewBag.SelectedPage;
-    decimal totalPage = ViewBag.TotalPage;
+    int order = (Model.Evler.PageIndex - 1) * 4;
 }
 
 
@@ -57,8 +55,16 @@
                                         <option>Default Sorting</option>
                                         <option>Sort by popularity</option>
                                         <option>Sort by new arrivals</option>
-                                        <option>Sort by price: low to high</option>
-                                        <option>Sort by price: high to low</option>
+                                        <option>
+                                            <a asp-action="index" asp-route-sort="price">
+                                               Descening price
+                                            </a>
+                                        </option>
+                                        <option>
+                                            <a asp-action="index" asp-route-sort="price_desc">
+                                               Ascending price
+                                            </a>
+                                        </option>
                                     </select>
                                 </div>
                             </li>
@@ -78,7 +84,7 @@
                                         </div>
                                     </div>
 
-                                    @foreach (var item in Model.Houses)
+                                    @foreach (var item in Model.Evler)
                                     {
                                         <div class="col-xl-6 col-sm-6 col-12">
                                             <div class="ltn__product-item ltn__product-item-4 ltn__product-item-5 text-center---">
@@ -161,7 +167,7 @@
                                             </form>
                                         </div>
                                     </div>
-                                    @foreach (var item in Model.Houses)
+                                    @foreach (var item in Model.Evler)
                                     {
                                         <div class="col-lg-12">
                                             <div class="ltn__product-item ltn__product-item-4 ltn__product-item-5">
@@ -246,33 +252,22 @@
                     <div class="ltn__pagination-area text-center">
                         <div class="ltn__pagination">
                             <ul>
-                                @if (selectedPage > 1)
+                                <li class="page-item @(Model.Evler.HasPrev?"":"disabled")">
+                                    <a class="page-link" asp-action="index" asp-route-page="@(Model.Evler.PageIndex-1)"  asp-route-sort="@ViewBag.CurrentSort" aria-label="Previous">
+                                        <span aria-hidden="true">&laquo;</span>
+                                        <span class="sr-only">Previous</span>
+                                    </a>
+                                </li>
+                                @for (int i = 1; i <= Model.Evler.TotalPages; i++)
                                 {
-                                    <li>
-                                        <a asp-action="index" asp-route-page="@(selectedPage-1)" class="single-btn prev-btn ">
-                                            <i class="fas fa-angle-double-left"></i>
-                                        </a>
-                                    </li>
+                                    <li class="page-item @(i==Model.Evler.PageIndex?"active":"")"><a class="page-link" asp-action="index" asp-route-page="@i"  asp-route-sort="@ViewBag.CurrentSort">@i</a></li>
                                 }
-
-                                @{
-                                    int startPage = (selectedPage == 1 || totalPage <= 3) ? 1 : selectedPage < totalPage ? selectedPage - 1 : selectedPage - 2;
-                                    int endPage = totalPage > 2 ? startPage + 2 : (int)totalPage;
-                                }
-
-                                @for (int i = startPage; i <= endPage; i++)
-                                {
-                                    <li class="@(i==selectedPage?"active":"")"><a asp-action="index" asp-route-page="@i" asp-route-houseTypeId="@ViewBag.HouseTypeId" asp-route-amenitiesId="@ViewBag.AmenitiesId" asp-route-houseStatusId="@ViewBag.HouseStatusesId" class="single-btn">@i</a></li>
-                                }
-
-                                @if (selectedPage < totalPage)
-                                {
-                                    <li>
-                                        <a asp-action="index" asp-route-page="@(selectedPage+1)" class="single-btn next-btn">
-                                            <i class="fas fa-angle-double-right"></i>
-                                        </a>
-                                    </li>
-                                }
+                                <li class="page-item @(Model.Evler.HasNext?"":"disabled")">
+                                    <a class="page-link" asp-action="index" asp-route-page="@(Model.Evler.PageIndex+1)"  asp-route-sort="@ViewBag.CurrentSort" aria-label="Next">
+                                        <span aria-hidden="true">&raquo;</span>
+                                        <span class="sr-only">Next</span>
+                                    </a>
+                                </li>
                             </ul>
                         </div>
                     </div>
@@ -280,7 +275,7 @@
                 <div class="col-lg-4">
                     <aside class="sidebar ltn__shop-sidebar ltn__right-sidebar">
                         <h3 class="mb-10">Ətrafli məlumat</h3>
-                        <label class="mb-30"><small>@Model.Houses.Count yaxın ev</small></label>
+                        <label class="mb-30"><small>@Model.Evler.Count yaxın ev</small></label>
                         <!-- Advance Information widget -->
                         <div class="widget ltn__menu-widget">
                             <h4 class="ltn__widget-title">Kateqoriya</h4>

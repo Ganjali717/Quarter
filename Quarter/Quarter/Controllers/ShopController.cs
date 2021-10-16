@@ -22,7 +22,7 @@ namespace Quarter.Controllers
             _userManager = userManager;
         }
 
-        public IActionResult Index(int page = 1, int? houseTypeId = null, int? amenitiesId = null, int? houseStatusId = null , int? cityId = null)
+        public IActionResult Index(int page = 1, int? houseTypeId = null, int? amenitiesId = null, int? houseStatusId = null, int? cityId = null, string sort = null)
         {
             if (page<=0)
             {
@@ -35,6 +35,7 @@ namespace Quarter.Controllers
             ViewBag.AmenitiesId = amenitiesId;
             ViewBag.HouseStatusesId = houseStatusId;
             ViewBag.CityId = cityId;
+            ViewBag.CurrentSort = sort;
 
             ViewBag.Maxprice = query.Where(x => x.SalePrice > 1000 && x.SalePrice < 30000);
 
@@ -46,11 +47,24 @@ namespace Quarter.Controllers
                 query = query.Where(x => x.HouseStatusId == houseStatusId);
             if (cityId != null)
                 query = query.Where(x => x.CityId == cityId);
-         
+
+            switch (sort)
+            {
+                case "price":
+                    query = query.OrderBy(x => x.SalePrice);
+                    break;
+                case "price_desc":
+                    query = query.OrderByDescending(x => x.SalePrice);
+                    break;
+                default:
+                    query = query.OrderByDescending(x => x.Id);
+                    break;
+            }
+
 
             HouseViewModel houseVM = new HouseViewModel
             {
-                Houses = query.Include(x => x.HouseImages).Include(x => x.WishlistItems).Include(x => x.City).Include(z => z.HouseStatus).Include(y => y.HouseType).Skip((page - 1) * 4).Take(4).ToList(),
+                Evler = PagenatedList<House>.Create(query.Include(x => x.HouseImages).Include(x => x.WishlistItems).Include(x => x.City).Include(z => z.HouseStatus).Include(y => y.HouseType), 4, page),
                 HouseTypes = _context.HouseTypes.Include(x => x.Houses).ToList(), 
                 HouseStatuses = _context.HouseStatuses.Include(x=>x.Houses).ToList(),
                 Amenitis = _context.Amenitis.Include(x=> x.HouseAmenitis).ToList(),
@@ -59,13 +73,11 @@ namespace Quarter.Controllers
                 Teams = _context.Teams.ToList()   
             };
 
-            foreach (var item in houseVM.Houses)
+            foreach (var item in houseVM.Evler)
             {
                 item.IsWished = item.WishlistItems.Any(x => x.AppUserId == member.Id);
             }
 
-            ViewBag.SelectedPage = page;
-            ViewBag.TotalPage = Math.Ceiling(query.Count() / 4m);
             return View(houseVM);
         }
 

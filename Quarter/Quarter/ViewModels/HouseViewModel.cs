@@ -14,6 +14,8 @@ namespace Quarter.ViewModels
         public List<HouseStatus> HouseStatuses { get; set; }
         public List<HouseType> HouseTypes { get; set; }
 
+        public PagenatedList<House> Evler { get; set; }
+
         public double MaxPrice { get; set; }
         public double MinPrice { get; set; }
 
