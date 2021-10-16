@@ -310,7 +310,7 @@
                                             <a asp-action="index" asp-controller="shop" asp-route-houseTypeId="@item.Id" data-id="@item.Id">
                                                 @item.Name
                                                 <input type="checkbox" @(ViewBag.HouseTypeId == item.Id?"checked":"")>
-                                                <span class="checkmark"></span>
+                                                <span class="checkmark" ></span>
                                             </a>
                                         </label>
                                         <span class="categorey-no">(@item.Houses.Count())</span>

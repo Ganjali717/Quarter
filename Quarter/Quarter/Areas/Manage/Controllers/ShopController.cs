@@ -24,13 +24,39 @@ namespace Quarter.Areas.Manage.Controllers
             _context = context;
             _env = env;
         }
-        public IActionResult Index(int page = 1)
+        public IActionResult Index(int page = 1, string search = null, int? cityId = null, string sort = null)
         {
-            List<House> house = _context.House.Include(x => x.HouseAmenitis).Include(x => x.HouseImages).Include(x => x.HouseStatus).Include(x => x.HouseType).Include(x => x.Team).Include(x => x.City).Skip((page - 1) * 4).Take(4).ToList();
+            ViewBag.Cities = _context.Cities.ToList();
+            var query = _context.House.Include(x => x.HouseAmenitis).Include(x => x.HouseImages).Include(x => x.HouseStatus).Include(x => x.HouseType).Include(x => x.Team).Include(x => x.City).AsQueryable();
 
-            ViewBag.TotalPage = Math.Ceiling(_context.House.Count() / 4m);
-            ViewBag.SelectedPage = page;
-            return View(house);
+            ViewBag.CurrentSearch = search;
+            ViewBag.CurrentCityId = cityId;
+            ViewBag.CurrentSort = sort;
+
+
+            if (!string.IsNullOrWhiteSpace(search))
+                query = query.Where(x => x.Location.Contains(search) || x.HouseAmenitis.Any(x => x.Ameniti.Name.Contains(search)));
+
+            if (cityId != null)
+                query = query.Where(x => x.CityId == cityId);
+
+            switch (sort)
+            {
+                case "price":
+                    query = query.OrderBy(x => x.SalePrice);
+                    break;
+                case "price_desc":
+                    query = query.OrderByDescending(x => x.SalePrice);
+                    break;
+                default:
+                    query = query.OrderByDescending(x => x.Id);
+                    break;
+            }
+
+
+            var pagenatedHouses =  PagenatedList<House>.Create(query.Include(x => x.HouseAmenitis).Include(x => x.HouseImages).Include(x => x.HouseStatus).Include(x => x.HouseType).Include(x => x.Team).Include(x => x.City), 4, page);
+
+            return View(pagenatedHouses);
         }
 
         public IActionResult Create()

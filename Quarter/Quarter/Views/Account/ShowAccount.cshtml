@@ -60,7 +60,7 @@
                                                     <table class="table">
                                                         <thead>
                                                             <tr>
-                                                                <th>Sifariş</th>
+                                                                <th>Sifariş No</th>
                                                                 <th>Şəkil</th>
                                                                 <th>Status</th>
                                                                 <th>Satış Qiymeti</th>
@@ -71,26 +71,29 @@
                                                             @foreach (var item in Model.appUser.Orders)
                                                             {
                                                                 order++;
-                                                                <tr>
-                                                                    <td scope="row">@order</td>
-                                                                    <td><img src="~/uploads/house/@item.HouseImage" style="width:250px; height:180px;" /></td>
-                                                                    <td>
-                                                                        @if (item.Status == OrderStatus.Accepted)
-                                                                        {
-                                                                            <span style="background-color:forestgreen; border-radius:10px; padding:10px;">Accepted</span>
-                                                                        }
-                                                                        else if (item.Status == OrderStatus.Rejected)
-                                                                        {
-                                                                            <span style="background-color:red; border-radius:10px; padding:10px;">Rejected</span>
-                                                                        }
-                                                                        else
-                                                                        {
-                                                                            <span style="background-color:deepskyblue; border-radius:10px; padding:10px;">Pending</span>
-                                                                        }
-                                                                    </td>
-                                                                    <td>@item.SalePrice AZN</td>
-                                                                    <td><a asp-action="detail" asp-controller="shop" asp-route-id="@item.House.Id">Detallı göstər</a></td>
-                                                                </tr>
+                                                                    <tr>
+                                                                        <td scope="row">@order</td>
+                                                                        <td><img src="~/uploads/house/@item.HouseImage" style="width:250px; height:180px;" /></td>
+                                                                        <td>
+                                                                            @if (item.Status == OrderStatus.Accepted)
+                                                                            {
+                                                                                <span style="background-color:forestgreen; border-radius:10px; padding:10px;">Accepted</span>
+                                                                            }
+                                                                            else if (item.Status == OrderStatus.Rejected)
+                                                                            {
+                                                                                <span style="background-color:red; border-radius:10px; padding:10px;">Rejected</span>
+                                                                            }
+                                                                            else
+                                                                            {
+                                                                                <span style="background-color:deepskyblue; border-radius:10px; padding:10px;">Pending</span>
+                                                                            }
+                                                                        </td>
+                                                                        <td>@item.SalePrice AZN</td>
+                                                                        <td>
+                                                                            <a asp-action="detail" asp-controller="shop" asp-route-id="@item.House.Id" class="btn btn-danger mr-2">Detallı göstər</a>
+                                                                            <a asp-action="deletefromorder" asp-controller="order" asp-route-id="@item.Id" class="btn btn-dark">Sil</a>
+                                                                        </td>
+                                                                    </tr>
                                                              }
                                                         </tbody>
                                                     </table>
