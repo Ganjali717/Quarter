@@ -66,6 +66,7 @@ namespace Quarter.Controllers
             {
                 Evler = PagenatedList<House>.Create(query.Include(x => x.HouseImages).Include(x => x.WishlistItems).Include(x => x.City).Include(z => z.HouseStatus).Include(y => y.HouseType), 4, page),
                 HouseTypes = _context.HouseTypes.Include(x => x.Houses).ToList(), 
+                Houses = query.Include(x => x.HouseImages).Include(x => x.WishlistItems).Include(x => x.City).Include(z => z.HouseStatus).Include(y => y.HouseType).ToList(),
                 HouseStatuses = _context.HouseStatuses.Include(x=>x.Houses).ToList(),
                 Amenitis = _context.Amenitis.Include(x=> x.HouseAmenitis).ToList(),
                 MaxPrice = _context.House.Max(x => x.SalePrice),

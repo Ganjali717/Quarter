@@ -1,10 +1,15 @@
-﻿using Microsoft.AspNetCore.Identity;
+﻿using MailKit;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using NETCore.MailKit.Core;
 using Quarter.Models;
+using Quarter.Services;
 using Quarter.ViewModels;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -16,13 +21,15 @@ namespace Quarter.Controllers
         private readonly RoleManager<IdentityRole> _roleManager;
         private readonly SignInManager<AppUser> _signInManager;
         private readonly AppDbContext _context;
+        private readonly Services.IMailService _mailService;
 
-        public AccountController(UserManager<AppUser> userManager, RoleManager<IdentityRole> roleManager, SignInManager<AppUser> signInManager, AppDbContext context)
+        public AccountController(UserManager<AppUser> userManager, RoleManager<IdentityRole> roleManager, SignInManager<AppUser> signInManager, AppDbContext context, Services.IMailService mailService)
         {
             _userManager = userManager;
             _roleManager = roleManager;
             _signInManager = signInManager;
             _context = context;
+            _mailService = mailService;
         }
         public IActionResult Index()
         {
@@ -110,6 +117,7 @@ namespace Quarter.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Member")]
 
         public async Task<IActionResult> Login(MemberLoginViewModel loginVM)
         {
@@ -143,6 +151,7 @@ namespace Quarter.Controllers
             return RedirectToAction("index", "home");
         }
 
+        [Authorize(Roles = "Member")]
         public IActionResult ShowAccount(string id)
         {
             AppUser appUsers = _context.AppUsers.Include(x => x.Orders).ThenInclude(x => x.House).FirstOrDefault(x => x.Id == id);
@@ -159,6 +168,7 @@ namespace Quarter.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Member")]
         public async Task<IActionResult> ShowAccount(ChangePasswordViewModel model)
         {
             AppUser existUser = _context.AppUsers.Include(x => x.Orders).ThenInclude(x => x.House).FirstOrDefault(x => x.Id == model.appUser.Id);
@@ -192,5 +202,6 @@ namespace Quarter.Controllers
             return RedirectToAction("index", "home");
         }
 
+    
     }
 }

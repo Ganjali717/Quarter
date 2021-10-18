@@ -51,21 +51,16 @@
                             </li>
                             <li>
                                 <div class="short-by text-center">
-                                    <select class="nice-select">
-                                        <option>Default Sorting</option>
-                                        <option>Sort by popularity</option>
-                                        <option>Sort by new arrivals</option>
-                                        <option>
-                                            <a asp-action="index" asp-route-sort="price">
-                                               Descening price
-                                            </a>
-                                        </option>
-                                        <option>
+                                   
                                             <a asp-action="index" asp-route-sort="price_desc">
-                                               Ascending price
+                                              Qiymət (yuxarıdan aşağı)
                                             </a>
-                                        </option>
-                                    </select>
+                                     <br />
+                                            <a asp-action="index" asp-route-sort="price">
+                                               Qiymət (aşağıdan yuxarı)
+                                            </a>
+                                     
+                                   
                                 </div>
                             </li>
                         </ul>
@@ -252,18 +247,18 @@
                     <div class="ltn__pagination-area text-center">
                         <div class="ltn__pagination">
                             <ul>
-                                <li class="page-item @(Model.Evler.HasPrev?"":"disabled")">
-                                    <a class="page-link" asp-action="index" asp-route-page="@(Model.Evler.PageIndex-1)"  asp-route-sort="@ViewBag.CurrentSort" aria-label="Previous">
+                                <li class=" @(Model.Evler.HasPrev?"":"disabled")">
+                                    <a  asp-action="index" asp-route-page="@(Model.Evler.PageIndex-1)"  asp-route-sort="@ViewBag.CurrentSort" aria-label="Previous">
                                         <span aria-hidden="true">&laquo;</span>
                                         <span class="sr-only">Previous</span>
                                     </a>
                                 </li>
                                 @for (int i = 1; i <= Model.Evler.TotalPages; i++)
                                 {
-                                    <li class="page-item @(i==Model.Evler.PageIndex?"active":"")"><a class="page-link" asp-action="index" asp-route-page="@i"  asp-route-sort="@ViewBag.CurrentSort">@i</a></li>
+                                    <li class=" @(i==Model.Evler.PageIndex?"active":"")"><a  asp-action="index" asp-route-page="@i"  asp-route-sort="@ViewBag.CurrentSort">@i</a></li>
                                 }
-                                <li class="page-item @(Model.Evler.HasNext?"":"disabled")">
-                                    <a class="page-link" asp-action="index" asp-route-page="@(Model.Evler.PageIndex+1)"  asp-route-sort="@ViewBag.CurrentSort" aria-label="Next">
+                                <li class=" @(Model.Evler.HasNext?"":"disabled")">
+                                    <a asp-action="index" asp-route-page="@(Model.Evler.PageIndex+1)"  asp-route-sort="@ViewBag.CurrentSort" aria-label="Next">
                                         <span aria-hidden="true">&raquo;</span>
                                         <span class="sr-only">Next</span>
                                     </a>
@@ -275,7 +270,7 @@
                 <div class="col-lg-4">
                     <aside class="sidebar ltn__shop-sidebar ltn__right-sidebar">
                         <h3 class="mb-10">Ətrafli məlumat</h3>
-                        <label class="mb-30"><small>@Model.Evler.Count yaxın ev</small></label>
+                        <label class="mb-30"><small>@Model.Houses.Count() yaxın ev</small></label>
                         <!-- Advance Information widget -->
                         <div class="widget ltn__menu-widget">
                             <h4 class="ltn__widget-title">Kateqoriya</h4>
